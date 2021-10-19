@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <title>フロントコード</title>
+  <!-- シンタックスハイライトのテーマは以下URLを確認
+      https://highlightjs.org/static/demo/
+ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a th:href="@{/}">
+        <img th:src="@{/images/home.png}" alt="home">
+      </a>
+      <a th:href="@{/admin}">
+        <img th:src="@{/images/setting_icon.png}" alt="home">
+      </a>
+    </div>
+  </header>
+  <main>
+    <div class="admin_wrapper">
+      <div class="admin_title">
+        <h2>Hello!&nbsp;Administrator</h2>
+      </div>
+      <div class="admin_menu">
+        <a th:href="@{/unapprovedList}">
+          <img th:src="@{/images/authorize.png}" alt="">
+          <p>承認</p>
+        </a>
+        <a th:href="@{/listView}">
+          <img th:src="@{/images/list_icon.png}" alt="">
+          <p>一覧を確認</p>
+        </a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
