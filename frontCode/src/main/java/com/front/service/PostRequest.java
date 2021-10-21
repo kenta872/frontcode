@@ -14,7 +14,5 @@ public class PostRequest {
 	private String srchtml;
 	
 	private String srccss;
-	
-	private String srcjs;
 
 }

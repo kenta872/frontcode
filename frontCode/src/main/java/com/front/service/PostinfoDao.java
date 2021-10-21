@@ -15,10 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.front.entity.CodeinfoEntity;
-import com.front.entity.FileinfoEntity;
-import com.front.entity.PostinfoEntity;
-import com.front.entity.TypedbEntity;
+import com.front.controller.entity.CodeinfoEntity;
+import com.front.controller.entity.FileinfoEntity;
+import com.front.controller.entity.PostinfoEntity;
+import com.front.controller.entity.TypedbEntity;
 
 
 /**
@@ -40,7 +40,7 @@ public class PostinfoDao {
 	 */
 	public PostinfoEntity findPostByPostid(Integer postid) throws Exception {
 		
-		Query postinfoQuery = entityManager.createQuery("from PostinfoEntity where postid = " + postid);
+		Query postinfoQuery = entityManager.createQuery("from PostinfoEntity where delFlg = 'false' and postid = " + postid);
 		return (PostinfoEntity)postinfoQuery.getSingleResult();
 	}
 	
@@ -53,7 +53,12 @@ public class PostinfoDao {
 	 */
 	public List<PostinfoEntity> findPostByStatus(Integer status) throws Exception {
 		
-		Query postinfoQuery = entityManager.createQuery("from PostinfoEntity where status = " + status);
+		Query postinfoQuery = entityManager.createQuery("from PostinfoEntity where delFlg = 'false' and status = " + status);
+		return postinfoQuery.getResultList();
+	}
+	
+	public List<PostinfoEntity> findPostByDelflg() {
+		Query postinfoQuery = entityManager.createQuery("from PostinfoEntity where delFlg = 'true'");
 		return postinfoQuery.getResultList();
 	}
 

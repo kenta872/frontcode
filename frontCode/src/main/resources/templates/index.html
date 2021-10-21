@@ -95,9 +95,6 @@
               <div class="addItems_cssForm">
                 <textarea th:field="*{cssInputText}" placeholder="css"></textarea>
               </div>
-              <div class="addItems_jsForm">
-                <textarea th:field="*{jsInputText}" placeholder="js"></textarea>
-              </div>
               <button class="btn" type="submit">
                 <img th:src="@{/images/check_icon.png}" alt="">
                 <p>Check!</p>
@@ -130,7 +127,7 @@
                   <div class="content_header">
                     <!-- ダウンロードボタン -->
                     <div class="download_btn">
-                      <a th:href="@{${codepartobj.value[4]}}">
+                      <a th:href="@{${codepartobj.value[3]}}">
                         <img th:src="@{/images/download_icon.png}" alt="">
                       </a>
                     </div>
@@ -138,12 +135,11 @@
                     <label class="tab_menu active">View</label>
                     <label class="tab_menu">HTML</label>
                     <label class="tab_menu">CSS</label>
-                    <label class="tab_menu">JS</label>
                   </div>
                   <div class="content_space">
                     <!-- VIEWタブ -->
                     <div class="content_area show content_view">
-                      <iframe th:src="@{${codepartobj.value[3]}}" frameborder="0"></iframe>
+                      <iframe th:src="@{${codepartobj.value[2]}}" frameborder="0"></iframe>
                     </div>
                     <!-- HTMLタブ -->
                     <div class="content_area content_html">
@@ -152,10 +148,6 @@
                     <!-- CSSタブ -->
                     <div class="content_area content_css">
                       <pre><code class="css" th:text="${codepartobj.value[1]}"></code></pre>
-                    </div>
-                    <!-- JSタブ -->
-                    <div class="content_area content_js">
-                      <pre><code class="javascript" th:text="${codepartobj.value[2]}"></code></pre>
                     </div>
                   </div>
                 </div>

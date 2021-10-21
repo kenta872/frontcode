@@ -29,7 +29,7 @@
       <div class="autho_title">
         <h2>Management</h2>
       </div>
-      <form class="manageListForm" method="post" th:action="@{/filter}">
+      <form class="manageListForm" method="post" th:action="@{/admin/filter}">
         <div class="manageList_typeSelect">
           <img th:src="@{/images/click_icon.png}" alt="">
           <select name="item_type">
@@ -40,19 +40,15 @@
         <button type="submit">Filter</button>
       </form>
       <div class="autho_list">
-        <form method="post" th:action="@{/manageDetail}" th:each="postDataObj : ${postDataList}">
-          <button class="btnToDetail" type="submit">
+        <div class="btnToDetail_wrapper" th:each="postDataObj : ${postDataList}">
+          <a th:href="@{/admin/unapprovedDetail/{postid}(postid=${postDataObj[2]})}" class="btnToDetail">
             <img th:src="@{/images/file_icon.png}" alt="">
             <div class="autho_text">
-              <p th:text="${postDataObj[0]}">2021.10.10</p>
+              <p th:text="${postDataObj[0]}"></p>
               <p th:text="${postDataObj[1]}"></p>
             </div>
-          </button>
-          <div class="manageList_hidden">
-            <input id="postidForManage" name="postidForManage" type="text" th:value="${postDataObj[2]}">
-            <input id="typeidForManage" name="typeidForManage" type="text" th:value="${postDataObj[3]}">
-          </div>
-        </form>
+          </a>
+        </div>
       </div>
     </div>
   </main>

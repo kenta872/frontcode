@@ -15,10 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.front.entity.CodeinfoEntity;
-import com.front.entity.FileinfoEntity;
-import com.front.entity.PostinfoEntity;
-import com.front.entity.TypedbEntity;
+import com.front.controller.entity.CodeinfoEntity;
+import com.front.controller.entity.FileinfoEntity;
+import com.front.controller.entity.PostinfoEntity;
+import com.front.controller.entity.TypedbEntity;
 
 
 /**
@@ -37,7 +37,7 @@ public class FileinfoDao {
 	 * @return
 	 */
 	public List<FileinfoEntity> selectFileAll() {
-		Query Query = entityManager.createQuery("from FileinfoEntity");
+		Query Query = entityManager.createQuery("from FileinfoEntity where delFlg = 'false'");
 		return Query.getResultList();
 	}
  	/**
@@ -48,7 +48,7 @@ public class FileinfoDao {
 	 */
 	public List<FileinfoEntity> findFileByPostid(Integer postid) throws Exception {
 
-		Query Query = entityManager.createQuery("from FileinfoEntity where postid = " + postid);
+		Query Query = entityManager.createQuery("from FileinfoEntity where delFlg = 'false' and postid = " + postid);
 		return Query.getResultList();
 	}
 	
@@ -60,7 +60,13 @@ public class FileinfoDao {
 	 */
 	public FileinfoEntity findFileByPostid(Integer postid, String filetype) {
 
-		Query filehtmlQuery = entityManager.createQuery("from FileinfoEntity where filegenre = '" + filetype + "' and postid = " + postid);
+		Query filehtmlQuery = entityManager.createQuery("from FileinfoEntity where delFlg = 'false' and filegenre = '" + filetype + "' and postid = " + postid);
 		return (FileinfoEntity)filehtmlQuery.getSingleResult();
+	}
+	
+	
+	public List<FileinfoEntity> findFileByDelflg() {
+		Query filehtmlQuery = entityManager.createQuery("from FileinfoEntity where delFlg = 'true'");
+		return filehtmlQuery.getResultList();
 	}
 }

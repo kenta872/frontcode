@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.front.entity.PostinfoEntity;
-import com.front.entity.PostinfosubEntity;
+import com.front.controller.entity.PostinfoEntity;
+import com.front.controller.entity.PostinfosubEntity;
 
 
 /**
@@ -25,6 +25,18 @@ public class PostinfosubDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+
+	/**
+	 * 投稿一覧全取得
+	 * @return
+	 * @throws Exception
+	 */
+	public List<PostinfosubEntity> findPostAll() throws Exception {
+		
+		Query postinfoQuery = entityManager.createQuery("from PostinfosubEntity");
+		return postinfoQuery.getResultList();
+	}
+	
 	
 	/**
 	 * 投稿情報テーブルから指定した投稿IDに紐づくレコードを取得する

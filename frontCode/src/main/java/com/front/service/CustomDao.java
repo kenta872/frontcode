@@ -15,10 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.front.entity.CodeinfoEntity;
-import com.front.entity.FileinfoEntity;
-import com.front.entity.PostinfoEntity;
-import com.front.entity.TypedbEntity;
+import com.front.controller.entity.CodeinfoEntity;
+import com.front.controller.entity.FileinfoEntity;
+import com.front.controller.entity.PostinfoEntity;
+import com.front.controller.entity.TypedbEntity;
 
 
 /**
@@ -51,6 +51,7 @@ public class CustomDao {
 			  sql += "	  on pi.typeid = td.typeid ";
 			  sql += "where ";
 			  sql += "  pi.status = 1";
+			  sql += "  and pi.delFlg = 'false'";
 		
 		// 未承認(status=1)の投稿ID一覧を取得する
 		Query authoQuery = entityManager.createQuery(sql);
@@ -88,7 +89,7 @@ public class CustomDao {
 	 * ソースコードテーブルから指定した投稿IDに紐づくソースコードを取得する。
 	 */
 	public String[] searchSrcByPostid(Integer postid,Integer typeid) throws Exception {
-		String[] queryResult = new String[4];
+		String[] queryResult = new String[3];
 		try {
 			// HTMLソースコード取得
 			Query codehtmlQuery = entityManager.createQuery("select src from CodeinfoEntity where codegenre = 'html' and postid = " + postid);
@@ -96,12 +97,9 @@ public class CustomDao {
 			// CSSソースコード取得
 			Query codecssQuery = entityManager.createQuery("select src from CodeinfoEntity where codegenre = 'css' and postid = " + postid);
 			queryResult[1] = (String)codecssQuery.getSingleResult();
-			// JSソースコード取得
-			Query codejsQuery = entityManager.createQuery("select src from CodeinfoEntity where codegenre = 'js' and postid = " + postid);
-			queryResult[2] = (String)codejsQuery.getSingleResult();
 			// パーツ種別を取得
 			Query typedbQuery = entityManager.createQuery("select typename from TypedbEntity where typeid = " + typeid);
-			queryResult[3] = (String)typedbQuery.getSingleResult();
+			queryResult[2] = (String)typedbQuery.getSingleResult();
 			
 
 		} catch (Exception e) {
@@ -122,12 +120,9 @@ public class CustomDao {
 			// CSSソースコード取得
 			Query codecssQuery = entityManager.createQuery("select src from CodeinfosubEntity where codegenre = 'css' and postid = " + postid);
 			queryResult[1] = (String)codecssQuery.getSingleResult();
-			// JSソースコード取得
-			Query codejsQuery = entityManager.createQuery("select src from CodeinfosubEntity where codegenre = 'js' and postid = " + postid);
-			queryResult[2] = (String)codejsQuery.getSingleResult();
 			// パーツ種別を取得
 			Query typedbQuery = entityManager.createQuery("select typename from TypedbEntity where typeid = " + typeid);
-			queryResult[3] = (String)typedbQuery.getSingleResult();
+			queryResult[2] = (String)typedbQuery.getSingleResult();
 			
 
 		} catch (Exception e) {

@@ -28,7 +28,7 @@ public class IoService {
 	/**
 	 * HTMLファイルを作成する
 	 * @param filename 作成ファイル名
-	 * @param srcList HTML,CSS,JSのファイルソースリスト
+	 * @param srcList HTML,CSSのファイルソースリスト
 	 * @throws Exception ファイル操作に失敗した場合
 	 */
 	public void createHtmlFile(String filename, List<String> srcList, boolean subcheck) throws Exception {
@@ -45,9 +45,6 @@ public class IoService {
 		       srccode+= "</head>\r\n";
 		       srccode+= "<body>\r\n";
 		       srccode+= srcList.get(0);
-		       srccode+= "<script type=\"text/javascript\">\r\n";
-		       srccode+= srcList.get(2);
-		       srccode+= "</script>\r\n";
 		       srccode+= "</body>\r\n";
 		       srccode+= "</html>";
 		       

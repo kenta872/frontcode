@@ -15,10 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.front.entity.CodeinfoEntity;
-import com.front.entity.FileinfoEntity;
-import com.front.entity.PostinfoEntity;
-import com.front.entity.TypedbEntity;
+import com.front.controller.entity.CodeinfoEntity;
+import com.front.controller.entity.FileinfoEntity;
+import com.front.controller.entity.PostinfoEntity;
+import com.front.controller.entity.TypedbEntity;
 
 
 /**

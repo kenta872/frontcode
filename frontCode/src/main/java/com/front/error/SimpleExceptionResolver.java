@@ -18,10 +18,17 @@ public class SimpleExceptionResolver implements HandlerExceptionResolver {
             Exception ex) {
         logger.error("例外をキャッチしました。", ex);
         ModelAndView mav = new ModelAndView();
-        // JSPに表示するメッセージをセットします。
-        mav.addObject("message", "予期せぬエラーが発生しました。" + " 詳細：【" + ex + "】");
-        // 遷移先のJSPを指定します。(error.jspに遷移します。)
-        mav.setViewName("error");
+        if(ex instanceof ApplicationException) {
+        	ApplicationException appException = (ApplicationException) ex;
+        	String errorMessage = appException.getErrorMessage();
+        	mav.addObject("errorMessage",errorMessage);
+        } else {
+            // JSPに表示するメッセージをセットします。
+            mav.addObject("errorMessage", "予期せぬエラーが発生しました。" + " 詳細：【" + ex + "】");
+            // 遷移先のJSPを指定します。(error.jspに遷移します。)      	
+        }
+        mav.setViewName("error"); 
+        
         return mav;
     }
 }

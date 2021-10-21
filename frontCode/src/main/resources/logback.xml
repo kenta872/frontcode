@@ -21,8 +21,12 @@
         </encoder>
     </appender>
     <!-- ここまで追加 -->
+   	<!-- どのパッケージをどのレベルで出力するかを設定 -->
     <logger name="error" level="debug" />
     <logger name="com.front" level="debug" />
+    <logger name="com.front.controller" level="debug" />
+    <logger name="com.front.service" level="debug" />
+    <logger name="com.front.schedule" level="debug" />
 
     <root level="OFF">
         <!-- コンソールへ出力 -->

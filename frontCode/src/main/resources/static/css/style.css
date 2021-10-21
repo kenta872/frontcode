@@ -406,18 +406,22 @@ header {
 }
 
 .deleteFormImg {
+  display: flex;
+  align-items: center;
   height: 100%;
   margin-right: auto;
   margin-left: 20px;
 }
 
 .download_btn {
+  display: flex;
+  align-items: center;
   height: 100%;
   margin-right: auto;
   margin-left: 16px;
 }
 .download_btn > a {
-  height: 100%;
+  height: 50%;
   display: flex;
   align-items: center;
   transition: 0.3s;
@@ -426,23 +430,25 @@ header {
   opacity: 0.6;
 }
 .download_btn > a > img {
-  height: 50%;
+  height: 100%;
+  width: auto;
   width: auto;
 }
 
 .deleteForm {
-  height: 100%;
+  height: 60%;
   display: flex;
   align-items: center;
 }
-.deleteForm > input {
-  height: 60%;
+.deleteForm > img {
+  height: 100%;
+  width: auto;
   display: flex;
   align-items: center;
   transition: 0.3s;
   cursor: pointer;
 }
-.deleteForm > input:hover {
+.deleteForm > img:hover {
   opacity: 0.6;
 }
 
@@ -770,7 +776,7 @@ header {
   display: none;
 }
 
-.codeCheck_back {
+.codeCheck_submit {
   margin-bottom: 32px;
 }
 
@@ -995,21 +1001,10 @@ header {
   display: flex;
   flex-wrap: wrap;
 }
-.autho_list > form {
+
+.btnToDetail_wrapper {
   margin-bottom: 32px;
   width: 45%;
-  transition: 0.3s;
-  cursor: pointer;
-}
-@media screen and (max-width: 480px) {
-  .autho_list > form {
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 32px;
-  }
-}
-.autho_list > form:hover {
-  opacity: 0.6;
 }
 
 .btnToDetail {
@@ -1020,6 +1015,17 @@ header {
   border: none;
   outline: none;
   cursor: pointer;
+  transition: 0.3s;
+}
+@media screen and (max-width: 480px) {
+  .btnToDetail {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 32px;
+  }
+}
+.btnToDetail:hover {
+  opacity: 0.6;
 }
 .btnToDetail > img {
   height: 40px;
@@ -1357,6 +1363,48 @@ header {
 
 .delete_btn {
   margin-bottom: 32px;
+}
+
+.error_wrapper {
+  width: 90%;
+  margin: auto;
+  max-width: 1000px;
+}
+
+.error_title {
+  margin-top: 100px;
+  margin-bottom: 40px;
+}
+.error_title > h2 {
+  font-size: 60px;
+  font-weight: 400;
+  color: #FFFFFF;
+  text-align: center;
+}
+@media screen and (max-width: 720px) {
+  .error_title > h2 {
+    font-size: 32px;
+  }
+}
+
+.error_text {
+  width: 100%;
+  padding: 40px 24px;
+  border: solid 2px #FFFFFF;
+  border-radius: 6px;
+  margin-bottom: 60px;
+  box-sizing: border-box;
+}
+.error_text > p {
+  font-size: 24px;
+  font-weight: 500;
+  color: #FFFFFF;
+  text-align: center;
+}
+@media screen and (max-width: 720px) {
+  .error_text > p {
+    font-size: 16px;
+  }
 }
 
 .btn {

@@ -1,11 +1,29 @@
 package com.front.error;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+@Component
+@PropertySource(value = "classpath:errormessage_ja.properties", encoding="UTF-8")
 public class ErrorMessage {
 	
-	/** アップロードエラー：E10001：タグエラー */
-	public static final String ERROR_MESSAGE_E10001 = "aタグのhrefには「#」以外を設定しないでください";
-	
-    /** アップロードエラー：E10002：フォームエラー */
-    public static final String ERROR_MESSAGE_E10002 = "パーツ種別を選択してください";
+	// 例外
+	@Value("${error.exception.noturl}")
+    public String ERROR_EXCEPTION_URL;
+	@Value("${error.exception.illegal}")
+    public String ERROR_EXCEPTION_ILLEGAL;
+	@Value("${error.exception.dberror}")
+    public String ERROR_EXCEPTION_DBILLEGAL;
+    
+	// エラーメッセージ
+    @Value("${error.message.nothttp}")
+    public String ERROR_MESSAGE_NOTHTTP;
+    
+    @Value("${error.message.htmlscript}")
+    public String ERROR_MESSAGE_NOTHTMLSCRIPT;
+    
+    @Value("${error.message.cssscript}")
+    public String ERROR_MESSAGE_NOTCSSSCRIPT;
 
 }

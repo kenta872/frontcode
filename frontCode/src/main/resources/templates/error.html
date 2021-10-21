@@ -14,6 +14,33 @@
   <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-<p th:text="${message}"></p>
+  <header>
+    <div class="logo">
+      <a th:href="@{/}">
+        <img th:src="@{/images/home.png}" alt="home">
+      </a>
+    </div>
+    <div class="nav_wrapper">
+      <label class="nav_btn" for="nav_check">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+  </header>
+  <main>
+    <div class="error_wrapper">
+      <div class="error_title">
+        <h2>ERROR</h2>
+      </div>
+      <div class="error_text">
+        <p th:text="${errorMessage}"></p>
+      </div>
+      <a class="btn" th:href="@{/}">
+        <img th:src="@{/images/home.png}" alt="">
+        <p>HOME</p>
+      </a>
+    </div>
+  </main>
 </body>
 </html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <script type="text/javascript" th:src="@{/js/jquery-3.5.1.min.js}"></script>
+  <script type="text/javascript" th:src="@{/js/script.js}"></script>
+  <title>フロントコード</title>
+  <!-- シンタックスハイライトのテーマは以下URLを確認
+      https://highlightjs.org/static/demo/
+ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a th:href="@{/}">
+        <img th:src="@{/images/home.png}" alt="home">
+      </a>
+    </div>
+  </header>
+  <main>
+    <div class="codeCheck_wrapper">
+      <div class="codeCheck_title">
+        <h2>UPLOAD</h2>
+      </div>
+      <div class="codeCheck_view">
+        <p>VIEW</p>
+        <div class="codeCheck_design">
+          <iframe th:src="@{${filehtmlLink}}" frameborder="0"></iframe>
+        </div>
+      </div>
+      <div class="codeCheck_select">
+        <p>TYPE</p>
+        <p th:text="${selecType}">Button</p>
+      </div>
+      <div class="codeCheck_html">
+        <p>HTML</p>
+        <pre><code class="html" th:text="${inputHtml}"></code></pre>
+      </div>
+      <div class="codeCheck_css">
+        <p>CSS</p>
+        <pre><code class="css" th:text="${inputCss}"></code></pre>
+      </div>
+    </div>
+    <div class="codeCheck_form">
+      <form method="post" th:action="@{/save}">
+        <div class="codeCheck_hidden">
+          <input name="postidForRegist" type="text" th:value="${postid}">
+          <input name="htmlForRegist" type="text" th:value="${inputHtml}">
+          <input name="cssForRegist" type="text" th:value="${inputCss}">
+        </div>
+        <button class="btn codeCheck_submit" type="submit">
+          <img th:src="@{/images/send_icon.png}" alt="">
+          <p>Send!</p>
+        </button>
+      </form>
+      <form method="post" th:action="@{/cancel}">
+        <input id="postidForDelete" name="postidForDelete" type="hidden" th:value="${postid}">
+        <button class="btn codeCheck_back" type="submit">
+          <img th:src="@{/images/back_icon.png}" alt="">
+          <p>Back!</p>
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

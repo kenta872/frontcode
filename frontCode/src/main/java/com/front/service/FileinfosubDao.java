@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.front.entity.FileinfoEntity;
-import com.front.entity.FileinfosubEntity;
+import com.front.controller.entity.FileinfoEntity;
+import com.front.controller.entity.FileinfosubEntity;
 
 
 /**

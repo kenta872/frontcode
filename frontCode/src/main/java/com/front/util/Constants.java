@@ -29,17 +29,14 @@ public class Constants {
 	/** セキュリティ対象外ファイルリスト */
     public static final String[] STATIC_RESOURCES = {"/**/css/**", "/**/js/**", "/**/images/**", };
     
-    /** 日付フォーマット：yyyymmdd */
-    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("uuuuMMddHHmmss").withResolverStyle(ResolverStyle.STRICT);
+    /** 日付フォーマット：uuuuMMddHHmm */
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("uuuuMMddHHmm").withResolverStyle(ResolverStyle.STRICT);
     
     /** ソース種別：HTML */
     public static final String CODE_TYPE_HTML = "html";
     
     /** ソース種別：CSS */
     public static final String CODE_TYPE_CSS = "css";
-    
-    /** ソース種別：JS */
-    public static final String CODE_TYPE_JS = "js";
     
     /** ファイル種別：HTML */
     public static final String FILE_TYPE_HTML = "html";
@@ -52,9 +49,6 @@ public class Constants {
 
     /** 投稿ステータス：承認 */
     public static final int POSTIFNO_STATUS_SHONIN = 2;
-    
-    /** エラーチェック用：HTTP */
-    public static final String PROTOCOL_HTTP = "http";
     
     /** 空文字 */
     public static final String EMPTY_TEXT = "";

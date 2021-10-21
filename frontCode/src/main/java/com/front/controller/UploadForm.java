@@ -13,12 +13,10 @@ public class UploadForm {
 	@NotEmpty(message = "パーツ種別を選択してください")
 	String typeSelectValue;
 	
-	@NotBlank(message = "HTMLを入力してください")
+	@NotEmpty(message = "HTMLを入力してください")
 	String htmlInputText;
 	
-	@NotBlank(message="CSSを入力してください")
+	@NotEmpty(message="CSSを入力してください")
 	String cssInputText;
-	
-	String jsInputText;
 
 }

@@ -13,20 +13,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.front.entity.CodeinfoEntity;
-import com.front.entity.FileinfoEntity;
-import com.front.entity.PostinfoEntity;
-import com.front.entity.TypedbEntity;
-import com.front.repository.CodeinfoRepository;
-import com.front.repository.CodeinfosubRepository;
-import com.front.repository.FileinfoRepository;
-import com.front.repository.FileinfosubRepository;
-import com.front.repository.PostinfoRepository;
-import com.front.repository.PostinfosubRepository;
+import com.front.controller.entity.CodeinfoEntity;
+import com.front.controller.entity.FileinfoEntity;
+import com.front.controller.entity.PostinfoEntity;
+import com.front.controller.entity.TypedbEntity;
+import com.front.controller.repository.CodeinfoRepository;
+import com.front.controller.repository.CodeinfosubRepository;
+import com.front.controller.repository.FileinfoRepository;
+import com.front.controller.repository.FileinfosubRepository;
+import com.front.controller.repository.PostinfoRepository;
+import com.front.controller.repository.PostinfosubRepository;
+import com.front.error.ErrorMessage;
+import com.front.error.Errors;
 import com.front.service.CodeinfoDao;
 import com.front.service.CodeinfosubDao;
 import com.front.service.CustomDao;
@@ -38,6 +41,7 @@ import com.front.service.PostinfoDao;
 import com.front.service.PostinfosubDao;
 import com.front.service.TypedbDao;
 import com.front.util.Constants;
+import com.front.util.StringUtil;
 
 /**
  * ホームコントローラー
@@ -77,6 +81,8 @@ public class AdminController {
 	IoService ioService;
 	@Autowired
 	OperationService operationService;
+	@Autowired
+	Errors errors;
 
 	@Value("${file.savedir}")
 	private String dirname;
@@ -125,13 +131,11 @@ public class AdminController {
 					int postid = postinfoList.get(i).getPostid();
 					String codehtml = null;
 					String codecss = null;
-					String codejs = null;
 					String filehtml = dirname + "/src/";
 					// ソースコードの数だけループ
 					for (int codeinfoIndex = 0; codeinfoIndex < codeinfoList.size(); codeinfoIndex++) {
 						boolean htmlHit = false;
 						boolean cssHit = false;
-						boolean jsHit = false;
 						// 投稿IDに紐づくソースコードがある場合
 						if (codeinfoList.get(codeinfoIndex).getPostid() == postid) {
 							if (codeinfoList.get(codeinfoIndex).getCodegenre().equals(Constants.CODE_TYPE_HTML)) {
@@ -140,12 +144,9 @@ public class AdminController {
 							} else if (codeinfoList.get(codeinfoIndex).getCodegenre().equals(Constants.CODE_TYPE_CSS)) {
 								codecss = codeinfoList.get(codeinfoIndex).getSrc();
 								cssHit = true;
-							} else if (codeinfoList.get(codeinfoIndex).getCodegenre().equals(Constants.CODE_TYPE_JS)) {
-								codejs = codeinfoList.get(codeinfoIndex).getSrc();
-								jsHit = true;
 							}
 						}
-						if (htmlHit == true && cssHit == true && jsHit == true) {
+						if (htmlHit == true && cssHit == true) {
 							break;
 						}
 
@@ -164,10 +165,8 @@ public class AdminController {
 					List<String> outlist = new ArrayList<>();
 					outlist.add(codehtml);
 					outlist.add(codecss);
-					outlist.add(codejs);
 					outlist.add(filehtml);
 					outlist.add(String.valueOf(postid));
-					outlist.add(String.valueOf(typeid));
 					codeMap.put(postid, outlist);
 				}
 				initMap.put(typeid, codeMap);
@@ -196,10 +195,10 @@ public class AdminController {
 	 * @return 管理者用ソース画面
 	 * @throws Exception
 	 */
-	@GetMapping("/listView")
+	@GetMapping("/admin/postList")
 	public String listView(Model model) throws Exception {
 
-		return "listView";
+		return "postList";
 	}
 
 	/**
@@ -211,29 +210,42 @@ public class AdminController {
 	 * @return 管理者用ソース削除画面
 	 * @throws Exception
 	 */
-	@PostMapping("/deleteView")
-	public String deleteview(@RequestParam(value = "postidForDelete") Integer postid,
-			@RequestParam(value = "typeidForDelete") Integer typeid, Model model) throws Exception {
-
-		FileinfoEntity fileinfoEntity = fileinfoDao.findFileByPostid(postid, Constants.FILE_TYPE_HTML);
-		model.addAttribute("typename", typedbDao.findTypeByTypeid(typeid).getTypename());
+	@GetMapping("/admin/postDetail/{postid}")
+	public String deleteview(@PathVariable("postid") Integer postid, Model model) throws Exception {
+	
+		// URLチェック
+		if(!StringUtil.isValidNumber(postid.toString())) {
+			// URL例外
+			throw errors.errorUrl();
+		}
+		
+		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
+		// DBに該当の投稿が存在しない場合
+		if(postinfoEntity==null) {
+			throw errors.errorDbIllegal();
+		}
+		model.addAttribute("typename", typedbDao.findTypeByTypeid(postinfoEntity.getTypeid()).getTypename());
 		model.addAttribute("htmlsrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_HTML));
 		model.addAttribute("csssrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_CSS));
-		model.addAttribute("jssrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_JS));
 		model.addAttribute("postid", postid);
 
-		return "deleteView";
+		return "postDetail";
 	}
 
 	/**
-	 * 管理画面削除コントローラー URL：/manageDetail
+	 * 投稿削除
+	 * 
+	 * @param postid 投稿ID
+	 * @param model  モデル
+	 * @return 管理者投稿一覧画面にリダイレクト
+	 * @throws Exception
 	 */
-	@PostMapping("/manageDelete")
+	@PostMapping("/admin/postDelete")
 	public String manageDelete(@RequestParam(value = "postidForDelete") int postid, Model model) throws Exception {
 		// 投稿IDに紐づく情報をすべて削除
 		operationService.deleteOpe(postid);
 
-		return "redirect:/listView";
+		return "redirect:/admin/postList";
 	}
 
 	/**
@@ -243,7 +255,7 @@ public class AdminController {
 	 * @return 未承認投稿一覧画面
 	 * @throws Exception
 	 */
-	@GetMapping("unapprovedList")
+	@GetMapping("/admin/unapprovedList")
 	public String unapprovedList(Model model) throws Exception {
 
 		// 未承認の投稿一覧を取得 [postdate,typename,postid,typeid]
@@ -262,18 +274,27 @@ public class AdminController {
 	 * @param mav    モデルアンドビュー
 	 * @return
 	 */
-	@PostMapping("/manageDetail")
-	public ModelAndView manageDetail(@RequestParam(value = "postidForManage") Integer postid,
-			@RequestParam(value = "typeidForManage") Integer typeid, ModelAndView mav) {
+	@GetMapping("/admin/unapprovedDetail/{postid}")
+	public ModelAndView manageDetail(@PathVariable("postid") Integer postid, ModelAndView mav) throws Exception {
+		
+		// URLチェック
+		if(!StringUtil.isValidNumber(postid.toString())) {
+			// URL例外
+			throw errors.errorUrl();
+		}
 
+		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
 		FileinfoEntity fileinfoEntity = fileinfoDao.findFileByPostid(postid, Constants.FILE_TYPE_HTML);
-		mav.addObject("typename", typedbDao.findTypeByTypeid(typeid).getTypename());
+		// DBに該当の投稿が存在しない場合
+		if(postinfoEntity==null || fileinfoEntity==null) {
+			throw errors.errorDbIllegal();
+		}
+		mav.addObject("typename", typedbDao.findTypeByTypeid(postinfoEntity.getTypeid()).getTypename());
 		mav.addObject("htmlsrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_HTML));
 		mav.addObject("csssrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_CSS));
-		mav.addObject("jssrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_JS));
 		mav.addObject("htmllink", dirname + "/src/" + fileinfoEntity.getFilename());
 		mav.addObject("postid", postid);
-		mav.setViewName("manageDetail");
+		mav.setViewName("unapprovedDetail");
 		return mav;
 	}
 
@@ -285,13 +306,13 @@ public class AdminController {
 	 * @return 未承認一覧画面にリダイレクト
 	 * @throws Exception
 	 */
-	@PostMapping("/regist")
+	@PostMapping("/admin/regist")
 	public String postRegist(@RequestParam(value = "postidForRegist") Integer postid, Model model) throws Exception {
 		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
 		postinfoEntity.setStatus(2);
 		postRepos.saveAndFlush(postinfoEntity);
 
-		return "redirect:/unapprovedList";
+		return "redirect:/admin/unapprovedList";
 
 	}
 
@@ -303,7 +324,7 @@ public class AdminController {
 	 * @return 未承認投稿一覧絞り込み結果
 	 * @throws Exception
 	 */
-	@PostMapping("/filter")
+	@PostMapping("/admin/filter")
 	public String postFilter(@RequestParam(value = "item_type") int typeid, Model model) throws Exception {
 
 		List<Object[]> postDataList = new ArrayList<>();
@@ -330,13 +351,13 @@ public class AdminController {
 	 * @return 未承認投稿一覧画面にリダイレクト
 	 * @throws Exception
 	 */
-	@PostMapping("/reject")
+	@PostMapping("/admin/reject")
 	public String reject(@RequestParam(value = "postidForDelete") int postid, Model model) throws Exception {
 
 		// 投稿IDに紐づく情報をすべて削除
 		operationService.deleteOpe(postid);
 
-		return "redirect:/unapprovedList";
+		return "redirect:/admin/unapprovedList";
 	}
 
 //	/**
