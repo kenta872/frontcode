@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,16 @@
       <a th:href="@{/}">
         <img th:src="@{/images/home.png}" alt="home">
       </a>
+      <a th:href="@{/login}" sec:authorize="isAnonymous()">
+          <img th:src="@{/images/login_icon.png}" alt="home">
+      </a>
+      <form role="form" id="logout" th:action="@{/logout}" method="post" sec:authorize="hasAnyRole('ADMIN','USER')">
+	    <input type="image" th:src="@{/images/logout_icon.png}" />
+      </form>
+      <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">
+          <img th:src="@{/images/setting_icon.png}" alt="home">
+      </a>
+
     </div>
     <div class="nav_wrapper">
       <label class="nav_btn" for="nav_check">
@@ -46,7 +56,7 @@
         <!-- アプリケーション説明ページ -->
         <label class="side_menu">
           <div class="side_menu_text">
-            <p>HOW TO</p>
+            <p>HOW&nbsp;TO</p>
             <p>使い方</p>
           </div>
           <img th:src="@{/images/arrow_right.png}" alt="arrowRight">
@@ -104,7 +114,36 @@
         </div>
         <div class="main_content">
           <div class="instruct_title">
-            <h2>Instructions</h2>
+            <h2>HOW&nbsp;TO</h2>
+          </div>
+          <div class="howto_wrapper">
+            <div class="howto_label">
+              <div class="howto_btn">
+                <p id="howto_download_toggle">ファイルダウンロードについて<span class="arror_right"></span></p>
+                <div class="howto_content">
+                  <img src="./images/gallery_7.jpg" alt="">
+                  <p>ファイルをダウンロードして動作確認ができます。</p>
+                  <p>ダウンロードボタンを押すとzipファイルがダウンロードされます。</p>
+                </div>
+              </div>
+              <div class="howto_btn">
+                <p id="howto_upload_toggle">ファイルアップロードについて<span class="arror_right"></span></p>
+                <div class="howto_content">
+                  <p>よく使うデザインパーツをアップロードして、いつでも使えるようにしておきましょう。</p>
+                  <p>①パーツ種別を選択</p>
+                  <p>②HTMLコードを入力</p>
+                  <p>③CSSコードを入力</p>
+                  <p>管理者の承認後、サイトに反映されます。</p>
+                  <p>※javascriptや外部サイトへのリンクは入力できないようになっております。</p>
+                </div>
+              </div>
+              <div class="howto_btn">
+                <p id="howto_future_toggle">追加予定の機能について<span class="arror_right"></span></p>
+                <div class="howto_content">
+                  <p>○お気に入り機能</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-------------------------------->

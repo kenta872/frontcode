@@ -22,3 +22,20 @@ $(function() {
     tabContents.eq(elmIndex).addClass('main_show');
   });
 });
+
+
+$(function(){
+  $("#howto_download_toggle").on("click", function() {
+    $(this).next().slideToggle();
+  });
+});
+$(function(){
+  $("#howto_upload_toggle").on("click", function() {
+    $(this).next().slideToggle();
+  });
+});
+$(function(){
+  $("#howto_future_toggle").on("click", function() {
+    $(this).next().slideToggle();
+  });
+});

@@ -1,5 +1,6 @@
 package com.front.security.account;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
@@ -23,6 +25,9 @@ public class Account implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private static final String ROLE_ADMIN = "ADMIN";
+	private static final String ROLE_USER = "USER";
+	
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,13 +38,22 @@ public class Account implements UserDetails {
 	
 	@Column
 	private String password;
+	
+	@Column
+	private String mail;
+	
+	@Column
+	private String role;
 
 	//この下はインターフェースのメソッドを実装する
 	
 	//ユーザーに与えられる権限リストを返却するメソッド
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities(){
-		return null;
+		// TODO Auto-generated method stub
+		Collection<GrantedAuthority> authorityList = new ArrayList<>();
+		authorityList.add(new SimpleGrantedAuthority("ROLE_" + this.role));
+		return authorityList;
 	}
 	
 	//ユーザー名を返却するメソッド
@@ -76,5 +90,14 @@ public class Account implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	
+	
+	public String getRoleAdmin() {
+		return ROLE_ADMIN;
+	}
+	
+	public String getRoleUser() {
+		return ROLE_USER;
 	}
 }

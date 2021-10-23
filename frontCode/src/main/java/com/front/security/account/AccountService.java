@@ -23,7 +23,6 @@ public class AccountService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		//データベースからアカウント情報を検索
 		Account account = accountDao.getUserData(username);
-		System.out.println(account.getPassword());
 		return account;
 	}
 

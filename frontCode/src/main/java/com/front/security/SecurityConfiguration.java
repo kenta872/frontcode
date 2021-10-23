@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.front.security.account.AccountService;
 import com.front.util.Constants;
@@ -24,14 +25,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private AccountService userService;
 		
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    private static final String[] STATIC_RESOURCES = {
-            "/**/css/**", "/**/js/**", "/**/img/**",
-        };
-//	/**
-//	 * アカウント情報DB登録時に使用するパスワードエンコーダー
-//	 * @return
-//	 */
+	/**
+	 * アカウント情報DB登録時に使用するパスワードエンコーダー
+	 * @return
+	 */
     @Bean
     public PasswordEncoder passwordEncoder() {
 
@@ -54,34 +51,41 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-        // 主にURLごとに異なるセキュリティ設定を行う
-		/* Basic認証の場合 */
-        // (3) Basic認証の対象となるパス
-        http.antMatcher("/admin/**");
-        // (5) 対象のすべてのパスに対して認証を有効にする
-        http.authorizeRequests().anyRequest().authenticated();
-        // (4) Basic認証を指定
-        http.httpBasic();
-        // (6) すべてのリクエストをステートレスとして設定
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        
-//        /* ログインページ対応の場合 */
-//        http
-//        // AUTHORIZE
-//        .authorizeRequests()
-////        .mvcMatchers("/","/upload","/delete","/codeCheck","/comp").permitAll() // ＜＝ログイン認証対象外のURL
-//        .antMatchers("/","/upload","/delete","/codeCheck","/comp"). permitAll() // <- antMatchersはURLのみが対象、mvcMatchersはファイル名なども対象
-//        .anyRequest()
-//        .authenticated()
-//        .and()
-//        // LOGIN
-//        .formLogin()
-//        .loginPage("/login")
-//        .permitAll()
-//        .defaultSuccessUrl("/")
-//        .usernameParameter("username") // ＜＝"username"というname名からデータを取得してくる
-//	    .passwordParameter("password"); // ＜＝"password"というname名からデータを取得してくる
-        
+		http
+        .authorizeRequests()
+            // アクセス権限の設定
+            // アクセス制限の無いURL
+            .antMatchers("/", "/upload", "/check", "/save", "/comp", "/cancel", "/createAccount", "/accountRegist","/error","/toError","/login").permitAll()
+            // ADMINユーザーのみに許可
+            .antMatchers("/admin/**").hasRole("ADMIN")
+            // その他は認証済みであること
+            .anyRequest()
+            .authenticated()
+            .and()
+        // ログイン処理
+        .formLogin()
+            .loginPage("/login").permitAll()
+            .loginProcessingUrl("/login")
+            .usernameParameter("username") // ＜＝"username"というname名からデータを取得してくる
+  	        .passwordParameter("password") // ＜＝"password"というname名からデータを取得してくる
+            .defaultSuccessUrl("/")
+  	        .failureUrl("/toError")
+            .permitAll()
+		    .and()
+        // ログアウト処理
+		.logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            // ログアウト成功時の遷移先
+            .logoutSuccessUrl("/login")
+            // ログアウト時に削除するクッキー名
+            .deleteCookies("JSESSIONID")
+            // ログアウト時のセッション破棄を有効化
+            .invalidateHttpSession(true)
+			.and()
+        .exceptionHandling()
+        	.accessDeniedPage("/toError");
+
+		
 	}
 	// 独自の認証処理を実装する場合はオーバーライドする
 	// オーバーライドしなければapplication.propertiesに設定したログイン情報がエフォルトに

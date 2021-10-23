@@ -50,10 +50,8 @@ public class StringUtil {
 			return false;
 		}
 		try {
-			System.out.println(Integer.parseInt(value));
 			return true;
 		} catch (NumberFormatException e) {
-			System.out.println("NG");
 			return false;
 		}
 	}

@@ -21,8 +21,14 @@
       <a th:href="@{/}">
         <img th:src="@{/images/home.png}" alt="home">
       </a>
-      <a th:href="@{/admin}">
-        <img th:src="@{/images/setting_icon.png}" alt="home">
+      <a th:href="@{/login}" sec:authorize="isAnonymous()">
+          <img th:src="@{/images/login_icon.png}" alt="home">
+      </a>
+      <form role="form" id="logout" th:action="@{/logout}" method="post" sec:authorize="hasAnyRole('ADMIN','USER')">
+	    <input type="image" th:src="@{/images/logout_icon.png}" />
+      </form>
+      <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">
+          <img th:src="@{/images/setting_icon.png}" alt="home">
       </a>
     </div>
     <div class="nav_wrapper">

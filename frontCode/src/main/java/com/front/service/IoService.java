@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -31,7 +31,10 @@ public class IoService {
 	 * @param srcList HTML,CSSのファイルソースリスト
 	 * @throws Exception ファイル操作に失敗した場合
 	 */
-	public void createHtmlFile(String filename, List<String> srcList, boolean subcheck) throws Exception {
+	public void createHtmlFile(String filename, Map<String,String> srcMap, boolean subcheck) throws Exception {
+		String htmlSrc = null;
+		String cssSrc = null;
+		
 		// sample{id}.htmlの内容
 		String srccode = "<!doctype html>\r\n";
 		       srccode+= "<html lang=\"ja\">\r\n";
@@ -40,11 +43,11 @@ public class IoService {
 		       srccode+= "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n";
 		       srccode+= "<title>sample</title>\r\n";
 		       srccode+= "<style>\r\n";
-		       srccode+= srcList.get(1);
+		       srccode+= srcMap.get(Constants.CODE_TYPE_CSS);
 		       srccode+= "</style>\r\n";
 		       srccode+= "</head>\r\n";
 		       srccode+= "<body>\r\n";
-		       srccode+= srcList.get(0);
+		       srccode+= srcMap.get(Constants.CODE_TYPE_HTML);
 		       srccode+= "</body>\r\n";
 		       srccode+= "</html>";
 		       

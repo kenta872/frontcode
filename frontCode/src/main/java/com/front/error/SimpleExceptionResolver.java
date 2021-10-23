@@ -23,10 +23,12 @@ public class SimpleExceptionResolver implements HandlerExceptionResolver {
         	String errorMessage = appException.getErrorMessage();
         	mav.addObject("errorMessage",errorMessage);
         } else {
-            // JSPに表示するメッセージをセットします。
-            mav.addObject("errorMessage", "予期せぬエラーが発生しました。" + " 詳細：【" + ex + "】");
-            // 遷移先のJSPを指定します。(error.jspに遷移します。)      	
+        	logger.error("不明なシステムエラーが発生しました。", ex);
+            String textMessage = ex.getMessage();
+            mav.addObject("errorMessage", textMessage);
+            // JSPに表示するメッセージをセットします。 	
         }
+        
         mav.setViewName("error"); 
         
         return mav;

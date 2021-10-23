@@ -78,6 +78,7 @@ public class CustomDao {
 			  sql += "where ";
 			  sql += "  pi.status = 1";
 			  sql += "  and pi.typeid = " + typeid;
+			  sql += "  and pi.delFlg = 'false'";
 		
 		// 未承認(status=1)の投稿ID一覧を取得する
 		Query authoQuery = entityManager.createQuery(sql);

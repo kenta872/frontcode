@@ -6,13 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -92,9 +94,9 @@ public class HomeController {
 	ErrorCheck errorCheck;
 	
 	@Autowired
-	AccountRepository repos;
+	AccountRepository accountRepos;
 	@Autowired
-	AccountDao dao;
+	AccountDao accountDao;
 
 	@Value("${file.savedir}")
 	private String dirname;
@@ -144,7 +146,6 @@ public class HomeController {
 					int postid = postinfoList.get(i).getPostid();
 					String codehtml = null;
 					String codecss = null;
-					String codejs = null;
 					String filehtml = dirname + "/src/";
 					String filezip = dirname + "/zip/";
 					// ソースコードの数だけループ
@@ -275,12 +276,12 @@ public class HomeController {
 		filezipsubEntity.setPostid(postinfosubEntity.getPostid());
 		filezipsubEntity = filesubRepos.saveAndFlush(filezipsubEntity);
 
-		List<String> srcList = new ArrayList<>();
-		srcList.add(uploadForm.getHtmlInputText());
-		srcList.add(uploadForm.getCssInputText());
+		Map<String,String> srcMap = new HashMap<>();
+		srcMap.put(Constants.CODE_TYPE_HTML, uploadForm.getHtmlInputText());
+		srcMap.put(Constants.CODE_TYPE_CSS, uploadForm.getCssInputText());
 
 		// sample{id}.htmlを生成
-		ioService.createHtmlFile(filehtmlsubEntity.getFilename(), srcList, true);
+		ioService.createHtmlFile(filehtmlsubEntity.getFilename(), srcMap, true);
 		// sample{id}.zipを生成
 		ioService.createZipFile(filezipsubEntity.getFilename(), filehtmlsubEntity.getFilename(), true);
 
@@ -300,10 +301,9 @@ public class HomeController {
 	 * @throws Exception
 	 */
 	@GetMapping("/check")
-	public String checkCode(Model model) throws Exception {
+	public String checkCode(@ModelAttribute("uploadForm") UploadForm uploadForm, Model model) throws Exception {
 
-		// アップロードフォームデータを受け取る
-		UploadForm uploadForm = (UploadForm) model.getAttribute("uploadForm");
+		System.out.println(uploadForm.getHtmlInputText());
 		// 仮登録情報を受け取る
 		PostinfosubEntity postinfosubEntity = (PostinfosubEntity) model.getAttribute("postinfosubEntity");
 
@@ -314,9 +314,9 @@ public class HomeController {
 		// 選択種別を設定
 		model.addAttribute("selecType", typedbDao.findTypeByTypeid(postinfosubEntity.getTypeid()).getTypename());
 		// ソースコードを設定
-		model.addAttribute("inputHtml", uploadForm.getHtmlInputText());
-		model.addAttribute("inputCss", uploadForm.getCssInputText());
 		model.addAttribute("postid", postinfosubEntity.getPostid());
+		model.addAttribute("inputHtml",uploadForm.getHtmlInputText());
+		model.addAttribute("inputCss",uploadForm.getCssInputText());
 
 		return "postCheck";
 	}
@@ -333,8 +333,10 @@ public class HomeController {
 	 */
 	@PostMapping("/save")
 	public String saveCode(@RequestParam(value = "postidForRegist") int postid,
-			@RequestParam(value = "htmlForRegist") String inputHtml,
-			@RequestParam(value = "cssForRegist") String inputCss, Model model) throws Exception {
+			@ModelAttribute("uploadForm") UploadForm uploadForm,
+			Model model) throws Exception {
+		
+		System.out.println(uploadForm.getHtmlInputText());
 
 		LocalDateTime nowDate = LocalDateTime.now();
 		// TODO DB自動設定で今日の日付を設定できないか検討
@@ -359,13 +361,13 @@ public class HomeController {
 		// HTMLソースコードを設定
 		codehtmlEntity.setCodegenre(Constants.CODE_TYPE_HTML);
 		codehtmlEntity.setPostid(postinfoEntity.getPostid());
-		codehtmlEntity.setSrc(inputHtml);
+		codehtmlEntity.setSrc(uploadForm.getHtmlInputText());
 		codehtmlEntity = codeRepos.saveAndFlush(codehtmlEntity);
 
 		// CSSソースコードを登録
 		codecssEntity.setCodegenre(Constants.CODE_TYPE_CSS);
 		codecssEntity.setPostid(postinfoEntity.getPostid());
-		codecssEntity.setSrc(inputCss);
+		codecssEntity.setSrc(uploadForm.getCssInputText());
 		codecssEntity = codeRepos.saveAndFlush(codecssEntity);
 
 		// HTMLファイル情報を登録
@@ -380,12 +382,12 @@ public class HomeController {
 		filezipEntity.setPostid(postinfoEntity.getPostid());
 		filezipEntity = fileRepos.saveAndFlush(filezipEntity);
 
-		List<String> codeList = new ArrayList<>();
-		codeList.add(codehtmlEntity.getSrc());
-		codeList.add(codecssEntity.getSrc());
+		Map<String,String> srcMap = new HashMap<>();
+		srcMap.put(Constants.CODE_TYPE_HTML, codehtmlEntity.getSrc());
+		srcMap.put(Constants.CODE_TYPE_CSS, codecssEntity.getSrc());
 
 		// sample{id}.htmlを生成
-		ioService.createHtmlFile(filehtmlEntity.getFilename(), codeList, false);
+		ioService.createHtmlFile(filehtmlEntity.getFilename(), srcMap, false);
 		// sample{id}.zipを生成
 		ioService.createZipFile(filezipEntity.getFilename(), filehtmlEntity.getFilename(), false);
 
@@ -419,46 +421,101 @@ public class HomeController {
 
 		return "redirect:/";
 	}
+
+	/**
+	 * ログイン画面コントローラー
+	 * 
+	 * @param error
+	 * @param logout
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+    @GetMapping("/login")
+    public String login(@RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            Model model, HttpSession session) {
+
+        model.addAttribute("showErrorMsg", false);
+        model.addAttribute("showLogoutedMsg", false);
+        if (error != null) {
+            if (session != null) {
+                AuthenticationException ex = (AuthenticationException) session
+                        .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+                if (ex != null) {
+                    model.addAttribute("showErrorMsg", true);
+                    model.addAttribute("errorMsg", ex.getMessage());
+                }
+            }
+        } else if (logout != null) {
+            model.addAttribute("showLogoutedMsg", true);
+        }
+        return "login";
+    }
+    
+    
+    @GetMapping("/createAccount")
+    public String createAccount(@ModelAttribute("account") Account account) {
+    	
+    	return "createAccount";
+    }
+    
+    @PostMapping("/accountRegist")
+    public String registAccount(@Validated @ModelAttribute("account")Account account, BindingResult errorResult
+    		, Model model) {
+    	
+		// バリデーションエラーチェック
+		if (errorResult.hasErrors()) {
+			List<String> errorList = new ArrayList<>();
+			for (ObjectError error : errorResult.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+			}
+			model.addAttribute("validationError", errorList);
+			return "createAccount";
+		}
+		
+		
+		// カスタムエラーチェック
+		List<String> errorList = new ArrayList<>();
+		// ユーザーネーム重複チェック
+		if(accountDao.findAccountByName(account.getUsername()).size()>0) {
+			errorList.add(errors.userDuplicate());
+		}
+		// メールアドレス重複チェック
+		if(accountDao.findAccountByMail(account.getMail()).size()>0) {
+			errorList.add(errors.mailDuplicate());
+		}
+		if(errorList.size()>0) {
+			model.addAttribute("validationError", errorList);
+			return "createAccount";
+		}
+		
+
+		// パスワードエンコード
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		String hashPass = bCryptPasswordEncoder.encode(account.getPassword());
+		
+		Account newAccount = new Account();
+		newAccount.setUsername(account.getUsername());
+		newAccount.setPassword(hashPass);
+		newAccount.setMail(account.getMail());
+		newAccount.setRole(newAccount.getRoleUser());
+    	accountRepos.saveAndFlush(newAccount);
+    	logger.info("アカウントを登録しました：" + newAccount.getUsername());
+    	
+    	return "redirect:/";
+    }
 	
 //	@PostConstruct
 //	public void init() throws Exception{
 //		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //		Account userdata = new Account();
-//		userdata.setUsername("nakai");
-//		String hashPass = bCryptPasswordEncoder.encode("postgres");
+//		userdata.setUsername("test");
+//		String hashPass = bCryptPasswordEncoder.encode("test");
 //		userdata.setPassword(hashPass);
+//		userdata.setMail("test@mail.com");
+//		userdata.setRole("USER");
 //		repos.saveAndFlush(userdata);
 //	}
-
-//	/**
-//	 * ログイン画面コントローラー
-//	 * 
-//	 * @param error
-//	 * @param logout
-//	 * @param model
-//	 * @param session
-//	 * @return
-//	 */
-//    @GetMapping("/login")
-//    public String login(@RequestParam(value = "error", required = false) String error,
-//            @RequestParam(value = "logout", required = false) String logout,
-//            Model model, HttpSession session) {
-//
-//        model.addAttribute("showErrorMsg", false);
-//        model.addAttribute("showLogoutedMsg", false);
-//        if (error != null) {
-//            if (session != null) {
-//                AuthenticationException ex = (AuthenticationException) session
-//                        .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-//                if (ex != null) {
-//                    model.addAttribute("showErrorMsg", true);
-//                    model.addAttribute("errorMsg", ex.getMessage());
-//                }
-//            }
-//        } else if (logout != null) {
-//            model.addAttribute("showLogoutedMsg", true);
-//        }
-//        return "login";
-//    }
 
 }

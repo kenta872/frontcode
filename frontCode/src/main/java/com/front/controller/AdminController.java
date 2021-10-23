@@ -28,7 +28,6 @@ import com.front.controller.repository.FileinfoRepository;
 import com.front.controller.repository.FileinfosubRepository;
 import com.front.controller.repository.PostinfoRepository;
 import com.front.controller.repository.PostinfosubRepository;
-import com.front.error.ErrorMessage;
 import com.front.error.Errors;
 import com.front.service.CodeinfoDao;
 import com.front.service.CodeinfosubDao;
@@ -212,16 +211,16 @@ public class AdminController {
 	 */
 	@GetMapping("/admin/postDetail/{postid}")
 	public String deleteview(@PathVariable("postid") Integer postid, Model model) throws Exception {
-	
+
 		// URLチェック
-		if(!StringUtil.isValidNumber(postid.toString())) {
+		if (!StringUtil.isValidNumber(postid.toString())) {
 			// URL例外
 			throw errors.errorUrl();
 		}
-		
+
 		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
 		// DBに該当の投稿が存在しない場合
-		if(postinfoEntity==null) {
+		if (postinfoEntity == null) {
 			throw errors.errorDbIllegal();
 		}
 		model.addAttribute("typename", typedbDao.findTypeByTypeid(postinfoEntity.getTypeid()).getTypename());
@@ -276,9 +275,9 @@ public class AdminController {
 	 */
 	@GetMapping("/admin/unapprovedDetail/{postid}")
 	public ModelAndView manageDetail(@PathVariable("postid") Integer postid, ModelAndView mav) throws Exception {
-		
+
 		// URLチェック
-		if(!StringUtil.isValidNumber(postid.toString())) {
+		if (!StringUtil.isValidNumber(postid.toString())) {
 			// URL例外
 			throw errors.errorUrl();
 		}
@@ -286,7 +285,7 @@ public class AdminController {
 		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
 		FileinfoEntity fileinfoEntity = fileinfoDao.findFileByPostid(postid, Constants.FILE_TYPE_HTML);
 		// DBに該当の投稿が存在しない場合
-		if(postinfoEntity==null || fileinfoEntity==null) {
+		if (postinfoEntity == null || fileinfoEntity == null) {
 			throw errors.errorDbIllegal();
 		}
 		mav.addObject("typename", typedbDao.findTypeByTypeid(postinfoEntity.getTypeid()).getTypename());
@@ -360,35 +359,77 @@ public class AdminController {
 		return "redirect:/admin/unapprovedList";
 	}
 
-//	/**
-//	 * ログイン画面コントローラー
-//	 * 
-//	 * @param error
-//	 * @param logout
-//	 * @param model
-//	 * @param session
-//	 * @return
-//	 */
-//    @GetMapping("/login")
-//    public String login(@RequestParam(value = "error", required = false) String error,
-//            @RequestParam(value = "logout", required = false) String logout,
-//            Model model, HttpSession session) {
-//
-//        model.addAttribute("showErrorMsg", false);
-//        model.addAttribute("showLogoutedMsg", false);
-//        if (error != null) {
-//            if (session != null) {
-//                AuthenticationException ex = (AuthenticationException) session
-//                        .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-//                if (ex != null) {
-//                    model.addAttribute("showErrorMsg", true);
-//                    model.addAttribute("errorMsg", ex.getMessage());
-//                }
-//            }
-//        } else if (logout != null) {
-//            model.addAttribute("showLogoutedMsg", true);
-//        }
-//        return "login";
-//    }
+	/**
+	 * herokuのファイル削除復活対応
+	 * 
+	 * @return 管理ページでリダイレクト
+	 * @throws Exception
+	 */
+	@GetMapping("/admin/heroku")
+	public String herokuFileService() throws Exception {
 
+		List<PostinfoEntity> postinfoEntityList = postinfoDao.findPostAll();
+		List<FileinfoEntity> fileinfoEntityList = fileinfoDao.selectFileAll();
+		List<CodeinfoEntity> codeinfoEntityList = codeinfoDao.selectCodeAll();
+
+		// 投稿数ループ
+		for (PostinfoEntity postinfoEntity : postinfoEntityList) {
+			String htmlname = null;
+			String zipname = null;
+			Map<String, String> srcMap = new HashMap<>();
+
+			// 投稿IDに紐づくファイル情報を取得
+			for (FileinfoEntity fileinfoEntity : fileinfoEntityList) {
+				if (fileinfoEntity.getPostid() == postinfoEntity.getPostid()) {
+					if (fileinfoEntity.getFilegenre().equals(Constants.FILE_TYPE_HTML)) {
+						htmlname = fileinfoEntity.getFilename();
+					}
+					if (fileinfoEntity.getFilegenre().equals(Constants.FILE_TYPE_ZIP)) {
+						zipname = fileinfoEntity.getFilename();
+					}
+					if (htmlname != null && zipname != null) {
+						break;
+					}
+				}
+			}
+
+			// 投稿IDに紐づくソースコードを取得
+			for (CodeinfoEntity codeinfoEntity : codeinfoEntityList) {
+				if (codeinfoEntity.getPostid() == postinfoEntity.getPostid()) {
+					boolean htmlcheck = false;
+					boolean csscheck = false;
+					if (codeinfoEntity.getCodegenre().equals(Constants.CODE_TYPE_HTML)) {
+						srcMap.put(Constants.CODE_TYPE_HTML, codeinfoEntity.getSrc());
+						htmlcheck = true;
+					}
+					if (codeinfoEntity.getCodegenre().equals(Constants.CODE_TYPE_CSS)) {
+						srcMap.put(Constants.CODE_TYPE_CSS, codeinfoEntity.getSrc());
+						csscheck = true;
+					}
+					if (htmlcheck && csscheck) {
+						break;
+					}
+				}
+			}
+			if(htmlname!=null && zipname!=null && srcMap.size()>0) {
+				ioService.createHtmlFile(htmlname, srcMap, false);
+				ioService.createZipFile(zipname, htmlname, false);				
+			}
+
+		}
+
+		return "redirect:/admin";
+		// public void createZipFile(String zipName, String htmlName, boolean subCheck)
+	}
+	
+	
+	/**
+	 * エラーハンドリング
+	 * @return
+	 */
+	@GetMapping("/toError")
+	public String toError() {
+		// 権限例外を発生させる
+		throw errors.errorRole();
+	}
 }

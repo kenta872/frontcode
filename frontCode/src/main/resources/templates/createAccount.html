@@ -35,24 +35,27 @@
       <div class="login_title">
         <h2>FrontCode</h2>
       </div>
+      <div class="errorText">
+        <table>
+          <tbody>
+            <tr th:if="${validationError}" th:each="error : ${validationError}">
+                <td style="" th:text="${error}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="login_form">
-        <form class="form-signin" th:action="@{/login}" method="post">
-          <div th:if="${showErrorMsg}" class="alert alert-danger" role="alert" th:text="${errorMsg}">
-          </div>
-          <div th:if="${showLogoutedMsg}" class="alert alert-success" role="alert" th:text="#{demo.login.logouted}">
-          </div>
+        <form class="form-signin" th:action="@{/accountRegist}" method="post" th:object="${account}">
           <div class="login_input">
-            <input type="text" id="username" name="username" placeholder="USERNAME" required autofocus>
-            <input type="password" id="password" name="password" placeholder="PASSWORD" required>
+            <input type="text" th:field="*{username}" placeholder="USERNAME" required autofocus>
+            <input type="password" th:field="*{password}" placeholder="PASSWORD" required>
+            <input type="email" th:field="*{mail}" placeholder="E-MAIL" required>
           </div>
           <button class="btn " type="submit">
-            <img src="./images/login_icon.png" alt="login">
-            <p>Login</p>
+            <img src="./images/click_icon.png" alt="login">
+            <p>CREATE</p>
           </button>
         </form>
-        <a class="createaccount" th:href="@{/createAccount}">
-          <p>アカウント作成</p>
-        </a>
       </div>
     </div>
   </main>

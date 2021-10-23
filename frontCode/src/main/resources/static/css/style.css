@@ -204,6 +204,20 @@ header {
   height: 40px;
   width: auto;
 }
+.logo > form {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+.logo > form > input {
+  height: 40px;
+  width: auto;
+  transition: 0.3s;
+}
+.logo > form > input:hover {
+  opacity: 0.4;
+}
 
 .nav_wrapper {
   display: flex;
@@ -611,6 +625,10 @@ header {
   letter-spacing: 1px;
 }
 
+.howto_wrapper {
+  margin-bottom: 100px;
+}
+
 .instruct_title {
   margin-top: 80px;
   margin-bottom: 40px;
@@ -626,6 +644,73 @@ header {
   .instruct_title > h2 {
     font-size: 32px;
   }
+}
+
+#howto_download_toggle {
+  padding: 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+#howto_upload_toggle {
+  padding: 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+#howto_future_toggle {
+  padding: 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+.arror_right {
+  /* くの字の表示設定 */
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 32px;
+  width: 13px;
+  /* くの字を山なりに見た時、左側の長さ */
+  height: 13px;
+  /* くの字を山なりに見た時、右側の長さ */
+  border-top: 3px solid #FFFFFF;
+  /* くの字を山なりに見た時、左側の太さと色 */
+  border-right: 3px solid #FFFFFF;
+  /* くの字を山なりに見た時、右側の太さと色 */
+  transform: rotate(135deg);
+  /* くの字の向き */
+}
+
+.howto_btn {
+  border: solid 2px #FFFFFF;
+  border-radius: 6px;
+  box-sizing: border-box;
+  margin-bottom: 32px;
+}
+.howto_btn:hover > p {
+  opacity: 0.6;
+}
+.howto_btn > p {
+  font-size: 20px;
+  font-weight: 600;
+  color: #FFFFFF;
+  transition: 0.3s;
+}
+
+.howto_content {
+  display: none;
+  margin: 16px 32px;
+}
+.howto_content > p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+.howto_content > img {
+  width: 100%;
 }
 
 .codeCheck_wrapper {
@@ -1405,6 +1490,65 @@ header {
   .error_text > p {
     font-size: 16px;
   }
+}
+
+.login_wrapper {
+  width: 360px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+@media screen and (max-width: 480px) {
+  .login_wrapper {
+    width: 90%;
+  }
+}
+
+.login_title {
+  width: 100%;
+  margin-bottom: 32px;
+}
+.login_title > h2 {
+  font-size: 40px;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.login_form {
+  width: 100%;
+}
+
+.login_input {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+.login_input > input {
+  font-size: 16px;
+  font-weight: 500;
+  color: #202025;
+  padding: 12px;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+.login_input > input:last-child {
+  margin-bottom: 0;
+}
+
+.createaccount {
+  margin-top: 32px;
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  color: #FFFFFF;
+  transition: 0.3s;
+}
+.createaccount:hover {
+  color: #337AB7;
 }
 
 .btn {

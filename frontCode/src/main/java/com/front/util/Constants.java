@@ -27,7 +27,7 @@ public class Constants {
 	public static final String FILE_EXTENSION_HTML = ".html";
 	
 	/** セキュリティ対象外ファイルリスト */
-    public static final String[] STATIC_RESOURCES = {"/**/css/**", "/**/js/**", "/**/images/**", };
+    public static final String[] STATIC_RESOURCES = {"/**/css/**", "/**/js/**", "/**/images/**", "/**/sampleFile/**"};
     
     /** 日付フォーマット：uuuuMMddHHmm */
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("uuuuMMddHHmm").withResolverStyle(ResolverStyle.STRICT);

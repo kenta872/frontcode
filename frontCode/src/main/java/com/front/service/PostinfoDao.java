@@ -30,6 +30,15 @@ public class PostinfoDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	/**
+	 * 投稿一覧をすべて取得
+	 * @return 投稿一覧
+	 */
+	public List<PostinfoEntity> findPostAll() {
+		Query postinfoQuery = entityManager.createQuery("from PostinfoEntity where delFlg = 'false'");
+		return postinfoQuery.getResultList();
+	}
 
 	
 	/**
@@ -57,6 +66,10 @@ public class PostinfoDao {
 		return postinfoQuery.getResultList();
 	}
 	
+	/**
+	 * 削除フラグがtrueの投稿一覧を取得
+	 * @return 削除フラグtrueの投稿一覧
+	 */
 	public List<PostinfoEntity> findPostByDelflg() {
 		Query postinfoQuery = entityManager.createQuery("from PostinfoEntity where delFlg = 'true'");
 		return postinfoQuery.getResultList();

@@ -15,6 +15,8 @@ public class ErrorMessage {
     public String ERROR_EXCEPTION_ILLEGAL;
 	@Value("${error.exception.dberror}")
     public String ERROR_EXCEPTION_DBILLEGAL;
+	@Value("${error.exception.loginerror}")
+	public String ERROR_EXCEPTION_ROLEAUTHO;
     
 	// エラーメッセージ
     @Value("${error.message.nothttp}")
@@ -25,5 +27,11 @@ public class ErrorMessage {
     
     @Value("${error.message.cssscript}")
     public String ERROR_MESSAGE_NOTCSSSCRIPT;
+    
+    @Value("${error.message.userduplicate}")
+    public String ERROR_MESSAGE_USER_DUPLICATE;
+    
+    @Value("${error.message.mailduplicate}")
+    public String ERROR_MESSAGE_MAIL_DUPLICATE;
 
 }
