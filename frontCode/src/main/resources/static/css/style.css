@@ -756,6 +756,7 @@ header {
 .codeCheck_design > iframe {
   height: 100%;
   width: 100%;
+  padding: 40px 0;
 }
 
 .codeCheck_select {
