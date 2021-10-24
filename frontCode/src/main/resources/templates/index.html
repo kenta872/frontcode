@@ -56,8 +56,8 @@
         <!-- アプリケーション説明ページ -->
         <label class="side_menu">
           <div class="side_menu_text">
-            <p>HOW&nbsp;TO</p>
-            <p>使い方</p>
+            <p>ABOUT</p>
+            <p>アプリについて</p>
           </div>
           <img th:src="@{/images/arrow_right.png}" alt="arrowRight">
         </label>
@@ -114,16 +114,16 @@
         </div>
         <div class="main_content">
           <div class="instruct_title">
-            <h2>HOW&nbsp;TO</h2>
+            <h2>ABOUT</h2>
           </div>
           <div class="howto_wrapper">
             <div class="howto_label">
               <div class="howto_btn">
                 <p id="howto_download_toggle">ファイルダウンロードについて<span class="arror_right"></span></p>
                 <div class="howto_content">
-                  <img src="./images/gallery_7.jpg" alt="">
                   <p>ファイルをダウンロードして動作確認ができます。</p>
                   <p>ダウンロードボタンを押すとzipファイルがダウンロードされます。</p>
+                  <img th:src="@{/images/about_dowload.png}" alt="">
                 </div>
               </div>
               <div class="howto_btn">
@@ -131,10 +131,12 @@
                 <div class="howto_content">
                   <p>よく使うデザインパーツをアップロードして、いつでも使えるようにしておきましょう。</p>
                   <p>①パーツ種別を選択</p>
+                  <img th:src="@{/images/about_upload_part.png}" alt="">
                   <p>②HTMLコードを入力</p>
-                  <p>③CSSコードを入力</p>
-                  <p>管理者の承認後、サイトに反映されます。</p>
                   <p>※javascriptや外部サイトへのリンクは入力できないようになっております。</p>
+                  <img th:src="@{/images/about_upload_html.png}" alt="">
+                  <p>③CSSコードを入力</p>
+                  <img th:src="@{/images/about_upload_css.png}" alt="">
                 </div>
               </div>
               <div class="howto_btn">
@@ -149,51 +151,53 @@
         <!-------------------------------->
         <!-- for文 -->
         <!-------------------------------->
-        <div class="main_content_for" th:each="contentobj:${typedbList}">
-          <!-- Map<Integer,Map<Integer,List<String>>> -->
-          <div class="main_content" th:each="initMapObj:${initMap}">
-            <!-------------------------------->
-            <!-- for文 -->
-            <!-------------------------------->
-            <th:block th:if="${initMapObj.value != null}">
+        <!-- Map<Integer,Map<Integer,List<String>>> -->
+        <div class="main_content" th:each="initMapObj:${initMap}">
+          <!-------------------------------->
+          <!-- for文 -->
+          <!-------------------------------->
+          <th:block th:if="${initMapObj.value != null}">
+          <div th:each="contentobj:${typedbList}">
+          <th:block th:if="${initMapObj.key == contentobj.typeid}">
             <div class="typenameTitle">
               <h2 th:text="${contentobj.typename}"></h2>
             </div>
-            <div class="content_frame_for" th:each="codepartobj:${initMapObj.value}">
-              <div class="content_frame_wrapper">
-                <div class="content_frame">
-                  <!-- タブヘッダー -->
-                  <div class="content_header">
-                    <!-- ダウンロードボタン -->
-                    <div class="download_btn">
-                      <a th:href="@{${codepartobj.value[3]}}">
-                        <img th:src="@{/images/download_icon.png}" alt="">
-                      </a>
-                    </div>
-                    <!-- タブメニュー -->
-                    <label class="tab_menu active">View</label>
-                    <label class="tab_menu">HTML</label>
-                    <label class="tab_menu">CSS</label>
+          </th:block>
+          </div>
+          <div class="content_frame_for" th:each="codepartobj:${initMapObj.value}">
+            <div class="content_frame_wrapper">
+              <div class="content_frame">
+                <!-- タブヘッダー -->
+                <div class="content_header">
+                  <!-- ダウンロードボタン -->
+                  <div class="download_btn">
+                    <a th:href="@{${codepartobj.value[3]}}">
+                      <img th:src="@{/images/download_icon.png}" alt="">
+                    </a>
                   </div>
-                  <div class="content_space">
-                    <!-- VIEWタブ -->
-                    <div class="content_area show content_view">
-                      <iframe th:src="@{${codepartobj.value[2]}}" frameborder="0"></iframe>
-                    </div>
-                    <!-- HTMLタブ -->
-                    <div class="content_area content_html">
-                      <pre><code class="html" th:text="${codepartobj.value[0]}"></code></pre>
-                    </div>
-                    <!-- CSSタブ -->
-                    <div class="content_area content_css">
-                      <pre><code class="css" th:text="${codepartobj.value[1]}"></code></pre>
-                    </div>
+                  <!-- タブメニュー -->
+                  <label class="tab_menu active">View</label>
+                  <label class="tab_menu">HTML</label>
+                  <label class="tab_menu">CSS</label>
+                </div>
+                <div class="content_space">
+                  <!-- VIEWタブ -->
+                  <div class="content_area show content_view">
+                    <iframe th:src="@{${codepartobj.value[2]}}" frameborder="0"></iframe>
+                  </div>
+                  <!-- HTMLタブ -->
+                  <div class="content_area content_html">
+                    <pre><code class="html" th:text="${codepartobj.value[0]}"></code></pre>
+                  </div>
+                  <!-- CSSタブ -->
+                  <div class="content_area content_css">
+                    <pre><code class="css" th:text="${codepartobj.value[1]}"></code></pre>
                   </div>
                 </div>
               </div>
             </div>
-            </th:block>
           </div>
+          </th:block>
         </div>
       </div>
     </div>

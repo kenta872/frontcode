@@ -1,10 +1,6 @@
 package com.front.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,11 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import com.front.controller.entity.CodeinfoEntity;
-import com.front.controller.entity.FileinfoEntity;
-import com.front.controller.entity.PostinfoEntity;
-import com.front.controller.entity.TypedbEntity;
 
 
 /**
@@ -130,5 +121,147 @@ public class CustomDao {
 			throw e;
 		}
 		return queryResult;
+	}
+	
+	
+
+	/**
+	 * 初期画面表示用SQL
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Object[]> findInitMap() throws Exception {
+		
+		String initSql = "select ";
+		initSql += "  td.typeid ";
+		initSql += "  , pi.postid ";
+		initSql += "  , cihtml.htmlcode ";
+		initSql += "  , cicss.csscode ";
+		initSql += "  , fihtml.htmlfile ";
+		initSql += "  , fizip.zipfile ";
+		initSql += "from ";
+		initSql += "  v1.typedb td left outer join v1.postinfo pi ";
+		initSql += "    on td.typeid = pi.typeid ";
+		initSql += "    left outer join ( ";
+		initSql += "      select ";
+		initSql += "    v1.codeinfo.postid ";
+		initSql += "    , v1.codeinfo.src htmlcode ";
+		initSql += "  from ";
+		initSql += "    v1.codeinfo ";
+		initSql += "  where ";
+		initSql += "    v1.codeinfo.codegenre = 'html' ";
+		initSql += "    ) cihtml ";
+		initSql += "      on pi.postid = cihtml.postid ";
+		initSql += "  left outer join ( ";
+		initSql += "    select ";
+		initSql += "  v1.codeinfo.postid ";
+		initSql += "  , v1.codeinfo.src csscode ";
+		initSql += "    from ";
+		initSql += "  v1.codeinfo ";
+		initSql += "    where ";
+		initSql += "  v1.codeinfo.codegenre = 'css' ";
+		initSql += "  ) cicss ";
+		initSql += "    on pi.postid = cicss.postid ";
+		initSql += "    left outer join ( ";
+		initSql += "      select ";
+		initSql += "    v1.fileinfo.postid ";
+		initSql += "    , v1.fileinfo.filename htmlfile ";
+		initSql += "      from ";
+		initSql += "    v1.fileinfo ";
+		initSql += "      where ";
+		initSql += "    v1.fileinfo.filegenre = 'html' ";
+		initSql += "    ) fihtml ";
+		initSql += "      on pi.postid = fihtml.postid ";
+		initSql += "      left outer join ( ";
+		initSql += "        select ";
+		initSql += "      v1.fileinfo.postid ";
+		initSql += "      , v1.fileinfo.filename zipfile ";
+		initSql += "        from ";
+		initSql += "      v1.fileinfo ";
+		initSql += "        where ";
+		initSql += "      v1.fileinfo.filegenre = 'zip' ";
+		initSql += "      ) fizip ";
+		initSql += "      on pi.postid = fizip.postid ";
+		initSql += "where ";
+		initSql += "  pi.del_flg = 'false' ";
+		initSql += "  and pi.status = 2 ";
+		initSql += "order by ";
+		initSql += " td.typeid ";
+		initSql += " ,pi.postid; ";
+		
+		// 未承認(status=1)の投稿ID一覧を取得する
+		Query authoQuery = entityManager.createNativeQuery(initSql);
+		return authoQuery.getResultList();
+		
+	}
+	
+	
+	/**
+	 * 初期画面表示用SQL
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Object[]> findMisyoninMap() throws Exception {
+		
+		String initSql = "select ";
+		initSql += "  td.typeid ";
+		initSql += "  , pi.postid ";
+		initSql += "  , cihtml.htmlcode ";
+		initSql += "  , cicss.csscode ";
+		initSql += "  , fihtml.htmlfile ";
+		initSql += "from ";
+		initSql += "  v1.typedb td left outer join v1.postinfo pi ";
+		initSql += "    on td.typeid = pi.typeid ";
+		initSql += "    left outer join ( ";
+		initSql += "      select ";
+		initSql += "    v1.codeinfo.postid ";
+		initSql += "    , v1.codeinfo.src htmlcode ";
+		initSql += "  from ";
+		initSql += "    v1.codeinfo ";
+		initSql += "  where ";
+		initSql += "    v1.codeinfo.codegenre = 'html' ";
+		initSql += "    ) cihtml ";
+		initSql += "      on pi.postid = cihtml.postid ";
+		initSql += "  left outer join ( ";
+		initSql += "    select ";
+		initSql += "  v1.codeinfo.postid ";
+		initSql += "  , v1.codeinfo.src csscode ";
+		initSql += "    from ";
+		initSql += "  v1.codeinfo ";
+		initSql += "    where ";
+		initSql += "  v1.codeinfo.codegenre = 'css' ";
+		initSql += "  ) cicss ";
+		initSql += "    on pi.postid = cicss.postid ";
+		initSql += "    left outer join ( ";
+		initSql += "      select ";
+		initSql += "    v1.fileinfo.postid ";
+		initSql += "    , v1.fileinfo.filename htmlfile ";
+		initSql += "      from ";
+		initSql += "    v1.fileinfo ";
+		initSql += "      where ";
+		initSql += "    v1.fileinfo.filegenre = 'html' ";
+		initSql += "    ) fihtml ";
+		initSql += "      on pi.postid = fihtml.postid ";
+		initSql += "      left outer join ( ";
+		initSql += "        select ";
+		initSql += "      v1.fileinfo.postid ";
+		initSql += "      , v1.fileinfo.filename zipfile ";
+		initSql += "        from ";
+		initSql += "      v1.fileinfo ";
+		initSql += "        where ";
+		initSql += "      v1.fileinfo.filegenre = 'zip' ";
+		initSql += "      ) fizip ";
+		initSql += "      on pi.postid = fizip.postid ";
+		initSql += "where ";
+		initSql += "  pi.del_flg = 'false' ";
+		initSql += "  and pi.status = 2 ";
+		initSql += "order by ";
+		initSql += " td.typeid ";
+		initSql += " ,pi.postid; ";
+		
+		// 未承認(status=1)の投稿ID一覧を取得する
+		Query authoQuery = entityManager.createNativeQuery(initSql);
+		return authoQuery.getResultList();
+		
 	}
 }

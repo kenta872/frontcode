@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.front.controller.entity.CodeinfoEntity;
@@ -60,7 +61,7 @@ public class ScheduledTasks {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// cronは秒、分、時、日、月、曜日 を指定することが可能。曜日は（0,1,2,3,4,5,6,7が日～日を表す。※日は2つある）
-//	@Scheduled(cron = "0 5 0 * * *", zone = "Asia/Tokyo")
+	@Scheduled(cron = "0 5 0 * * *", zone = "Asia/Tokyo")
 //	@Scheduled(fixedRate=5000)
 	public void deleteDb() throws Exception {
 

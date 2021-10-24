@@ -80,48 +80,53 @@
         <!-------------------------------->
         <!-- for文 -->
         <!-------------------------------->
-        <div class="main_content_for" th:each="contentobj:${typedbList}">
-          <!-- Map<Integer,Map<Integer,List<String>>> -->
-          <div class="main_content" th:each="codemapallobj:${initMap}">
-            <!-------------------------------->
-            <!-- for文 -->
-            <!-------------------------------->
-            <th:block th:if="${codemapallobj.value != null}">
-            <div class="content_frame_for" th:each="codepartobj:${codemapallobj.value}">
-              <div class="content_frame_wrapper">
-                <p th:text="${codeobj}"></p>
-                <div class="content_frame">
-                  <!-- タブヘッダー -->
-                  <div class="content_header">
-                    <a class="deleteFormImg" th:href="@{/admin/postDetail/{postid}(postid=${codepartobj.value[3]})}">
-                      <div class="deleteForm">
-                        <img th:src="@{/images/dust_icon.png}" alt="delete">
-                      </div>
-                    </a>
-                    <!-- タブメニュー -->
-                    <label class="tab_menu active">View</label>
-                    <label class="tab_menu">HTML</label>
-                    <label class="tab_menu">CSS</label>
+        <!-- Map<Integer,Map<Integer,List<String>>> -->
+        <div class="main_content" th:each="codemapallobj:${initMap}">
+          <!-------------------------------->
+          <!-- for文 -->
+          <!-------------------------------->
+          <th:block th:if="${codemapallobj.value != null}">
+          <div th:each="contentobj:${typedbList}">
+          <th:block th:if="${codemapallobj.key == contentobj.typeid}">
+            <div class="typenameTitle">
+              <h2 th:text="${contentobj.typename}"></h2>
+            </div>
+          </th:block>
+          </div>
+          <div class="content_frame_for" th:each="codepartobj:${codemapallobj.value}">
+            <div class="content_frame_wrapper">
+              <p th:text="${codeobj}"></p>
+              <div class="content_frame">
+                <!-- タブヘッダー -->
+                <div class="content_header">
+                  <a class="deleteFormImg" th:href="@{/admin/postDetail/{postid}(postid=${codepartobj.value[3]})}">
+                    <div class="deleteForm">
+                      <img th:src="@{/images/dust_icon.png}" alt="delete">
+                    </div>
+                  </a>
+                  <!-- タブメニュー -->
+                  <label class="tab_menu active">View</label>
+                  <label class="tab_menu">HTML</label>
+                  <label class="tab_menu">CSS</label>
+                </div>
+                <div class="content_space">
+                  <!-- VIEWタブ -->
+                  <div class="content_area show content_view">
+                    <iframe th:src="@{/{htmlLink}(htmlLink=${codepartobj.value[2]})}" frameborder="0"></iframe>
                   </div>
-                  <div class="content_space">
-                    <!-- VIEWタブ -->
-                    <div class="content_area show content_view">
-                      <iframe th:src="@{/{htmlLink}(htmlLink=${codepartobj.value[2]})}" frameborder="0"></iframe>
-                    </div>
-                    <!-- HTMLタブ -->
-                    <div class="content_area content_html">
-                      <pre><code class="html" th:text="${codepartobj.value[0]}"></code></pre>
-                    </div>
-                    <!-- CSSタブ -->
-                    <div class="content_area content_css">
-                      <pre><code class="css" th:text="${codepartobj.value[1]}"></code></pre>
-                    </div>
+                  <!-- HTMLタブ -->
+                  <div class="content_area content_html">
+                    <pre><code class="html" th:text="${codepartobj.value[0]}"></code></pre>
+                  </div>
+                  <!-- CSSタブ -->
+                  <div class="content_area content_css">
+                    <pre><code class="css" th:text="${codepartobj.value[1]}"></code></pre>
                   </div>
                 </div>
               </div>
             </div>
-            </th:block>
           </div>
+          </th:block>
         </div>
       </div>
     </div>

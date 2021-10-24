@@ -700,7 +700,7 @@ header {
 
 .howto_content {
   display: none;
-  margin: 16px 32px;
+  margin: 16px 64px;
 }
 .howto_content > p {
   font-size: 16px;
@@ -756,7 +756,6 @@ header {
 .codeCheck_design > iframe {
   height: 100%;
   width: 100%;
-  padding: 40px 0;
 }
 
 .codeCheck_select {
