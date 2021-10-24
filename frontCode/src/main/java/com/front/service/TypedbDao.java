@@ -42,7 +42,7 @@ public class TypedbDao {
 	 */
 	public List<TypedbEntity> selectTypedbAll() throws Exception {
 		Query query = entityManager.createQuery("from TypedbEntity");
-		return (List<TypedbEntity>)query.getResultList();
+		return query.getResultList();
 	}
 	
 	/**

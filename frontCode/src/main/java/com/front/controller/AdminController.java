@@ -1,6 +1,7 @@
 package com.front.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,77 +102,39 @@ public class AdminController {
 	}
 
 	/**
-	 * 全ソースコードデータの準備
+	 * 管理者画面用全ソースコードデータの準備
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	@ModelAttribute("initMap")
-	Map<Integer, Map<Integer, List<String>>> addAttributeinitMap() throws Exception {
+	Map<Integer, Map<Object, List<Object>>> addAttributeinitMap() throws Exception {
 
-		// 項目種別一覧取得
-		List<TypedbEntity> typedbList = typedbDao.selectTypedbAll();
-		// 未承認投稿一覧を取得
-		List<PostinfoEntity> postinfoList = postinfoDao.findPostByStatus(2);
-		// ソースコード一覧取得
-		List<CodeinfoEntity> codeinfoList = codeinfoDao.selectCodeAll();
-		// ファイル一覧を取得
-		List<FileinfoEntity> fileinfoList = fileinfoDao.selectFileAll();
+		List<Object[]> sqlResultList = customDao.findMisyoninMap();
 
-		Map<Integer, Map<Integer, List<String>>> initMap = new HashMap<>();
-		// パーツ種別の数だけループ
-		for (int typeidIndex = 0; typeidIndex < typedbList.size(); typeidIndex++) {
-			int typeid = typedbList.get(typeidIndex).getTypeid();
-			Map<Integer, List<String>> codeMap = new HashMap<>();
-			// 投稿されている数だけループ
-			for (int i = 0; i < postinfoList.size(); i++) {
-				// パーツ種別に紐づく投稿の場合
-				if (typeid == postinfoList.get(i).getTypeid()) {
-					int postid = postinfoList.get(i).getPostid();
-					String codehtml = null;
-					String codecss = null;
-					String filehtml = dirname + "/src/";
-					// ソースコードの数だけループ
-					for (int codeinfoIndex = 0; codeinfoIndex < codeinfoList.size(); codeinfoIndex++) {
-						boolean htmlHit = false;
-						boolean cssHit = false;
-						// 投稿IDに紐づくソースコードがある場合
-						if (codeinfoList.get(codeinfoIndex).getPostid() == postid) {
-							if (codeinfoList.get(codeinfoIndex).getCodegenre().equals(Constants.CODE_TYPE_HTML)) {
-								codehtml = codeinfoList.get(codeinfoIndex).getSrc();
-								htmlHit = true;
-							} else if (codeinfoList.get(codeinfoIndex).getCodegenre().equals(Constants.CODE_TYPE_CSS)) {
-								codecss = codeinfoList.get(codeinfoIndex).getSrc();
-								cssHit = true;
-							}
-						}
-						if (htmlHit == true && cssHit == true) {
-							break;
-						}
+		Map<Integer, Map<Object, List<Object>>> initMap = new HashMap<>();
+		Map<Object,List<Object>> postMap = new HashMap<>();
+		
+		Object typeid = null;
 
-					}
-
-					// ファイル一覧の数だけループ
-					for (int fileinfoIndex = 0; fileinfoIndex < fileinfoList.size(); fileinfoIndex++) {
-						// 投稿IDと紐づくファイルがあった場合
-						if (fileinfoList.get(fileinfoIndex).getPostid() == postid) {
-							if (fileinfoList.get(fileinfoIndex).getFilegenre().equals(Constants.FILE_TYPE_HTML)) {
-								filehtml = filehtml + fileinfoList.get(fileinfoIndex).getFilename();
-								break;
-							}
-						}
-					}
-					List<String> outlist = new ArrayList<>();
-					outlist.add(codehtml);
-					outlist.add(codecss);
-					outlist.add(filehtml);
-					outlist.add(String.valueOf(postid));
-					codeMap.put(postid, outlist);
-				}
-				initMap.put(typeid, codeMap);
+		for(Object[] sqlResultObj : sqlResultList) {
+			List<Object> initList = Arrays.asList(sqlResultObj);
+			
+			if(typeid == null) {
+				typeid = initList.get(0);
+			} else if(typeid != initList.get(0)) {
+				initMap.put((Integer)typeid, postMap);
+				postMap = new HashMap<>();
+				typeid = (Integer)initList.get(0);
 			}
+			
+			List<Object> outList = new ArrayList<>();
+			outList.add(initList.get(2));
+			outList.add(initList.get(3));
+			outList.add(dirname + "/src/" + initList.get(4));
+			outList.add(initList.get(1));
+			postMap.put(initList.get(1), outList);
 		}
-
 		return initMap;
 	}
 
