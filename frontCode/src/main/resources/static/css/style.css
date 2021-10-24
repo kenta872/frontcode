@@ -664,22 +664,10 @@ header {
   cursor: pointer;
 }
 
-.arror_right {
-  /* くの字の表示設定 */
-  content: "";
-  position: absolute;
-  top: 18px;
-  right: 32px;
-  width: 13px;
-  /* くの字を山なりに見た時、左側の長さ */
-  height: 13px;
-  /* くの字を山なりに見た時、右側の長さ */
-  border-top: 3px solid #FFFFFF;
-  /* くの字を山なりに見た時、左側の太さと色 */
-  border-right: 3px solid #FFFFFF;
-  /* くの字を山なりに見た時、右側の太さと色 */
-  transform: rotate(135deg);
-  /* くの字の向き */
+#howto_contact_toggle {
+  padding: 16px;
+  position: relative;
+  cursor: pointer;
 }
 
 .howto_btn {
@@ -688,13 +676,27 @@ header {
   box-sizing: border-box;
   margin-bottom: 32px;
 }
-.howto_btn:hover > p {
+.howto_btn:hover > .howto_title > p {
   opacity: 0.6;
 }
-.howto_btn > p {
+.howto_btn:hover > .howto_title > img {
+  opacity: 0.6;
+}
+
+.howto_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.howto_title > p {
   font-size: 20px;
   font-weight: 600;
   color: #FFFFFF;
+  transition: 0.3s;
+}
+.howto_title > img {
+  height: 30px;
+  width: auto;
   transition: 0.3s;
 }
 
@@ -711,6 +713,32 @@ header {
 }
 .howto_content > img {
   width: 100%;
+}
+
+.copyright_wrapper {
+  width: 100%;
+  margin-bottom: 40px;
+}
+.copyright_wrapper > p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.snsicon {
+  display: flex;
+}
+.snsicon > a {
+  margin-right: 20px;
+  transition: 0.3s;
+}
+.snsicon > a:hover {
+  opacity: 0.6;
+}
+.snsicon > a > img {
+  height: 40px;
+  width: auto;
 }
 
 .codeCheck_wrapper {

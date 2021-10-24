@@ -93,7 +93,7 @@ public class HomeController {
 	Errors errors;
 	@Autowired
 	ErrorCheck errorCheck;
-	
+
 	@Autowired
 	AccountRepository accountRepos;
 	@Autowired
@@ -126,29 +126,28 @@ public class HomeController {
 	Map<Integer, Map<Object, List<Object>>> addAttributeinitMap() throws Exception {
 
 		List<Object[]> sqlResultList = customDao.findInitMap();
+		List<TypedbEntity> typedbEntityList = typedbDao.selectTypedbAll();
 
 		Map<Integer, Map<Object, List<Object>>> initMap = new HashMap<>();
-		Map<Object,List<Object>> postMap = new HashMap<>();
-		
-		Object typeid = null;
+		Map<Object, List<Object>> postMap = new HashMap<>();
 
-		for(Object[] sqlResultObj : sqlResultList) {
-			List<Object> initList = Arrays.asList(sqlResultObj);
-			
-			if(typeid == null) {
-				typeid = initList.get(0);
-			} else if(typeid != initList.get(0)) {
-				initMap.put((Integer)typeid, postMap);
-				postMap = new HashMap<>();
-				typeid = (Integer)initList.get(0);
+		for (TypedbEntity typedbEntity : typedbEntityList) {
+			for (Object[] sqlResultObj : sqlResultList) {
+				List<Object> initList = Arrays.asList(sqlResultObj);
+
+				if ((Integer) initList.get(0) == typedbEntity.getTypeid()) {
+					List<Object> outList = new ArrayList<>();
+					outList.add(initList.get(2));
+					outList.add(initList.get(3));
+					outList.add(dirname + "/src/" + initList.get(4));
+					outList.add(dirname + "/zip/" + initList.get(5));
+					postMap.put(initList.get(1), outList);
+				} else if ((Integer) initList.get(0) > typedbEntity.getTypeid()) {
+					break;
+				}
 			}
-			
-			List<Object> outList = new ArrayList<>();
-			outList.add(initList.get(2));
-			outList.add(initList.get(3));
-			outList.add(dirname + "/src/" + initList.get(4));
-			outList.add(dirname + "/zip/" + initList.get(5));
-			postMap.put(initList.get(1), outList);
+			initMap.put(typedbEntity.getTypeid(), postMap);
+			postMap = new HashMap<>();
 		}
 		return initMap;
 	}
@@ -189,23 +188,22 @@ public class HomeController {
 			model.addAttribute("validationError", errorList);
 			return "index";
 		}
-		
-		
+
 		List<String> customErrorList = new ArrayList<>();
 		// カスタムチェック：外部リンクが仕込まれていないかチェック
 		customErrorList = errorCheck.srcCheckHtml(uploadForm, customErrorList);
 		// javascriptが仕込まれていないかチェック
 		customErrorList = errorCheck.srcCheckScript(uploadForm, customErrorList);
-		
+
 		// エラーがある場合ホーム画面に戻る
 		if (customErrorList.size() > 0) {
 			// バリデーションエラーを設定
 			model.addAttribute("validationError", customErrorList);
 			return "index";
 		}
-		
+
 		// パーツ種別IDチェック
-		if(!StringUtil.isValidNumber(uploadForm.getTypeSelectValue())) {
+		if (!StringUtil.isValidNumber(uploadForm.getTypeSelectValue())) {
 			throw errors.errorIllegal();
 		}
 
@@ -229,7 +227,7 @@ public class HomeController {
 		filezipsubEntity.setPostid(postinfosubEntity.getPostid());
 		filezipsubEntity = filesubRepos.saveAndFlush(filezipsubEntity);
 
-		Map<String,String> srcMap = new HashMap<>();
+		Map<String, String> srcMap = new HashMap<>();
 		srcMap.put(Constants.CODE_TYPE_HTML, uploadForm.getHtmlInputText());
 		srcMap.put(Constants.CODE_TYPE_CSS, uploadForm.getCssInputText());
 
@@ -268,8 +266,8 @@ public class HomeController {
 		model.addAttribute("selecType", typedbDao.findTypeByTypeid(postinfosubEntity.getTypeid()).getTypename());
 		// ソースコードを設定
 		model.addAttribute("postid", postinfosubEntity.getPostid());
-		model.addAttribute("inputHtml",uploadForm.getHtmlInputText());
-		model.addAttribute("inputCss",uploadForm.getCssInputText());
+		model.addAttribute("inputHtml", uploadForm.getHtmlInputText());
+		model.addAttribute("inputCss", uploadForm.getCssInputText());
 
 		return "postCheck";
 	}
@@ -286,9 +284,8 @@ public class HomeController {
 	 */
 	@PostMapping("/save")
 	public String saveCode(@RequestParam(value = "postidForRegist") int postid,
-			@ModelAttribute("uploadForm") UploadForm uploadForm,
-			Model model) throws Exception {
-		
+			@ModelAttribute("uploadForm") UploadForm uploadForm, Model model) throws Exception {
+
 		System.out.println(uploadForm.getHtmlInputText());
 
 		LocalDateTime nowDate = LocalDateTime.now();
@@ -335,7 +332,7 @@ public class HomeController {
 		filezipEntity.setPostid(postinfoEntity.getPostid());
 		filezipEntity = fileRepos.saveAndFlush(filezipEntity);
 
-		Map<String,String> srcMap = new HashMap<>();
+		Map<String, String> srcMap = new HashMap<>();
 		srcMap.put(Constants.CODE_TYPE_HTML, codehtmlEntity.getSrc());
 		srcMap.put(Constants.CODE_TYPE_CSS, codecssEntity.getSrc());
 
@@ -384,39 +381,37 @@ public class HomeController {
 	 * @param session
 	 * @return
 	 */
-    @GetMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error,
-            @RequestParam(value = "logout", required = false) String logout,
-            Model model, HttpSession session) {
+	@GetMapping("/login")
+	public String login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, Model model, HttpSession session) {
 
-        model.addAttribute("showErrorMsg", false);
-        model.addAttribute("showLogoutedMsg", false);
-        if (error != null) {
-            if (session != null) {
-                AuthenticationException ex = (AuthenticationException) session
-                        .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-                if (ex != null) {
-                    model.addAttribute("showErrorMsg", true);
-                    model.addAttribute("errorMsg", ex.getMessage());
-                }
-            }
-        } else if (logout != null) {
-            model.addAttribute("showLogoutedMsg", true);
-        }
-        return "login";
-    }
-    
-    
-    @GetMapping("/createAccount")
-    public String createAccount(@ModelAttribute("account") Account account) {
-    	
-    	return "createAccount";
-    }
-    
-    @PostMapping("/accountRegist")
-    public String registAccount(@Validated @ModelAttribute("account")Account account, BindingResult errorResult
-    		, Model model) {
-    	
+		model.addAttribute("showErrorMsg", false);
+		model.addAttribute("showLogoutedMsg", false);
+		if (error != null) {
+			if (session != null) {
+				AuthenticationException ex = (AuthenticationException) session
+						.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+				if (ex != null) {
+					model.addAttribute("showErrorMsg", true);
+					model.addAttribute("errorMsg", ex.getMessage());
+				}
+			}
+		} else if (logout != null) {
+			model.addAttribute("showLogoutedMsg", true);
+		}
+		return "login";
+	}
+
+	@GetMapping("/createAccount")
+	public String createAccount(@ModelAttribute("account") Account account) {
+
+		return "createAccount";
+	}
+
+	@PostMapping("/accountRegist")
+	public String registAccount(@Validated @ModelAttribute("account") Account account, BindingResult errorResult,
+			Model model) {
+
 		// バリデーションエラーチェック
 		if (errorResult.hasErrors()) {
 			List<String> errorList = new ArrayList<>();
@@ -426,39 +421,37 @@ public class HomeController {
 			model.addAttribute("validationError", errorList);
 			return "createAccount";
 		}
-		
-		
+
 		// カスタムエラーチェック
 		List<String> errorList = new ArrayList<>();
 		// ユーザーネーム重複チェック
-		if(accountDao.findAccountByName(account.getUsername()).size()>0) {
+		if (accountDao.findAccountByName(account.getUsername()).size() > 0) {
 			errorList.add(errors.userDuplicate());
 		}
 		// メールアドレス重複チェック
-		if(accountDao.findAccountByMail(account.getMail()).size()>0) {
+		if (accountDao.findAccountByMail(account.getMail()).size() > 0) {
 			errorList.add(errors.mailDuplicate());
 		}
-		if(errorList.size()>0) {
+		if (errorList.size() > 0) {
 			model.addAttribute("validationError", errorList);
 			return "createAccount";
 		}
-		
 
 		// パスワードエンコード
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		String hashPass = bCryptPasswordEncoder.encode(account.getPassword());
-		
+
 		Account newAccount = new Account();
 		newAccount.setUsername(account.getUsername());
 		newAccount.setPassword(hashPass);
 		newAccount.setMail(account.getMail());
 		newAccount.setRole(newAccount.getRoleUser());
-    	accountRepos.saveAndFlush(newAccount);
-    	logger.info("アカウントを登録しました：" + newAccount.getUsername());
-    	
-    	return "redirect:/";
-    }
-	
+		accountRepos.saveAndFlush(newAccount);
+		logger.info("アカウントを登録しました：" + newAccount.getUsername());
+
+		return "redirect:/";
+	}
+
 //	@PostConstruct
 //	public void init() throws Exception{
 //		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

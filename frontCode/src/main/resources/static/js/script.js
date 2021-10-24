@@ -39,3 +39,8 @@ $(function(){
     $(this).next().slideToggle();
   });
 });
+$(function(){
+  $("#howto_contact_toggle").on("click", function() {
+    $(this).next().slideToggle();
+  });
+});

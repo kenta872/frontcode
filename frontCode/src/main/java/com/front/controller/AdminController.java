@@ -111,29 +111,28 @@ public class AdminController {
 	Map<Integer, Map<Object, List<Object>>> addAttributeinitMap() throws Exception {
 
 		List<Object[]> sqlResultList = customDao.findMisyoninMap();
+		List<TypedbEntity> typedbEntityList = typedbDao.selectTypedbAll();
 
 		Map<Integer, Map<Object, List<Object>>> initMap = new HashMap<>();
 		Map<Object,List<Object>> postMap = new HashMap<>();
 		
-		Object typeid = null;
+		for (TypedbEntity typedbEntity : typedbEntityList) {
+			for (Object[] sqlResultObj : sqlResultList) {
+				List<Object> initList = Arrays.asList(sqlResultObj);
 
-		for(Object[] sqlResultObj : sqlResultList) {
-			List<Object> initList = Arrays.asList(sqlResultObj);
-			
-			if(typeid == null) {
-				typeid = initList.get(0);
-			} else if(typeid != initList.get(0)) {
-				initMap.put((Integer)typeid, postMap);
-				postMap = new HashMap<>();
-				typeid = (Integer)initList.get(0);
+				if ((Integer) initList.get(0) == typedbEntity.getTypeid()) {
+					List<Object> outList = new ArrayList<>();
+					outList.add(initList.get(2));
+					outList.add(initList.get(3));
+					outList.add(dirname + "/src/" + initList.get(4));
+					outList.add(initList.get(1));
+					postMap.put(initList.get(1), outList);
+				} else if ((Integer) initList.get(0) > typedbEntity.getTypeid()) {
+					break;
+				}
 			}
-			
-			List<Object> outList = new ArrayList<>();
-			outList.add(initList.get(2));
-			outList.add(initList.get(3));
-			outList.add(dirname + "/src/" + initList.get(4));
-			outList.add(initList.get(1));
-			postMap.put(initList.get(1), outList);
+			initMap.put(typedbEntity.getTypeid(), postMap);
+			postMap = new HashMap<>();
 		}
 		return initMap;
 	}
