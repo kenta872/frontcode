@@ -4,6 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.front.service.IoService;
 
 public class StringUtil {
 
@@ -13,13 +16,14 @@ public class StringUtil {
 	/** コンストラクタ */
 	private StringUtil(){}
 	
+	@Autowired
+	IoService ioService;
+	
 	
 	public static String convertToEscape(String src) {
 		String escText = src;
 		escText = escText.replace("&", "&amp;");
 		escText = src.replace("\"", "&quot;");
-		escText = escText.replace("<", "&lt;");
-		escText = escText.replace(">", "&gt;");
 		return escText;
 	}
 	
@@ -27,8 +31,6 @@ public class StringUtil {
 		String noEscText = escText;
 		noEscText = noEscText.replace("&amp;","&");
 		noEscText = noEscText.replace("&quot;","\"");
-		noEscText = noEscText.replace("&lt;","<");
-		noEscText = noEscText.replace("&gt;",">");
 		return noEscText;
 	}
 	
@@ -55,6 +57,56 @@ public class StringUtil {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * Iframeデータを作成する
+	 * @param htmlCode htmlソース
+	 * @param CssCode cssソース
+	 * @return iframeデータ
+	 */
+	public static String createIframe(String htmlCode,String cssCode) {
+		String iframeCode = "<!doctype html>";
+		iframeCode+= "<html lang=\"ja\">";
+		iframeCode+= "<head>";
+		iframeCode+= "<meta charset=\"utf-8\">";
+		iframeCode+= "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+		iframeCode+= "<title>sample</title>";
+		iframeCode+= "<style>";
+		iframeCode+= cssCode;
+		iframeCode+= "</style>";
+		iframeCode+= "</head>";
+		iframeCode+= "<body>";
+		iframeCode+= htmlCode;
+		iframeCode+= "</body>";
+		iframeCode+= "</html>";
+	       
+	    return iframeCode;
+	}
+	
+	/**
+	 * サンプルhtml用のソース作成
+	 * @param htmlCode
+	 * @param cssCode
+	 * @return
+	 */
+	public static String createSampleHtml(String htmlCode,String cssCode) {
+		
+		String outputCode = "<!doctype html>";
+		outputCode+= "<html lang=\"ja\">";
+		outputCode+= "<head>";
+		outputCode+= "<meta charset=\"utf-8\">";
+		outputCode+= "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+		outputCode+= "<title>sample</title>";
+		outputCode+= "<style>";
+		outputCode+= cssCode;
+		outputCode+= "</style>";
+		outputCode+= "</head>";
+		outputCode+= "<body>";
+		outputCode+= htmlCode;
+		outputCode+= "</body>";
+		outputCode+= "</html>";
+		
+		return outputCode;
+	}
 
 }

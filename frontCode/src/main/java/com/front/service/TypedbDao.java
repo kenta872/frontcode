@@ -1,10 +1,6 @@
 package com.front.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,9 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.front.controller.entity.CodeinfoEntity;
-import com.front.controller.entity.FileinfoEntity;
-import com.front.controller.entity.PostinfoEntity;
 import com.front.controller.entity.TypedbEntity;
 
 

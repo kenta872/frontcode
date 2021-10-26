@@ -1,5 +1,7 @@
 package com.front.controller;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,12 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.WebAttributes;
@@ -23,19 +25,16 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.front.controller.entity.CodeinfoEntity;
-import com.front.controller.entity.FileinfoEntity;
-import com.front.controller.entity.FileinfosubEntity;
 import com.front.controller.entity.PostinfoEntity;
 import com.front.controller.entity.PostinfosubEntity;
 import com.front.controller.entity.TypedbEntity;
 import com.front.controller.repository.CodeinfoRepository;
-import com.front.controller.repository.FileinfoRepository;
-import com.front.controller.repository.FileinfosubRepository;
 import com.front.controller.repository.PostinfoRepository;
 import com.front.controller.repository.PostinfosubRepository;
 import com.front.error.ErrorCheck;
@@ -45,9 +44,6 @@ import com.front.security.account.AccountDao;
 import com.front.security.account.AccountRepository;
 import com.front.service.CodeinfoDao;
 import com.front.service.CustomDao;
-import com.front.service.FileinfoDao;
-import com.front.service.FileinfosubDao;
-import com.front.service.IoService;
 import com.front.service.OperationService;
 import com.front.service.PostinfoDao;
 import com.front.service.PostinfosubDao;
@@ -64,10 +60,6 @@ public class HomeController {
 	@Autowired
 	CodeinfoDao codeinfoDao;
 	@Autowired
-	FileinfoDao fileinfoDao;
-	@Autowired
-	FileinfosubDao fileinfosubDao;
-	@Autowired
 	PostinfoDao postinfoDao;
 	@Autowired
 	PostinfosubDao postinfosubDao;
@@ -82,12 +74,6 @@ public class HomeController {
 	@Autowired
 	CodeinfoRepository codeRepos;
 	@Autowired
-	FileinfoRepository fileRepos;
-	@Autowired
-	FileinfosubRepository filesubRepos;
-	@Autowired
-	IoService ioService;
-	@Autowired
 	OperationService operationService;
 	@Autowired
 	Errors errors;
@@ -98,9 +84,6 @@ public class HomeController {
 	AccountRepository accountRepos;
 	@Autowired
 	AccountDao accountDao;
-
-	@Value("${file.savedir}")
-	private String dirname;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -139,8 +122,7 @@ public class HomeController {
 					List<Object> outList = new ArrayList<>();
 					outList.add(initList.get(2));
 					outList.add(initList.get(3));
-					outList.add(dirname + "/src/" + initList.get(4));
-					outList.add(dirname + "/zip/" + initList.get(5));
+					outList.add(StringUtil.createIframe((String)initList.get(2), (String)initList.get(3)));
 					postMap.put(initList.get(1), outList);
 				} else if ((Integer) initList.get(0) > typedbEntity.getTypeid()) {
 					break;
@@ -161,8 +143,26 @@ public class HomeController {
 	 * @throws Exception
 	 */
 	@GetMapping("/")
-	public String index(UploadForm uploadForm, Model model) throws Exception {
+	public String index(UploadForm uploadForm, Model model) {
+
+
 		return "index";
+	}
+	
+	@PostMapping("/download")
+	public String downloadFile(@RequestParam("codehtml") String codehtml, @RequestParam("codecss") String codecss,
+			HttpServletResponse response) {
+		String sampleHtmlCode = StringUtil.createSampleHtml(codehtml, codecss);
+		try {
+			response.setContentType("text/html; charset=utf-8");
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(sampleHtmlCode);
+			response.setHeader("Content-Disposition","attachment;filename=\"sample.html\"");
+			
+		} catch (Exception e) {
+			errors.errorDownload();
+		}
+		return null;
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class HomeController {
 	 */
 	@PostMapping("/upload")
 	public String uploadDataCheck(RedirectAttributes redirectAttributes, @Validated UploadForm uploadForm,
-			BindingResult errorResult, Model model) throws Exception {
+			BindingResult errorResult, Model model) {
 
 		// バリデーションエラーチェック
 		if (errorResult.hasErrors()) {
@@ -208,33 +208,10 @@ public class HomeController {
 		}
 
 		PostinfosubEntity postinfosubEntity = new PostinfosubEntity();
-		FileinfosubEntity filehtmlsubEntity = new FileinfosubEntity();
-		FileinfosubEntity filezipsubEntity = new FileinfosubEntity();
 
 		// 投稿情報をDB登録
 		postinfosubEntity.setTypeid(Integer.parseInt(uploadForm.getTypeSelectValue()));
 		postinfosubEntity = postsubRepos.saveAndFlush(postinfosubEntity);
-
-		// HTMLファイル情報を登録
-		filehtmlsubEntity.setFilename("sample" + postinfosubEntity.getPostid() + Constants.FILE_EXTENSION_HTML);
-		filehtmlsubEntity.setFilegenre(Constants.FILE_TYPE_HTML);
-		filehtmlsubEntity.setPostid(postinfosubEntity.getPostid());
-		filehtmlsubEntity = filesubRepos.saveAndFlush(filehtmlsubEntity);
-
-		// ZIPファイル情報を登録
-		filezipsubEntity.setFilename("sample" + postinfosubEntity.getPostid() + Constants.FILE_EXTENSION_ZIP);
-		filezipsubEntity.setFilegenre(Constants.FILE_TYPE_ZIP);
-		filezipsubEntity.setPostid(postinfosubEntity.getPostid());
-		filezipsubEntity = filesubRepos.saveAndFlush(filezipsubEntity);
-
-		Map<String, String> srcMap = new HashMap<>();
-		srcMap.put(Constants.CODE_TYPE_HTML, uploadForm.getHtmlInputText());
-		srcMap.put(Constants.CODE_TYPE_CSS, uploadForm.getCssInputText());
-
-		// sample{id}.htmlを生成
-		ioService.createHtmlFile(filehtmlsubEntity.getFilename(), srcMap, true);
-		// sample{id}.zipを生成
-		ioService.createZipFile(filezipsubEntity.getFilename(), filehtmlsubEntity.getFilename(), true);
 
 		// リダイレクト先にアップロードフォームを渡す
 		redirectAttributes.addFlashAttribute("uploadForm", uploadForm);
@@ -252,22 +229,18 @@ public class HomeController {
 	 * @throws Exception
 	 */
 	@GetMapping("/check")
-	public String checkCode(@ModelAttribute("uploadForm") UploadForm uploadForm, Model model) throws Exception {
+	public String checkCode(@ModelAttribute("uploadForm") UploadForm uploadForm, Model model) {
 
-		System.out.println(uploadForm.getHtmlInputText());
 		// 仮登録情報を受け取る
 		PostinfosubEntity postinfosubEntity = (PostinfosubEntity) model.getAttribute("postinfosubEntity");
 
-		// htmlのリンクを設定
-		String filehtml = dirname + "/subsrc/" + fileinfosubDao
-				.findFileByPostid(postinfosubEntity.getPostid(), Constants.FILE_TYPE_HTML).getFilename();
-		model.addAttribute("filehtmlLink", filehtml);
 		// 選択種別を設定
 		model.addAttribute("selecType", typedbDao.findTypeByTypeid(postinfosubEntity.getTypeid()).getTypename());
 		// ソースコードを設定
 		model.addAttribute("postid", postinfosubEntity.getPostid());
 		model.addAttribute("inputHtml", uploadForm.getHtmlInputText());
 		model.addAttribute("inputCss", uploadForm.getCssInputText());
+		model.addAttribute("iframeCode",StringUtil.createIframe(uploadForm.getHtmlInputText(), uploadForm.getCssInputText()));
 
 		return "postCheck";
 	}
@@ -284,22 +257,16 @@ public class HomeController {
 	 */
 	@PostMapping("/save")
 	public String saveCode(@RequestParam(value = "postidForRegist") int postid,
-			@ModelAttribute("uploadForm") UploadForm uploadForm, Model model) throws Exception {
-
-		System.out.println(uploadForm.getHtmlInputText());
+			@ModelAttribute("uploadForm") UploadForm uploadForm, Model model) {
 
 		LocalDateTime nowDate = LocalDateTime.now();
 		// TODO DB自動設定で今日の日付を設定できないか検討
 
 		PostinfosubEntity postsubEntity = postinfosubDao.findPostByPostid(postid);
-		FileinfosubEntity fileSubHtml = fileinfosubDao.findFileByPostid(postid, Constants.FILE_TYPE_HTML);
-		FileinfosubEntity fileSubZip = fileinfosubDao.findFileByPostid(postid, Constants.FILE_TYPE_ZIP);
 
 		PostinfoEntity postinfoEntity = new PostinfoEntity();
 		CodeinfoEntity codehtmlEntity = new CodeinfoEntity();
 		CodeinfoEntity codecssEntity = new CodeinfoEntity();
-		FileinfoEntity filehtmlEntity = new FileinfoEntity();
-		FileinfoEntity filezipEntity = new FileinfoEntity();
 
 		// 投稿情報を本番データに移行
 		postinfoEntity.setPostid(postsubEntity.getPostid());
@@ -319,27 +286,6 @@ public class HomeController {
 		codecssEntity.setPostid(postinfoEntity.getPostid());
 		codecssEntity.setSrc(uploadForm.getCssInputText());
 		codecssEntity = codeRepos.saveAndFlush(codecssEntity);
-
-		// HTMLファイル情報を登録
-		filehtmlEntity.setFilename(fileSubHtml.getFilename());
-		filehtmlEntity.setFilegenre(Constants.FILE_TYPE_HTML);
-		filehtmlEntity.setPostid(postinfoEntity.getPostid());
-		filehtmlEntity = fileRepos.saveAndFlush(filehtmlEntity);
-
-		// ZIPファイル情報を登録
-		filezipEntity.setFilename(fileSubZip.getFilename());
-		filezipEntity.setFilegenre(Constants.FILE_TYPE_ZIP);
-		filezipEntity.setPostid(postinfoEntity.getPostid());
-		filezipEntity = fileRepos.saveAndFlush(filezipEntity);
-
-		Map<String, String> srcMap = new HashMap<>();
-		srcMap.put(Constants.CODE_TYPE_HTML, codehtmlEntity.getSrc());
-		srcMap.put(Constants.CODE_TYPE_CSS, codecssEntity.getSrc());
-
-		// sample{id}.htmlを生成
-		ioService.createHtmlFile(filehtmlEntity.getFilename(), srcMap, false);
-		// sample{id}.zipを生成
-		ioService.createZipFile(filezipEntity.getFilename(), filehtmlEntity.getFilename(), false);
 
 		operationService.deleteOpeForSub(postid);
 		return "redirect:/comp";
@@ -365,7 +311,7 @@ public class HomeController {
 	 * @throws Exception
 	 */
 	@PostMapping("/cancel")
-	public String delete(@RequestParam(value = "postidForDelete") Integer postid, Model model) throws Exception {
+	public String delete(@RequestParam(value = "postidForDelete") Integer postid, Model model) {
 
 		operationService.deleteOpeForSub(postid);
 

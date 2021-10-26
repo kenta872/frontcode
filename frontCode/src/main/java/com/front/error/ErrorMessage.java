@@ -17,6 +17,8 @@ public class ErrorMessage {
     public String ERROR_EXCEPTION_DBILLEGAL;
 	@Value("${error.exception.loginerror}")
 	public String ERROR_EXCEPTION_ROLEAUTHO;
+	@Value("${error.exception.downloaderror}")
+	public String ERROR_EXCEPTION_DOWNLOAD;
     
 	// エラーメッセージ
     @Value("${error.message.nothttp}")

@@ -9,19 +9,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.front.controller.entity.CodeinfoEntity;
-import com.front.controller.entity.FileinfoEntity;
-import com.front.controller.entity.FileinfosubEntity;
 import com.front.controller.entity.PostinfoEntity;
 import com.front.controller.entity.PostinfosubEntity;
 import com.front.controller.repository.CodeinfoRepository;
 import com.front.controller.repository.CodeinfosubRepository;
-import com.front.controller.repository.FileinfoRepository;
-import com.front.controller.repository.FileinfosubRepository;
 import com.front.controller.repository.PostinfoRepository;
 import com.front.controller.repository.PostinfosubRepository;
 import com.front.service.CodeinfoDao;
-import com.front.service.FileinfoDao;
-import com.front.service.FileinfosubDao;
 import com.front.service.IoService;
 import com.front.service.PostinfoDao;
 import com.front.service.PostinfosubDao;
@@ -32,10 +26,6 @@ public class ScheduledTasks {
 
 	@Autowired
 	CodeinfoDao codeinfoDao;
-	@Autowired
-	FileinfosubDao fileinfosubDao;
-	@Autowired
-	FileinfoDao fileinfoDao;
 	@Autowired
 	PostinfoDao postinfoDao;
 	@Autowired
@@ -50,10 +40,7 @@ public class ScheduledTasks {
 	CodeinfoRepository codeRepos;
 	@Autowired
 	CodeinfosubRepository codesubRepos;
-	@Autowired
-	FileinfoRepository fileRepos;
-	@Autowired
-	FileinfosubRepository filesubRepos;
+
 
 	@Autowired
 	IoService ioService;
@@ -65,14 +52,6 @@ public class ScheduledTasks {
 //	@Scheduled(fixedRate=5000)
 	public void deleteDb() throws Exception {
 
-		// fileinfoのデータ削除
-		// HTML、ZIPファイル削除
-		List<FileinfosubEntity> fileinfosubEntityList = fileinfosubDao.selectFileAll();
-		for (FileinfosubEntity fileinfosubEntity : fileinfosubEntityList) {
-			ioService.deleteFile(fileinfosubEntity.getFilename(), true);
-			logger.info("ファイル削除：" + fileinfosubEntity.getFilename());
-			filesubRepos.delete(fileinfosubEntity);
-		}
 
 		// postinfoのデータ削除
 		List<PostinfosubEntity> postinfosubEntityList = postinfosubDao.findPostAll();
@@ -81,14 +60,6 @@ public class ScheduledTasks {
 			postsubRepos.delete(postinfosubEntity);
 		}
 
-		// 削除カラムがついている項目を削除
-		// ファイル関連を削除
-		List<FileinfoEntity> fileinfoEntityList = fileinfoDao.findFileByDelflg();
-		for (FileinfoEntity fileinfoEntity : fileinfoEntityList) {
-			logger.info("削除フラグファイル一覧を削除：" + fileinfoEntity.getFilename());
-			ioService.deleteFile(fileinfoEntity.getFilename(), false);
-			fileRepos.delete(fileinfoEntity);
-		}
 		// ソースコードを削除
 		List<CodeinfoEntity> codeinfoEntityList = codeinfoDao.findSrcByDelflg();
 		for (CodeinfoEntity codeinfoEntity : codeinfoEntityList) {

@@ -31,7 +31,7 @@ public class PostinfosubDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<PostinfosubEntity> findPostAll() throws Exception {
+	public List<PostinfosubEntity> findPostAll() {
 		
 		Query postinfoQuery = entityManager.createQuery("from PostinfosubEntity");
 		return postinfoQuery.getResultList();
@@ -44,7 +44,7 @@ public class PostinfosubDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public PostinfosubEntity findPostByPostid(Integer postid) throws Exception {
+	public PostinfosubEntity findPostByPostid(Integer postid) {
 		
 		Query postinfoQuery = entityManager.createQuery("from PostinfosubEntity where postid = " + postid);
 		return (PostinfosubEntity)postinfoQuery.getSingleResult();

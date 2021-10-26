@@ -9,7 +9,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,23 +18,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.front.controller.entity.CodeinfoEntity;
-import com.front.controller.entity.FileinfoEntity;
 import com.front.controller.entity.PostinfoEntity;
 import com.front.controller.entity.TypedbEntity;
 import com.front.controller.repository.CodeinfoRepository;
 import com.front.controller.repository.CodeinfosubRepository;
-import com.front.controller.repository.FileinfoRepository;
-import com.front.controller.repository.FileinfosubRepository;
 import com.front.controller.repository.PostinfoRepository;
 import com.front.controller.repository.PostinfosubRepository;
 import com.front.error.Errors;
 import com.front.service.CodeinfoDao;
-import com.front.service.CodeinfosubDao;
 import com.front.service.CustomDao;
-import com.front.service.FileinfoDao;
-import com.front.service.FileinfosubDao;
-import com.front.service.IoService;
 import com.front.service.OperationService;
 import com.front.service.PostinfoDao;
 import com.front.service.PostinfosubDao;
@@ -51,12 +42,6 @@ public class AdminController {
 
 	@Autowired
 	CodeinfoDao codeinfoDao;
-	@Autowired
-	FileinfoDao fileinfoDao;
-	@Autowired
-	CodeinfosubDao codeinfosubDao;
-	@Autowired
-	FileinfosubDao fileinfosubDao;
 	@Autowired
 	PostinfoDao postinfoDao;
 	@Autowired
@@ -74,18 +59,9 @@ public class AdminController {
 	@Autowired
 	CodeinfosubRepository codesubRepos;
 	@Autowired
-	FileinfoRepository fileRepos;
-	@Autowired
-	FileinfosubRepository filesubRepos;
-	@Autowired
-	IoService ioService;
-	@Autowired
 	OperationService operationService;
 	@Autowired
 	Errors errors;
-
-	@Value("${file.savedir}")
-	private String dirname;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -124,7 +100,7 @@ public class AdminController {
 					List<Object> outList = new ArrayList<>();
 					outList.add(initList.get(2));
 					outList.add(initList.get(3));
-					outList.add(dirname + "/src/" + initList.get(4));
+					outList.add(StringUtil.createIframe((String)initList.get(2), (String)initList.get(3)));
 					outList.add(initList.get(1));
 					postMap.put(initList.get(1), outList);
 				} else if ((Integer) initList.get(0) > typedbEntity.getTypeid()) {
@@ -245,15 +221,15 @@ public class AdminController {
 		}
 
 		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
-		FileinfoEntity fileinfoEntity = fileinfoDao.findFileByPostid(postid, Constants.FILE_TYPE_HTML);
 		// DBに該当の投稿が存在しない場合
-		if (postinfoEntity == null || fileinfoEntity == null) {
+		if (postinfoEntity == null) {
 			throw errors.errorDbIllegal();
 		}
 		mav.addObject("typename", typedbDao.findTypeByTypeid(postinfoEntity.getTypeid()).getTypename());
 		mav.addObject("htmlsrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_HTML));
 		mav.addObject("csssrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_CSS));
-		mav.addObject("htmllink", dirname + "/src/" + fileinfoEntity.getFilename());
+		mav.addObject("iframeData",StringUtil.createIframe(codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_HTML), 
+				codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_CSS)));
 		mav.addObject("postid", postid);
 		mav.setViewName("unapprovedDetail");
 		return mav;
@@ -270,7 +246,7 @@ public class AdminController {
 	@PostMapping("/admin/regist")
 	public String postRegist(@RequestParam(value = "postidForRegist") Integer postid, Model model) throws Exception {
 		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
-		postinfoEntity.setStatus(2);
+		postinfoEntity.setStatus(Constants.POSTIFNO_STATUS_SHONIN);
 		postRepos.saveAndFlush(postinfoEntity);
 
 		return "redirect:/admin/unapprovedList";
@@ -319,69 +295,6 @@ public class AdminController {
 		operationService.deleteOpe(postid);
 
 		return "redirect:/admin/unapprovedList";
-	}
-
-	/**
-	 * herokuのファイル削除復活対応
-	 * 
-	 * @return 管理ページでリダイレクト
-	 * @throws Exception
-	 */
-	@GetMapping("/admin/heroku")
-	public String herokuFileService() throws Exception {
-
-		List<PostinfoEntity> postinfoEntityList = postinfoDao.findPostAll();
-		List<FileinfoEntity> fileinfoEntityList = fileinfoDao.selectFileAll();
-		List<CodeinfoEntity> codeinfoEntityList = codeinfoDao.selectCodeAll();
-
-		// 投稿数ループ
-		for (PostinfoEntity postinfoEntity : postinfoEntityList) {
-			String htmlname = null;
-			String zipname = null;
-			Map<String, String> srcMap = new HashMap<>();
-
-			// 投稿IDに紐づくファイル情報を取得
-			for (FileinfoEntity fileinfoEntity : fileinfoEntityList) {
-				if (fileinfoEntity.getPostid() == postinfoEntity.getPostid()) {
-					if (fileinfoEntity.getFilegenre().equals(Constants.FILE_TYPE_HTML)) {
-						htmlname = fileinfoEntity.getFilename();
-					}
-					if (fileinfoEntity.getFilegenre().equals(Constants.FILE_TYPE_ZIP)) {
-						zipname = fileinfoEntity.getFilename();
-					}
-					if (htmlname != null && zipname != null) {
-						break;
-					}
-				}
-			}
-
-			// 投稿IDに紐づくソースコードを取得
-			for (CodeinfoEntity codeinfoEntity : codeinfoEntityList) {
-				if (codeinfoEntity.getPostid() == postinfoEntity.getPostid()) {
-					boolean htmlcheck = false;
-					boolean csscheck = false;
-					if (codeinfoEntity.getCodegenre().equals(Constants.CODE_TYPE_HTML)) {
-						srcMap.put(Constants.CODE_TYPE_HTML, codeinfoEntity.getSrc());
-						htmlcheck = true;
-					}
-					if (codeinfoEntity.getCodegenre().equals(Constants.CODE_TYPE_CSS)) {
-						srcMap.put(Constants.CODE_TYPE_CSS, codeinfoEntity.getSrc());
-						csscheck = true;
-					}
-					if (htmlcheck && csscheck) {
-						break;
-					}
-				}
-			}
-			if(htmlname!=null && zipname!=null && srcMap.size()>0) {
-				ioService.createHtmlFile(htmlname, srcMap, false);
-				ioService.createZipFile(zipname, htmlname, false);				
-			}
-
-		}
-
-		return "redirect:/admin";
-		// public void createZipFile(String zipName, String htmlName, boolean subCheck)
 	}
 	
 	

@@ -1,34 +1,9 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
-  <title>フロントコード</title>
-  <!-- シンタックスハイライトのテーマは以下URLを確認
-      https://highlightjs.org/static/demo/
- -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="common::headflagment">
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <a th:href="@{/}">
-        <img th:src="@{/images/home.png}" alt="home">
-      </a>
-      <a th:href="@{/login}" sec:authorize="isAnonymous()">
-          <img th:src="@{/images/login_icon.png}" alt="home">
-      </a>
-      <form role="form" id="logout" th:action="@{/logout}" method="post" sec:authorize="hasAnyRole('ADMIN','USER')">
-	    <input type="image" th:src="@{/images/logout_icon.png}" />
-      </form>
-      <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">
-          <img th:src="@{/images/setting_icon.png}" alt="home">
-      </a>
-    </div>
+  <header th:replace="common::headerflagment">
   </header>
   <main>
     <div class="autho_wrapper">

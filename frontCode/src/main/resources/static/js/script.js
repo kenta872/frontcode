@@ -44,3 +44,25 @@ $(function(){
     $(this).next().slideToggle();
   });
 });
+
+
+window.onload = function () {
+  // UploadFormを取得
+  var $formObject = document.getElementById( "addItems_form" );
+  // UploadFormの入力オブジェクトの数だけループ
+  for( var $i = 0; $i < $formObject.length; $i++ ) {
+    $formObject.elements[$i].onkeyup = function(){
+        getFormValue();
+    };
+  }
+}
+function getFormValue() {
+  const firstHtml = '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"></head><body>';
+  const endHtml = '</body></html>';
+  const styleStart = '<style>';
+  const styleEnd = '</style>';
+  // UploadFormを取得
+  var $formObject = document.getElementById("addItems_form");
+  // iframeのsrcdocにデータ入力
+  document.getElementById( "addItems_iframe_content" ).srcdoc = firstHtml + $formObject.htmlInputText.value + styleStart + $formObject.cssInputText.value + styleEnd + endHtml;
+}

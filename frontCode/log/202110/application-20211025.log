@@ -1,0 +1,701 @@
+2021-10-25 20:04:07.770 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 7436 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:04:07.785 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:04:07.790 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:04:10.763 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:04:15.253 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 7.973 seconds (JVM running for 10.589)
+2021-10-25 20:04:33.600 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:04:35.354 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /js/script.js
+2021-10-25 20:04:35.357 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /css/style.css
+2021-10-25 20:04:35.434 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /images/login_icon.png
+2021-10-25 20:04:35.674 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /images/about_upload_html.png
+2021-10-25 20:04:35.674 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /images/about_upload_part.png
+2021-10-25 20:04:35.675 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /images/about_dowload.png
+2021-10-25 20:04:35.680 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /images/arrowbottom_icon.png
+2021-10-25 20:04:35.686 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /images/about_upload_css.png
+2021-10-25 20:04:35.709 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /images/instagram_icon.png
+2021-10-25 20:04:35.715 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /images/twitter_icon.png
+2021-10-25 20:05:06.848 [RMI TCP Connection(3)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 20:05:14.332 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 9844 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:05:14.337 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:05:14.338 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:05:17.345 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:05:23.595 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 9.832 seconds (JVM running for 11.45)
+2021-10-25 20:05:24.212 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:05:26.448 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:05:57.956 [RMI TCP Connection(4)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 20:06:04.882 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 14012 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:06:04.887 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:06:04.887 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:06:07.637 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:06:10.883 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 6.555 seconds (JVM running for 8.097)
+2021-10-25 20:11:55.028 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:11:57.144 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:12:18.199 [RMI TCP Connection(8)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 20:12:25.426 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 10932 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:12:25.430 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:12:25.430 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:12:28.188 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:12:31.563 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 6.686 seconds (JVM running for 8.39)
+2021-10-25 20:12:36.866 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:12:39.074 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:13:07.382 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:20:00.523 [RMI TCP Connection(12)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 20:20:07.172 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 3676 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:20:07.177 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:20:07.177 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:20:10.676 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:20:15.677 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 9.049 seconds (JVM running for 10.716)
+2021-10-25 20:20:15.792 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:20:17.778 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:24:26.931 [RMI TCP Connection(8)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 20:24:33.738 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 17340 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:24:33.750 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:24:33.751 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:24:37.016 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:24:43.321 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 10.143 seconds (JVM running for 11.793)
+2021-10-25 20:24:55.555 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:24:57.413 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:25:15.156 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /upload
+2021-10-25 20:25:15.544 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /check
+2021-10-25 20:25:15.963 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /images/send_icon.png
+2021-10-25 20:25:15.964 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /images/back_icon.png
+2021-10-25 20:25:16.343 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:25:48.820 [RMI TCP Connection(5)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 20:25:55.663 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 1860 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:25:55.667 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:25:55.668 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:25:58.586 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:26:01.913 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 6.81 seconds (JVM running for 8.599)
+2021-10-25 20:26:14.558 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /check
+2021-10-25 20:26:15.189 [http-nio-8080-exec-1] ERROR(SimpleExceptionResolver.java:19) - 例外をキャッチしました。
+java.lang.NullPointerException: Cannot invoke "com.front.controller.entity.PostinfosubEntity.getTypeid()" because "postinfosubEntity" is null
+	at com.front.controller.HomeController.checkCode(HomeController.java:216)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at com.front.base.LoggingFilter.doFilter(LoggingFilter.java:34)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:218)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:212)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:117)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2021-10-25 20:26:15.194 [http-nio-8080-exec-1] ERROR(SimpleExceptionResolver.java:26) - 不明なシステムエラーが発生しました。
+java.lang.NullPointerException: Cannot invoke "com.front.controller.entity.PostinfosubEntity.getTypeid()" because "postinfosubEntity" is null
+	at com.front.controller.HomeController.checkCode(HomeController.java:216)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at com.front.base.LoggingFilter.doFilter(LoggingFilter.java:34)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:218)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:212)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:117)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2021-10-25 20:26:16.430 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:27:31.834 [RMI TCP Connection(5)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 20:27:40.586 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 3160 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:27:40.596 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:27:40.597 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:27:45.231 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:27:50.006 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 10.88 seconds (JVM running for 13.689)
+2021-10-25 20:27:50.277 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:27:50.277 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /check
+2021-10-25 20:27:50.524 [http-nio-8080-exec-2] ERROR(SimpleExceptionResolver.java:19) - 例外をキャッチしました。
+java.lang.NullPointerException: Cannot invoke "com.front.controller.entity.PostinfosubEntity.getTypeid()" because "postinfosubEntity" is null
+	at com.front.controller.HomeController.checkCode(HomeController.java:216)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at com.front.base.LoggingFilter.doFilter(LoggingFilter.java:34)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:218)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:212)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:117)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2021-10-25 20:27:50.527 [http-nio-8080-exec-2] ERROR(SimpleExceptionResolver.java:26) - 不明なシステムエラーが発生しました。
+java.lang.NullPointerException: Cannot invoke "com.front.controller.entity.PostinfosubEntity.getTypeid()" because "postinfosubEntity" is null
+	at com.front.controller.HomeController.checkCode(HomeController.java:216)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at com.front.base.LoggingFilter.doFilter(LoggingFilter.java:34)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:218)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:212)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:117)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2021-10-25 20:27:52.818 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:28:10.348 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /upload
+2021-10-25 20:28:10.664 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /check
+2021-10-25 20:28:11.480 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:28:14.727 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /save
+2021-10-25 20:28:14.924 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /comp
+2021-10-25 20:28:15.431 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:28:16.222 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:28:17.180 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:28:18.432 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:28:18.922 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:28:23.938 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:28:24.047 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /images/logout_icon.png
+2021-10-25 20:28:24.097 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /images/setting_icon.png
+2021-10-25 20:28:24.598 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /favicon.ico
+2021-10-25 20:28:27.377 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 20:28:27.595 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /images/authorize.png
+2021-10-25 20:28:27.595 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /images/list_icon.png
+2021-10-25 20:28:27.625 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /images/heroku_icon.png
+2021-10-25 20:28:28.500 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 20:28:28.711 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /images/file_icon.png
+2021-10-25 20:28:31.797 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/filter
+2021-10-25 20:28:35.581 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/filter
+2021-10-25 20:28:39.736 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/filter
+2021-10-25 20:28:40.424 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedDetail/86
+2021-10-25 20:28:40.672 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /images/dust_icon.png
+2021-10-25 20:28:40.672 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /images/ok_icon.png
+2021-10-25 20:28:40.722 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:34:14.124 [RMI TCP Connection(10)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 20:34:20.679 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 3896 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:34:20.685 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:34:20.686 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:34:23.389 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:34:27.404 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 7.235 seconds (JVM running for 8.634)
+2021-10-25 20:34:41.255 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 20:34:47.447 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedDetail/86
+2021-10-25 20:34:52.143 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/reject
+2021-10-25 20:34:52.373 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 20:34:54.489 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 20:35:00.659 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 20:49:11.514 [RMI TCP Connection(18)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 20:49:17.970 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 2828 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 20:49:17.976 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 20:49:17.976 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 20:49:20.369 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 20:49:23.929 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 6.45 seconds (JVM running for 7.874)
+2021-10-25 20:49:45.774 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:01:09.058 [RMI TCP Connection(15)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 21:01:15.622 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 15856 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 21:01:15.627 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 21:01:15.628 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 21:01:18.427 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 21:01:22.039 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 6.882 seconds (JVM running for 8.515)
+2021-10-25 21:01:36.561 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:03:16.787 [RMI TCP Connection(5)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 21:03:23.114 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 18280 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 21:03:23.119 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 21:03:23.120 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 21:03:25.935 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 21:03:29.562 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 6.941 seconds (JVM running for 8.522)
+2021-10-25 21:03:33.482 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:04:19.677 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /upload
+2021-10-25 21:04:20.016 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /check
+2021-10-25 21:04:26.284 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /save
+2021-10-25 21:04:26.504 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /comp
+2021-10-25 21:04:27.722 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:04:29.927 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 21:04:37.431 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:04:42.561 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 21:04:44.911 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 21:04:46.299 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedDetail/87
+2021-10-25 21:04:48.523 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/regist
+2021-10-25 21:04:48.587 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 21:04:50.865 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 21:04:52.611 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/postList
+2021-10-25 21:04:56.406 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/postDetail/60
+2021-10-25 21:04:57.956 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/postDelete
+2021-10-25 21:04:58.045 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/postList
+2021-10-25 21:05:01.250 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 21:05:02.000 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:05:11.014 [RMI TCP Connection(5)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 21:24:21.941 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 5340 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 21:24:21.946 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 21:24:21.946 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 21:24:24.572 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 21:25:29.322 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 67.943 seconds (JVM running for 70.039)
+2021-10-25 21:25:30.136 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:25:33.223 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:25:35.533 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 21:25:43.965 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /upload
+2021-10-25 21:25:45.808 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /check
+2021-10-25 21:25:47.597 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 21:25:49.399 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /save
+2021-10-25 21:25:54.598 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /comp
+2021-10-25 21:25:55.717 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 21:25:56.894 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:25:58.570 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 21:26:43.633 [RMI TCP Connection(2)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 21:26:54.202 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 17980 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 21:26:54.207 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 21:26:54.207 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 21:26:56.944 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 21:27:00.489 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 6.974 seconds (JVM running for 8.509)
+2021-10-25 21:27:39.210 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 21:27:41.212 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:13:22.195 [RMI TCP Connection(50)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 22:13:29.672 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 18828 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 22:13:29.677 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 22:13:29.677 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 22:13:33.096 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 22:13:39.053 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 10.017 seconds (JVM running for 11.887)
+2021-10-25 22:13:46.453 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:13:47.862 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:13:48.047 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /css/style.css
+2021-10-25 22:13:48.052 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /js/script.js
+2021-10-25 22:13:48.347 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /images/arrowbottom_icon.png
+2021-10-25 22:13:48.348 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /images/twitter_icon.png
+2021-10-25 22:13:48.359 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /images/instagram_icon.png
+2021-10-25 22:13:49.048 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:14:04.735 [RMI TCP Connection(4)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 22:14:13.554 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 19252 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 22:14:13.561 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 22:14:13.562 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 22:14:22.477 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 10156 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 22:14:22.482 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 22:14:22.482 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 22:14:25.985 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 22:14:31.220 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 9.374 seconds (JVM running for 11.435)
+2021-10-25 22:14:31.342 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:14:33.880 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:29:34.189 [RMI TCP Connection(17)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 22:29:44.916 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 14752 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 22:29:44.923 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 22:29:44.923 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 22:29:48.407 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 22:29:55.626 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 11.632 seconds (JVM running for 14.726)
+2021-10-25 22:30:28.836 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:30:30.957 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /css/style.css
+2021-10-25 22:30:32.308 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:30:48.745 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:30:49.324 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:30:52.211 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /createAccount
+2021-10-25 22:30:52.622 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:30:54.657 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:30:55.405 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:30:56.480 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:30:56.836 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:31:01.529 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:31:02.291 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /favicon.ico
+2021-10-25 22:31:03.036 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 22:31:05.986 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 22:31:11.670 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:31:13.124 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:31:24.413 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:31:32.423 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:31:34.892 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 22:31:36.183 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 22:31:58.293 [RMI TCP Connection(4)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 22:32:06.833 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 18692 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 22:32:06.838 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 22:32:06.838 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 22:32:09.976 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 22:32:14.648 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 8.313 seconds (JVM running for 10.064)
+2021-10-25 22:32:15.348 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 22:32:20.389 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 22:32:22.345 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 22:32:23.581 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 22:32:25.078 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 22:32:25.732 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/postList
+2021-10-25 22:32:46.469 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/postList
+2021-10-25 22:32:47.729 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:32:58.490 [RMI TCP Connection(4)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 22:57:43.091 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 20324 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 22:57:43.099 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 22:57:43.099 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 22:57:46.928 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 22:57:53.514 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 11.103 seconds (JVM running for 13.068)
+2021-10-25 22:58:13.439 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:58:14.988 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 22:58:15.244 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /css/style.css
+2021-10-25 22:59:25.931 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:09:05.602 [RMI TCP Connection(15)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 23:19:12.232 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 1312 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 23:19:12.240 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 23:19:12.241 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 23:19:15.355 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 23:19:19.766 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 8.249 seconds (JVM running for 10.459)
+2021-10-25 23:19:27.979 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:19:29.578 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:19:29.852 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /css/style.css
+2021-10-25 23:19:49.327 [RMI TCP Connection(4)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 23:19:56.969 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 16560 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 23:19:56.976 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 23:19:56.977 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 23:20:00.014 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 23:20:06.399 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 10.28 seconds (JVM running for 12.308)
+2021-10-25 23:20:11.686 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:20:14.917 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 23:20:16.063 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:20:16.684 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:27:40.701 [RMI TCP Connection(10)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 23:27:46.659 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 15776 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 23:27:46.664 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 23:27:46.664 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 23:27:48.674 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 23:27:51.612 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 5.389 seconds (JVM running for 6.717)
+2021-10-25 23:28:02.843 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:28:06.245 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 23:28:11.054 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:28:32.024 [RMI TCP Connection(4)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-25 23:28:38.287 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 15068 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-25 23:28:38.291 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-25 23:28:38.292 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-25 23:28:40.271 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-25 23:28:43.386 [main] INFO (StartupInfoLogger.java:61) - Started FrontCodeApplication in 5.497 seconds (JVM running for 6.761)
+2021-10-25 23:28:48.394 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:28:50.344 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 23:28:55.695 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:28:57.502 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 23:28:58.922 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 23:29:02.756 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 23:29:30.024 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:29:39.589 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 23:29:40.822 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /createAccount
+2021-10-25 23:29:47.238 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-25 23:29:51.639 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:29:52.997 [http-nio-8080-exec-6] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 23:29:54.391 [http-nio-8080-exec-7] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/postList
+2021-10-25 23:29:58.610 [http-nio-8080-exec-8] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 23:29:59.388 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 23:30:01.831 [http-nio-8080-exec-10] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/filter
+2021-10-25 23:30:03.067 [http-nio-8080-exec-1] DEBUG(LoggingFilter.java:32) - RequestURL : /admin
+2021-10-25 23:30:04.473 [http-nio-8080-exec-2] DEBUG(LoggingFilter.java:32) - RequestURL : /admin/unapprovedList
+2021-10-25 23:30:05.902 [http-nio-8080-exec-3] DEBUG(LoggingFilter.java:32) - RequestURL : /
+2021-10-25 23:58:58.542 [RMI TCP Connection(33)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了

@@ -41,7 +41,7 @@ public class CodeinfoDao {
 	 * @return 投稿IDとソースジャンルで絞り込んだレコード
 	 * @throws Exception
 	 */
-	public CodeinfoEntity searchSrcByPostid(Integer postid, String codegenre) throws Exception {
+	public CodeinfoEntity searchSrcByPostid(Integer postid, String codegenre) {
 
 		Query Query = entityManager
 				.createQuery("from CodeinfoEntity where delFlg = 'false' and codegenre = '" + codegenre + "' and postid = " + postid);
@@ -55,7 +55,7 @@ public class CodeinfoDao {
 	 * @return 投稿IDで絞り込んだレコード
 	 * @throws Exception
 	 */
-	public List<CodeinfoEntity> findSrcByPostid(Integer postid) throws Exception {
+	public List<CodeinfoEntity> findSrcByPostid(Integer postid) {
 
 		Query Query = entityManager.createQuery("from CodeinfoEntity where delFlg = 'false' and postid = " + postid);
 		return Query.getResultList();

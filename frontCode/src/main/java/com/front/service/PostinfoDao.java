@@ -1,10 +1,6 @@
 package com.front.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,13 +8,9 @@ import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.front.controller.entity.CodeinfoEntity;
-import com.front.controller.entity.FileinfoEntity;
 import com.front.controller.entity.PostinfoEntity;
-import com.front.controller.entity.TypedbEntity;
 
 
 /**
@@ -47,7 +39,7 @@ public class PostinfoDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public PostinfoEntity findPostByPostid(Integer postid) throws Exception {
+	public PostinfoEntity findPostByPostid(Integer postid) {
 		
 		Query postinfoQuery = entityManager.createQuery("from PostinfoEntity where delFlg = 'false' and postid = " + postid);
 		return (PostinfoEntity)postinfoQuery.getSingleResult();

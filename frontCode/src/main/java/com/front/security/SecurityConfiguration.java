@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
             // アクセス権限の設定
             // アクセス制限の無いURL
-            .antMatchers("/", "/upload", "/check", "/save", "/comp", "/cancel", "/createAccount", "/accountRegist","/error","/toError","/login").permitAll()
+            .antMatchers("/", "/upload","/download" , "/check", "/save", "/comp", "/cancel", "/createAccount", "/accountRegist","/error","/toError","/login").permitAll()
             // ADMINユーザーのみに許可
             .antMatchers("/admin/**").hasRole("ADMIN")
             // その他は認証済みであること

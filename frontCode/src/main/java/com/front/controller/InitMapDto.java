@@ -14,9 +14,5 @@ public class InitMapDto {
 	private String htmlcode;
 	
 	private String csscode;
-	
-	private String htmlfile;
-	
-	private String zipfile;
 
 }

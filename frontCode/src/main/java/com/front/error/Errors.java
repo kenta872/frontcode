@@ -43,6 +43,14 @@ public class Errors {
     public ApplicationException errorRole() {
     	return new ApplicationException(errorMessage.ERROR_EXCEPTION_ROLEAUTHO);
     }
+    
+    /**
+     * ファイルダウンロードが失敗したときに例外を発生させる
+     * @return ダウンロード例外
+     */
+    public ApplicationException errorDownload() {
+    	return new ApplicationException(errorMessage.ERROR_EXCEPTION_DOWNLOAD);
+    }
 	
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // エラーメッセージ

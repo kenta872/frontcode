@@ -1,44 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
-  <script type="text/javascript" th:src="@{/js/jquery-3.5.1.min.js}"></script>
-  <script type="text/javascript" th:src="@{/js/script.js}"></script>
-  <title>フロントコード</title>
-  <!-- シンタックスハイライトのテーマは以下URLを確認
-      https://highlightjs.org/static/demo/
- -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+<head th:replace="common::headflagment">
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <a th:href="@{/}">
-        <img th:src="@{/images/home.png}" alt="home">
-      </a>
-      <a th:href="@{/login}" sec:authorize="isAnonymous()">
-          <img th:src="@{/images/login_icon.png}" alt="home">
-      </a>
-      <form role="form" id="logout" th:action="@{/logout}" method="post" sec:authorize="hasAnyRole('ADMIN','USER')">
-	    <input type="image" th:src="@{/images/logout_icon.png}" />
-      </form>
-      <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">
-          <img th:src="@{/images/setting_icon.png}" alt="home">
-      </a>
-
-    </div>
-    <div class="nav_wrapper">
-      <label class="nav_btn" for="nav_check">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-    </div>
+  <header th:replace="common::headerflagment">
   </header>
   <main>
     <div class="content_wrapper">
@@ -59,7 +24,7 @@
             <p>ABOUT</p>
             <p>アプリについて</p>
           </div>
-          <img th:src="@{/images/arrow_right.png}" alt="arrowRight">
+          <img th:src="@{/images/arrow_right.png}" alt="">
         </label>
         <!-------------------------------->
         <!-- for文 -->
@@ -71,7 +36,7 @@
               <p th:text="${sideobj.typename}"></p>
               <p th:text="${sideobj.typenamejp}"></p>
             </div>
-            <img th:src="@{/images/arrow_right.png}" alt="arrowRight">
+            <img th:src="@{/images/arrow_right.png}" alt="">
           </label>
         </div>
       </div>
@@ -91,7 +56,7 @@
             </table>
           </div>
           <div class="addItems_input_wrapper">
-            <form method="post" th:action="@{/upload}" th:object="${uploadForm}">
+            <form id="addItems_form" method="post" th:action="@{/upload}" th:object="${uploadForm}">
               <div class="addItems_typeSelect">
                 <img th:src="@{/images/click_icon.png}" alt="">
                 <select th:field="*{typeSelectValue}">
@@ -100,10 +65,13 @@
                 </select>
               </div>
               <div class="addItems_htmlForm">
-                <textarea th:field="*{htmlInputText}" placeholder="html"></textarea>
+                <textarea th:field="*{htmlInputText}" placeholder="ex.<h1>test</h1>..."></textarea>
               </div>
               <div class="addItems_cssForm">
-                <textarea th:field="*{cssInputText}" placeholder="css"></textarea>
+                <textarea th:field="*{cssInputText}" placeholder="ex.h1{font-size:12px;}..."></textarea>
+              </div>
+              <div class="addItems_iframe">
+                <iframe id="addItems_iframe_content" frameborder="0" sandbox></iframe>
               </div>
               <button class="btn" type="submit">
                 <img th:src="@{/images/check_icon.png}" alt="">
@@ -124,8 +92,7 @@
                   <img th:src="@{/images/arrowbottom_icon.png}" alt="">
                 </div>
                 <div class="howto_content">
-                  <p>ファイルをダウンロードして動作確認ができます。</p>
-                  <p>ダウンロードボタンを押すとzipファイルがダウンロードされます。</p>
+                  <p>htmlファイルをダウンロードして動作が確認できます。</p>
                   <img th:src="@{/images/about_dowload.png}" alt="">
                 </div>
               </div>
@@ -197,11 +164,13 @@
               <div class="content_frame">
                 <!-- タブヘッダー -->
                 <div class="content_header">
-                  <!-- ダウンロードボタン -->
+                  <!-- お気に入りボタン -->
                   <div class="download_btn">
-                    <a th:href="@{${codepartobj.value[3]}}">
-                      <img th:src="@{/images/download_icon.png}" alt="">
-                    </a>
+                    <form th:action="@{/download}" method="post">
+                      <input type="hidden" name="codehtml" th:value="${codepartobj.value[0]}">
+                      <input type="hidden" name="codecss" th:value="${codepartobj.value[1]}">
+                      <input type="image" th:src=@{/images/download_icon.png}>
+                    </form>
                   </div>
                   <!-- タブメニュー -->
                   <label class="tab_menu active">View</label>
@@ -211,7 +180,7 @@
                 <div class="content_space">
                   <!-- VIEWタブ -->
                   <div class="content_area show content_view">
-                    <iframe th:src="@{${codepartobj.value[2]}}" frameborder="0"></iframe>
+                    <iframe th:srcdoc="@{${codepartobj.value[2]}}" frameborder="0" sandbox></iframe>
                   </div>
                   <!-- HTMLタブ -->
                   <div class="content_area content_html">
