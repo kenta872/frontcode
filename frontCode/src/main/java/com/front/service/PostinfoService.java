@@ -1,5 +1,6 @@
 package com.front.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,20 +9,25 @@ import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.front.controller.entity.PostinfoEntity;
+import com.front.controller.repository.PostinfoRepository;
+import com.front.util.Constants;
 
 
 /**
  * 投稿管理テーブルDAO
  */
 @Service
-public class PostinfoDao {
+public class PostinfoService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	@Autowired
+	PostinfoRepository postinfoRepos;
 	
 	/**
 	 * 投稿一覧をすべて取得
@@ -65,6 +71,37 @@ public class PostinfoDao {
 	public List<PostinfoEntity> findPostByDelflg() {
 		Query postinfoQuery = entityManager.createQuery("from PostinfoEntity where delFlg = 'true'");
 		return postinfoQuery.getResultList();
+	}
+	
+	
+	public PostinfoEntity insertPostinfo(Integer postid, Integer typeid) {
+		PostinfoEntity postinfoEntity = new PostinfoEntity();
+		
+		LocalDateTime nowDate = LocalDateTime.now();
+		
+		// 投稿情報を本番データに移行
+		postinfoEntity.setPostid(postid);
+		postinfoEntity.setPostdate(Constants.DATE_FORMAT.format(nowDate));
+		postinfoEntity.setStatus(Constants.POSTINFO_STATUS_MISHONIN);
+		postinfoEntity.setTypeid(typeid);
+		postinfoEntity = postinfoRepos.saveAndFlush(postinfoEntity);
+		
+		return postinfoEntity;
+	}
+	
+	
+	public void deletePostinfo(PostinfoEntity postinfoEntity) {
+		postinfoEntity.setDelFlg(true);
+		postinfoRepos.saveAndFlush(postinfoEntity);
+	}
+	
+	public void chageStatus(PostinfoEntity postinfoEntity) {
+		postinfoEntity.setStatus(Constants.POSTIFNO_STATUS_SHONIN);
+		postinfoRepos.saveAndFlush(postinfoEntity);
+	}
+	
+	public void rejectPostinfo(PostinfoEntity postinfoEntity) {
+		postinfoRepos.delete(postinfoEntity);
 	}
 
 }

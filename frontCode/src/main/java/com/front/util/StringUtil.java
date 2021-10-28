@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.front.service.IoService;
-
 public class StringUtil {
 
 	/** 半角数字のパターン */
@@ -17,7 +15,7 @@ public class StringUtil {
 	private StringUtil(){}
 	
 	@Autowired
-	IoService ioService;
+	FileIo ioService;
 	
 	
 	public static String convertToEscape(String src) {

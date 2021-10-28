@@ -80,10 +80,18 @@ public class Errors {
     }
     
     
+    /**
+     * ユーザーネームが重複している場合にエラーを出力する
+     * @return ユーザーネーム重複エラー
+     */
     public String userDuplicate() {
     	return errorMessage.ERROR_MESSAGE_USER_DUPLICATE;
     }
     
+    /**
+     * メールアドレスが重複している場合にエラーを出力する
+     * @return メールアドレス重複エラー
+     */
     public String mailDuplicate() {
     	return errorMessage.ERROR_MESSAGE_MAIL_DUPLICATE;
     }

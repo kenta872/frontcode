@@ -345,23 +345,32 @@ header {
   margin-left: 20px;
 }
 
-.download_btn {
+.option_btn {
   display: flex;
-  align-items: center;
   height: 100%;
   margin-right: auto;
   margin-left: 16px;
 }
-.download_btn > form {
+
+.download_btn, .favorite_btn {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.download_btn > form, .favorite_btn > form {
   height: 50%;
 }
-.download_btn > form > input {
+.download_btn > form > input, .favorite_btn > form > input {
   height: 100%;
   width: auto;
   transition: 0.3s;
 }
-.download_btn > form > input:hover {
+.download_btn > form > input:hover, .favorite_btn > form > input:hover {
   opacity: 0.4;
+}
+
+.download_btn {
+  margin-right: 24px;
 }
 
 .deleteForm {

@@ -1,11 +1,6 @@
 package com.front.controller;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,30 +20,26 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.front.controller.entity.CodeinfoEntity;
+import com.front.controller.entity.FavoriteEntity;
 import com.front.controller.entity.PostinfoEntity;
 import com.front.controller.entity.PostinfosubEntity;
 import com.front.controller.entity.TypedbEntity;
-import com.front.controller.repository.CodeinfoRepository;
-import com.front.controller.repository.PostinfoRepository;
-import com.front.controller.repository.PostinfosubRepository;
 import com.front.error.ErrorCheck;
 import com.front.error.Errors;
 import com.front.security.account.Account;
-import com.front.security.account.AccountDao;
-import com.front.security.account.AccountRepository;
-import com.front.service.CodeinfoDao;
-import com.front.service.CustomDao;
-import com.front.service.OperationService;
-import com.front.service.PostinfoDao;
-import com.front.service.PostinfosubDao;
-import com.front.service.TypedbDao;
+import com.front.security.account.AccountService;
+import com.front.service.CodeinfoService;
+import com.front.service.CustomService;
+import com.front.service.FavoriteinfoService;
+import com.front.service.PostinfoService;
+import com.front.service.PostinfosubService;
+import com.front.service.TypedbService;
 import com.front.util.Constants;
+import com.front.util.DeleteOpe;
 import com.front.util.StringUtil;
 
 /**
@@ -58,32 +49,26 @@ import com.front.util.StringUtil;
 public class HomeController {
 
 	@Autowired
-	CodeinfoDao codeinfoDao;
+	CodeinfoService codeinfoService;
 	@Autowired
-	PostinfoDao postinfoDao;
+	PostinfoService postinfoService;
 	@Autowired
-	PostinfosubDao postinfosubDao;
+	PostinfosubService postinfosubService;
 	@Autowired
-	TypedbDao typedbDao;
+	TypedbService typedbService;
 	@Autowired
-	CustomDao customDao;
+	CustomService customService;
 	@Autowired
-	PostinfoRepository postRepos;
+	FavoriteinfoService favoriteinfoService;
 	@Autowired
-	PostinfosubRepository postsubRepos;
+	AccountService accountService;
+
 	@Autowired
-	CodeinfoRepository codeRepos;
-	@Autowired
-	OperationService operationService;
+	DeleteOpe deleteOpe;
 	@Autowired
 	Errors errors;
 	@Autowired
 	ErrorCheck errorCheck;
-
-	@Autowired
-	AccountRepository accountRepos;
-	@Autowired
-	AccountDao accountDao;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -95,8 +80,24 @@ public class HomeController {
 	 */
 	@ModelAttribute("typedbList")
 	List<TypedbEntity> addAttributeTypedb() throws Exception {
-		List<TypedbEntity> typedbList = typedbDao.selectTypedbAll();
+		List<TypedbEntity> typedbList = typedbService.selectTypedbAll();
 		return typedbList;
+	}
+
+	/**
+	 * ログイン中アカウントのお気に入り情報を初期化
+	 * 
+	 * @param account アカウント
+	 * @return ログイン中アカウントのお気に入り情報
+	 */
+	@ModelAttribute("favoriteList")
+	List<Object> addAttribute(@AuthenticationPrincipal Account account) {
+		List<Object> favoriteList = new ArrayList<>();
+		if (account != null) {
+			favoriteList = favoriteinfoService.findPostidByAccountid(account.getUserid());
+		}
+		return favoriteList;
+
 	}
 
 	/**
@@ -108,30 +109,7 @@ public class HomeController {
 	@ModelAttribute("initMap")
 	Map<Integer, Map<Object, List<Object>>> addAttributeinitMap() throws Exception {
 
-		List<Object[]> sqlResultList = customDao.findInitMap();
-		List<TypedbEntity> typedbEntityList = typedbDao.selectTypedbAll();
-
-		Map<Integer, Map<Object, List<Object>>> initMap = new HashMap<>();
-		Map<Object, List<Object>> postMap = new HashMap<>();
-
-		for (TypedbEntity typedbEntity : typedbEntityList) {
-			for (Object[] sqlResultObj : sqlResultList) {
-				List<Object> initList = Arrays.asList(sqlResultObj);
-
-				if ((Integer) initList.get(0) == typedbEntity.getTypeid()) {
-					List<Object> outList = new ArrayList<>();
-					outList.add(initList.get(2));
-					outList.add(initList.get(3));
-					outList.add(StringUtil.createIframe((String)initList.get(2), (String)initList.get(3)));
-					postMap.put(initList.get(1), outList);
-				} else if ((Integer) initList.get(0) > typedbEntity.getTypeid()) {
-					break;
-				}
-			}
-			initMap.put(typedbEntity.getTypeid(), postMap);
-			postMap = new HashMap<>();
-		}
-		return initMap;
+		return customService.getInitMap();
 	}
 
 	/**
@@ -143,12 +121,46 @@ public class HomeController {
 	 * @throws Exception
 	 */
 	@GetMapping("/")
-	public String index(UploadForm uploadForm, Model model) {
-
-
+	public String index(UploadForm uploadForm, @AuthenticationPrincipal Account account, Model model) {
+		if (account != null) {
+			// お気に入り投稿情報をマップに格納
+			Map<Integer, Map<Object, List<Object>>> favoriteMap = favoriteinfoService.getFavoriteMap(account);
+			model.addAttribute("favoriteMap", favoriteMap);
+			model.addAttribute("accountid", account.getUserid());
+		}
 		return "index";
 	}
-	
+
+	/**
+	 * お気に入りボタン押下処理
+	 * 
+	 * @param postid 投稿ID
+	 * @param accountid アカウントID
+	 * @return 初期画面リダイレクト
+	 */
+	@PostMapping("/favorite")
+	public String favoriteRegist(@RequestParam("postid") Integer postid, @RequestParam("accountid") Integer accountid) {
+
+		List<FavoriteEntity> favoriteEntityList = favoriteinfoService.findFavorite(postid, accountid);
+		
+		// 対象の投稿がお気に入りされていない場合
+		if (favoriteEntityList.size() == 0) {
+			favoriteinfoService.insertFavorite(accountid, postid);
+		} else {
+	    // 対象の投稿がお気に入りされている場合
+			favoriteinfoService.deleteFavorite(favoriteEntityList.get(0));
+		}
+
+		return "redirect:/";
+	}
+
+	/**
+	 * htmlファイルダウンロード処理
+	 * @param codehtml htmlソース
+	 * @param codecss cssソース
+	 * @param response レスポンス
+	 * @return htmlファイルダウンロード
+	 */
 	@PostMapping("/download")
 	public String downloadFile(@RequestParam("codehtml") String codehtml, @RequestParam("codecss") String codecss,
 			HttpServletResponse response) {
@@ -157,8 +169,8 @@ public class HomeController {
 			response.setContentType("text/html; charset=utf-8");
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(sampleHtmlCode);
-			response.setHeader("Content-Disposition","attachment;filename=\"sample.html\"");
-			
+			response.setHeader("Content-Disposition", "attachment;filename=\"sample.html\"");
+
 		} catch (Exception e) {
 			errors.errorDownload();
 		}
@@ -207,11 +219,9 @@ public class HomeController {
 			throw errors.errorIllegal();
 		}
 
-		PostinfosubEntity postinfosubEntity = new PostinfosubEntity();
-
+		
 		// 投稿情報をDB登録
-		postinfosubEntity.setTypeid(Integer.parseInt(uploadForm.getTypeSelectValue()));
-		postinfosubEntity = postsubRepos.saveAndFlush(postinfosubEntity);
+		PostinfosubEntity postinfosubEntity = postinfosubService.insertPostinfo(Integer.parseInt(uploadForm.getTypeSelectValue()));
 
 		// リダイレクト先にアップロードフォームを渡す
 		redirectAttributes.addFlashAttribute("uploadForm", uploadForm);
@@ -235,59 +245,46 @@ public class HomeController {
 		PostinfosubEntity postinfosubEntity = (PostinfosubEntity) model.getAttribute("postinfosubEntity");
 
 		// 選択種別を設定
-		model.addAttribute("selecType", typedbDao.findTypeByTypeid(postinfosubEntity.getTypeid()).getTypename());
+		model.addAttribute("selecType", typedbService.findTypeByTypeid(postinfosubEntity.getTypeid()).getTypename());
 		// ソースコードを設定
 		model.addAttribute("postid", postinfosubEntity.getPostid());
 		model.addAttribute("inputHtml", uploadForm.getHtmlInputText());
 		model.addAttribute("inputCss", uploadForm.getCssInputText());
-		model.addAttribute("iframeCode",StringUtil.createIframe(uploadForm.getHtmlInputText(), uploadForm.getCssInputText()));
+		model.addAttribute("iframeCode",
+				StringUtil.createIframe(uploadForm.getHtmlInputText(), uploadForm.getCssInputText()));
 
 		return "postCheck";
 	}
 
+
 	/**
-	 * アップロード内容保存
+	 * アップロード情報をDBに保存
 	 * 
-	 * @param postid    投稿ID
-	 * @param inputHtml htmlコード
-	 * @param inputCss  cssコード
-	 * @param model     モデル
-	 * @return アップロード完了画面にリダイレクト
-	 * @throws Exception
+	 * @param postid 投稿ID
+	 * @param uploadForm アップロードフォーム
+	 * @param model モデル
+	 * @return アップロード完了画面
 	 */
 	@PostMapping("/save")
 	public String saveCode(@RequestParam(value = "postidForRegist") int postid,
 			@ModelAttribute("uploadForm") UploadForm uploadForm, Model model) {
 
-		LocalDateTime nowDate = LocalDateTime.now();
-		// TODO DB自動設定で今日の日付を設定できないか検討
-
-		PostinfosubEntity postsubEntity = postinfosubDao.findPostByPostid(postid);
-
-		PostinfoEntity postinfoEntity = new PostinfoEntity();
-		CodeinfoEntity codehtmlEntity = new CodeinfoEntity();
-		CodeinfoEntity codecssEntity = new CodeinfoEntity();
+		// 仮登録情報を取得
+		PostinfosubEntity postsubEntity = postinfosubService.findPostByPostid(postid);
 
 		// 投稿情報を本番データに移行
-		postinfoEntity.setPostid(postsubEntity.getPostid());
-		postinfoEntity.setPostdate(Constants.DATE_FORMAT.format(nowDate));
-		postinfoEntity.setStatus(Constants.POSTINFO_STATUS_MISHONIN);
-		postinfoEntity.setTypeid(postsubEntity.getTypeid());
-		postRepos.saveAndFlush(postinfoEntity);
+		PostinfoEntity postinfoEntity = postinfoService.insertPostinfo(postsubEntity.getPostid(), postsubEntity.getTypeid());
 
-		// HTMLソースコードを設定
-		codehtmlEntity.setCodegenre(Constants.CODE_TYPE_HTML);
-		codehtmlEntity.setPostid(postinfoEntity.getPostid());
-		codehtmlEntity.setSrc(uploadForm.getHtmlInputText());
-		codehtmlEntity = codeRepos.saveAndFlush(codehtmlEntity);
-
+		// HTMLソースコードを登録
+		codeinfoService.insertCodeinfo(Constants.CODE_TYPE_HTML, postinfoEntity.getPostid(), 
+				uploadForm.getHtmlInputText());
+		
 		// CSSソースコードを登録
-		codecssEntity.setCodegenre(Constants.CODE_TYPE_CSS);
-		codecssEntity.setPostid(postinfoEntity.getPostid());
-		codecssEntity.setSrc(uploadForm.getCssInputText());
-		codecssEntity = codeRepos.saveAndFlush(codecssEntity);
+		codeinfoService.insertCodeinfo(Constants.CODE_TYPE_CSS, postinfoEntity.getPostid(),
+				uploadForm.getCssInputText());
 
-		operationService.deleteOpeForSub(postid);
+		// 仮登録投稿を削除
+		deleteOpe.deleteOpeForSub(postid);
 		return "redirect:/comp";
 	}
 
@@ -313,7 +310,7 @@ public class HomeController {
 	@PostMapping("/cancel")
 	public String delete(@RequestParam(value = "postidForDelete") Integer postid, Model model) {
 
-		operationService.deleteOpeForSub(postid);
+		deleteOpe.deleteOpeForSub(postid);
 
 		return "redirect:/";
 	}
@@ -348,12 +345,24 @@ public class HomeController {
 		return "login";
 	}
 
+	/**
+	 * アカウント情報画面表示
+	 * @param account アカウント
+	 * @return アカウント情報画面
+	 */
 	@GetMapping("/createAccount")
 	public String createAccount(@ModelAttribute("account") Account account) {
 
 		return "createAccount";
 	}
 
+	/**
+	 * アカウント登録処理
+	 * @param account アカウント
+	 * @param errorResult バリデーションチェック結果
+	 * @param model モデル
+	 * @return アカウント登録後、初期画面に遷移
+	 */
 	@PostMapping("/accountRegist")
 	public String registAccount(@Validated @ModelAttribute("account") Account account, BindingResult errorResult,
 			Model model) {
@@ -371,11 +380,11 @@ public class HomeController {
 		// カスタムエラーチェック
 		List<String> errorList = new ArrayList<>();
 		// ユーザーネーム重複チェック
-		if (accountDao.findAccountByName(account.getUsername()).size() > 0) {
+		if (accountService.findAccountByName(account.getUsername()).size() > 0) {
 			errorList.add(errors.userDuplicate());
 		}
 		// メールアドレス重複チェック
-		if (accountDao.findAccountByMail(account.getMail()).size() > 0) {
+		if (accountService.findAccountByMail(account.getMail()).size() > 0) {
 			errorList.add(errors.mailDuplicate());
 		}
 		if (errorList.size() > 0) {
@@ -383,17 +392,8 @@ public class HomeController {
 			return "createAccount";
 		}
 
-		// パスワードエンコード
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		String hashPass = bCryptPasswordEncoder.encode(account.getPassword());
-
-		Account newAccount = new Account();
-		newAccount.setUsername(account.getUsername());
-		newAccount.setPassword(hashPass);
-		newAccount.setMail(account.getMail());
-		newAccount.setRole(newAccount.getRoleUser());
-		accountRepos.saveAndFlush(newAccount);
-		logger.info("アカウントを登録しました：" + newAccount.getUsername());
+		// アカウント登録
+		accountService.insertAccount(account.getUsername(), account.getPassword(), account.getMail());
 
 		return "redirect:/";
 	}

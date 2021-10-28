@@ -7,45 +7,17 @@
   </header>
   <main>
     <div class="content_wrapper">
-      <input id="nav_check" type="checkbox">
-      <div class="sidebar">
-        <!------------------------------------->
-        <!-- サイドバー -->
-        <!------------------------------------->
-        <!-- plus -->
-        <label class="side_menu side_active">
-          <div class="add_wrapper">
-            <img th:src="@{/images/plus_icon.png}" alt="">
-          </div>
-        </label>
-        <!-- アプリケーション説明ページ -->
-        <label class="side_menu">
-          <div class="side_menu_text">
-            <p>ABOUT</p>
-            <p>アプリについて</p>
-          </div>
-          <img th:src="@{/images/arrow_right.png}" alt="">
-        </label>
-        <!-------------------------------->
-        <!-- for文 -->
-        <!-------------------------------->
-        <div class="side_menu_for" th:each="sideobj:${typedbList}">
-          <!-- button -->
-          <label class="side_menu">
-            <div class="side_menu_text">
-              <p th:text="${sideobj.typename}"></p>
-              <p th:text="${sideobj.typenamejp}"></p>
-            </div>
-            <img th:src="@{/images/arrow_right.png}" alt="">
-          </label>
-        </div>
-      </div>
+      <!-- サイドメニュー -->
+      <div th:replace="common::sidemenu_flagment"></div>
+
+      <!-- メインコンテンツ -->
       <div class="main_content_wrapper">
         <!-- パーツ追加画面 -->
         <div class="main_content main_show">
           <div class="addItems_title">
             <h2>UPLOAD</h2>
           </div>
+          <!-- バリデーションエラーメッセージ -->
           <div class="errorText">
             <table>
               <tbody>
@@ -80,6 +52,7 @@
             </form>
           </div>
         </div>
+        <!-- アプリについて -->
         <div class="main_content">
           <div class="instruct_title">
             <h2>ABOUT</h2>
@@ -143,14 +116,66 @@
             <p>©&nbsp;2021&nbsp;k-nakai</p>
           </div>
         </div>
-        <!-------------------------------->
-        <!-- for文 -->
-        <!-------------------------------->
-        <!-- Map<Integer,Map<Integer,List<String>>> -->
+
+        <!-- お気に入り -->
+        <div class="main_content" sec:authorize="hasRole('USER')">
+          <div class="typenameTitle">
+            <h2>Favorite</h2>
+          </div>
+          <div th:each="favoriteMapObj:${favoriteMap}">
+            <div class="content_frame_for" th:each="codepartobj:${favoriteMapObj.value}">
+              <div class="content_frame_wrapper">
+                <div class="content_frame">
+                  <!-- タブヘッダー -->
+                  <div class="content_header">
+                    <div class="option_btn">
+                      <div class="download_btn">
+                        <form th:action="@{/download}" method="post">
+                          <input type="hidden" name="codehtml" th:value="${codepartobj.value[0]}">
+                          <input type="hidden" name="codecss" th:value="${codepartobj.value[1]}">
+                          <input type="image" th:src=@{/images/download_icon.png}>
+                        </form>
+                      </div>
+                      <div class="favorite_btn" sec:authorize="hasRole('USER')">
+                        <form th:action="@{/favorite}" method="post">
+                          <input type="hidden" name="postid" th:value="${codepartobj.key}">
+                          <input type="hidden" name="accountid" th:value="${accountid}">
+                          <th:block th:if="${favoriteList.contains(codepartobj.key)}">
+                            <input type="image" src="./images/star_ok_icon.png">
+                          </th:block>
+                          <th:block th:unless="${favoriteList.contains(codepartobj.key)}">
+                            <input type="image" src="./images/star_no_icon.png">
+                          </th:block>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- タブメニュー -->
+                    <label class="tab_menu active">View</label>
+                    <label class="tab_menu">HTML</label>
+                    <label class="tab_menu">CSS</label>
+                  </div>
+                  <div class="content_space">
+                    <!-- VIEWタブ -->
+                    <div class="content_area show content_view">
+                      <iframe th:srcdoc="@{${codepartobj.value[2]}}" frameborder="0" sandbox></iframe>
+                    </div>
+                    <!-- HTMLタブ -->
+                    <div class="content_area content_html">
+                      <pre><code class="html" th:text="${codepartobj.value[0]}"></code></pre>
+                    </div>
+                    <!-- CSSタブ -->
+                    <div class="content_area content_css">
+                      <pre><code class="css" th:text="${codepartobj.value[1]}"></code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 各パーツコンテンツ -->
         <div class="main_content" th:each="initMapObj:${initMap}">
-          <!-------------------------------->
-          <!-- for文 -->
-          <!-------------------------------->
           <th:block th:if="${initMapObj.value != null}">
           <div th:each="contentobj:${typedbList}">
           <th:block th:if="${initMapObj.key == contentobj.typeid}">
@@ -164,13 +189,26 @@
               <div class="content_frame">
                 <!-- タブヘッダー -->
                 <div class="content_header">
-                  <!-- お気に入りボタン -->
-                  <div class="download_btn">
-                    <form th:action="@{/download}" method="post">
-                      <input type="hidden" name="codehtml" th:value="${codepartobj.value[0]}">
-                      <input type="hidden" name="codecss" th:value="${codepartobj.value[1]}">
-                      <input type="image" th:src=@{/images/download_icon.png}>
-                    </form>
+                  <div class="option_btn">
+                    <div class="download_btn">
+                      <form th:action="@{/download}" method="post">
+                        <input type="hidden" name="codehtml" th:value="${codepartobj.value[0]}">
+                        <input type="hidden" name="codecss" th:value="${codepartobj.value[1]}">
+                        <input type="image" th:src=@{/images/download_icon.png}>
+                      </form>
+                    </div>
+                    <div class="favorite_btn" sec:authorize="hasRole('USER')">
+                      <form th:action="@{/favorite}" method="post">
+                        <input type="hidden" name="postid" th:value="${codepartobj.key}">
+                        <input type="hidden" name="accountid" th:value="${accountid}">
+                        <th:block th:if="${favoriteList.contains(codepartobj.key)}">
+                          <input type="image" src="./images/star_ok_icon.png">
+                        </th:block>
+                        <th:block th:unless="${favoriteList.contains(codepartobj.key)}">
+                          <input type="image" src="./images/star_no_icon.png">
+                        </th:block>
+                      </form>
+                    </div>
                   </div>
                   <!-- タブメニュー -->
                   <label class="tab_menu active">View</label>

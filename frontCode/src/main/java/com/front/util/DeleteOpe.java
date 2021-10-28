@@ -1,50 +1,35 @@
-package com.front.service;
+package com.front.util;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.front.controller.entity.CodeinfoEntity;
 import com.front.controller.entity.PostinfoEntity;
 import com.front.controller.entity.PostinfosubEntity;
-import com.front.controller.repository.CodeinfoRepository;
-import com.front.controller.repository.CodeinfosubRepository;
 import com.front.controller.repository.PostinfoRepository;
 import com.front.controller.repository.PostinfosubRepository;
+import com.front.service.CodeinfoService;
+import com.front.service.PostinfoService;
+import com.front.service.PostinfosubService;
 
 @Service
-public class OperationService {
+public class DeleteOpe {
 
 	@Autowired
-	CodeinfoDao codeinfoDao;
+	CodeinfoService codeinfoService;
 	@Autowired
-	CodeinfosubDao codeinfosubDao;
+	PostinfoService postinfoService;
 	@Autowired
-	PostinfoDao postinfoDao;
-	@Autowired
-	PostinfosubDao postinfosubDao;
-	@Autowired
-	TypedbDao typedbDao;
+	PostinfosubService postinfosubService;
 
 	@Autowired
 	PostinfoRepository postRepos;
 	@Autowired
 	PostinfosubRepository postsubRepos;
-	@Autowired
-	CodeinfoRepository codeRepos;
-	@Autowired
-	CodeinfosubRepository codesubRepos;
-
-
-	@Autowired
-	IoService ioService;
-
-	@Value("${file.savedir}")
-	private String dirname;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -55,17 +40,16 @@ public class OperationService {
 	 * @throws Exception
 	 */
 	public void deleteOpe(Integer postid) {
+		
 		// ソースコード削除
-		List<CodeinfoEntity> codeinfoList = codeinfoDao.findSrcByPostid(postid);
+		List<CodeinfoEntity> codeinfoList = codeinfoService.findSrcByPostid(postid);
 		for (CodeinfoEntity codeinfo : codeinfoList) {
-			codeinfo.setDelFlg(true);
-			codeRepos.saveAndFlush(codeinfo);
+			codeinfoService.deleteCodeinfo(codeinfo);
 		}
 
 		// 投稿情報削除
-		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
-		postinfoEntity.setDelFlg(true);
-		postRepos.saveAndFlush(postinfoEntity);
+		PostinfoEntity postinfoEntity = postinfoService.findPostByPostid(postid);
+		postinfoService.deletePostinfo(postinfoEntity);
 	}
 
 	/**
@@ -77,7 +61,7 @@ public class OperationService {
 	public void deleteOpeForSub(Integer postid) {
 
 		// 投稿情報削除
-		PostinfosubEntity postinfosubEntity = postinfosubDao.findPostByPostid(postid);
+		PostinfosubEntity postinfosubEntity = postinfosubService.findPostByPostid(postid);
 		postsubRepos.delete(postinfosubEntity);
 	}
 

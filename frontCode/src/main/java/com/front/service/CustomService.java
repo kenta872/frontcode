@@ -1,6 +1,10 @@
 package com.front.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,15 +12,19 @@ import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.front.controller.entity.TypedbEntity;
+import com.front.util.StringUtil;
 
 
 /**
  * カスタムDAO
  */
 @Service
-public class CustomDao {
+public class CustomService {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -24,6 +32,9 @@ public class CustomDao {
 	private EntityManager entityManager;
 	@Value("${file.savedir}")
 	private String dirname;
+	
+	@Autowired
+	TypedbService typedbDao;
 	
 	/**
 	 * 投稿管理テーブルで未承認のデータを抽出する
@@ -137,8 +148,6 @@ public class CustomDao {
 		initSql += "  , pi.postid ";
 		initSql += "  , cihtml.htmlcode ";
 		initSql += "  , cicss.csscode ";
-		initSql += "  , fihtml.htmlfile ";
-		initSql += "  , fizip.zipfile ";
 		initSql += "from ";
 		initSql += "  v1.typedb td left outer join v1.postinfo pi ";
 		initSql += "    on td.typeid = pi.typeid ";
@@ -162,26 +171,6 @@ public class CustomDao {
 		initSql += "  v1.codeinfo.codegenre = 'css' ";
 		initSql += "  ) cicss ";
 		initSql += "    on pi.postid = cicss.postid ";
-		initSql += "    left outer join ( ";
-		initSql += "      select ";
-		initSql += "    v1.fileinfo.postid ";
-		initSql += "    , v1.fileinfo.filename htmlfile ";
-		initSql += "      from ";
-		initSql += "    v1.fileinfo ";
-		initSql += "      where ";
-		initSql += "    v1.fileinfo.filegenre = 'html' ";
-		initSql += "    ) fihtml ";
-		initSql += "      on pi.postid = fihtml.postid ";
-		initSql += "      left outer join ( ";
-		initSql += "        select ";
-		initSql += "      v1.fileinfo.postid ";
-		initSql += "      , v1.fileinfo.filename zipfile ";
-		initSql += "        from ";
-		initSql += "      v1.fileinfo ";
-		initSql += "        where ";
-		initSql += "      v1.fileinfo.filegenre = 'zip' ";
-		initSql += "      ) fizip ";
-		initSql += "      on pi.postid = fizip.postid ";
 		initSql += "where ";
 		initSql += "  pi.del_flg = 'false' ";
 		initSql += "  and pi.status = 2 ";
@@ -208,7 +197,6 @@ public class CustomDao {
 		initSql += "  , pi.postid ";
 		initSql += "  , cihtml.htmlcode ";
 		initSql += "  , cicss.csscode ";
-		initSql += "  , fihtml.htmlfile ";
 		initSql += "from ";
 		initSql += "  v1.typedb td left outer join v1.postinfo pi ";
 		initSql += "    on td.typeid = pi.typeid ";
@@ -232,26 +220,6 @@ public class CustomDao {
 		initSql += "  v1.codeinfo.codegenre = 'css' ";
 		initSql += "  ) cicss ";
 		initSql += "    on pi.postid = cicss.postid ";
-		initSql += "    left outer join ( ";
-		initSql += "      select ";
-		initSql += "    v1.fileinfo.postid ";
-		initSql += "    , v1.fileinfo.filename htmlfile ";
-		initSql += "      from ";
-		initSql += "    v1.fileinfo ";
-		initSql += "      where ";
-		initSql += "    v1.fileinfo.filegenre = 'html' ";
-		initSql += "    ) fihtml ";
-		initSql += "      on pi.postid = fihtml.postid ";
-		initSql += "      left outer join ( ";
-		initSql += "        select ";
-		initSql += "      v1.fileinfo.postid ";
-		initSql += "      , v1.fileinfo.filename zipfile ";
-		initSql += "        from ";
-		initSql += "      v1.fileinfo ";
-		initSql += "        where ";
-		initSql += "      v1.fileinfo.filegenre = 'zip' ";
-		initSql += "      ) fizip ";
-		initSql += "      on pi.postid = fizip.postid ";
 		initSql += "where ";
 		initSql += "  pi.del_flg = 'false' ";
 		initSql += "  and pi.status = 2 ";
@@ -263,5 +231,77 @@ public class CustomDao {
 		Query authoQuery = entityManager.createNativeQuery(initSql);
 		return authoQuery.getResultList();
 		
+	}
+	
+
+	public List<Object[]> findFavoriteMap(Integer userid) {
+		
+		String initSql = "select ";
+		initSql += "  fi.favoriteid ";
+		initSql += "  , pi.postid ";
+		initSql += "  , cihtml.htmlcode ";
+		initSql += "  , cicss.csscode ";
+		initSql += "from ";
+		initSql += "  v1.favoriteinfo fi left outer join v1.postinfo pi ";
+		initSql += "    on fi.postid = pi.postid ";
+		initSql += "    left outer join ( ";
+		initSql += "      select ";
+		initSql += "    v1.codeinfo.postid ";
+		initSql += "    , v1.codeinfo.src htmlcode ";
+		initSql += "  from ";
+		initSql += "    v1.codeinfo ";
+		initSql += "  where ";
+		initSql += "    v1.codeinfo.codegenre = 'html' ";
+		initSql += "    ) cihtml ";
+		initSql += "      on pi.postid = cihtml.postid ";
+		initSql += "  left outer join ( ";
+		initSql += "    select ";
+		initSql += "  v1.codeinfo.postid ";
+		initSql += "  , v1.codeinfo.src csscode ";
+		initSql += "    from ";
+		initSql += "  v1.codeinfo ";
+		initSql += "    where ";
+		initSql += "  v1.codeinfo.codegenre = 'css' ";
+		initSql += "  ) cicss ";
+		initSql += "    on pi.postid = cicss.postid ";
+		initSql += "where ";
+		initSql += "  pi.del_flg = 'false' ";
+		initSql += "  and pi.status = 2 ";
+		initSql += "  and fi.accountid = '" + userid + "'";
+		initSql += "order by ";
+		initSql += " fi.favoriteid ";
+		initSql += " ,pi.postid; ";
+		
+		// 未承認(status=1)の投稿ID一覧を取得する
+		Query authoQuery = entityManager.createNativeQuery(initSql);
+		return authoQuery.getResultList();
+		
+	}
+	
+	public Map<Integer, Map<Object, List<Object>>> getInitMap() throws Exception {
+		List<Object[]> sqlResultList = findInitMap();
+		List<TypedbEntity> typedbEntityList = typedbDao.selectTypedbAll();
+
+		Map<Integer, Map<Object, List<Object>>> initMap = new HashMap<>();
+		Map<Object, List<Object>> postMap = new HashMap<>();
+
+		for (TypedbEntity typedbEntity : typedbEntityList) {
+			for (Object[] sqlResultObj : sqlResultList) {
+				List<Object> initList = Arrays.asList(sqlResultObj);
+
+				if ((Integer) initList.get(0) == typedbEntity.getTypeid()) {
+					List<Object> outList = new ArrayList<>();
+					outList.add(initList.get(2));
+					outList.add(initList.get(3));
+					outList.add(StringUtil.createIframe((String) initList.get(2), (String) initList.get(3)));
+					postMap.put(initList.get(1), outList);
+				} else if ((Integer) initList.get(0) > typedbEntity.getTypeid()) {
+					break;
+				}
+			}
+			initMap.put(typedbEntity.getTypeid(), postMap);
+			postMap = new HashMap<>();
+		}
+		return initMap;
 	}
 }

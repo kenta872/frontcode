@@ -20,46 +20,32 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.front.controller.entity.PostinfoEntity;
 import com.front.controller.entity.TypedbEntity;
-import com.front.controller.repository.CodeinfoRepository;
-import com.front.controller.repository.CodeinfosubRepository;
-import com.front.controller.repository.PostinfoRepository;
-import com.front.controller.repository.PostinfosubRepository;
 import com.front.error.Errors;
-import com.front.service.CodeinfoDao;
-import com.front.service.CustomDao;
-import com.front.service.OperationService;
-import com.front.service.PostinfoDao;
-import com.front.service.PostinfosubDao;
-import com.front.service.TypedbDao;
+import com.front.service.CodeinfoService;
+import com.front.service.CustomService;
+import com.front.service.PostinfoService;
+import com.front.service.TypedbService;
 import com.front.util.Constants;
+import com.front.util.DeleteOpe;
 import com.front.util.StringUtil;
 
 /**
- * ホームコントローラー
+ * アドミンコントローラ
  */
 @Controller
 public class AdminController {
 
 	@Autowired
-	CodeinfoDao codeinfoDao;
+	CodeinfoService codeinfoService;
 	@Autowired
-	PostinfoDao postinfoDao;
+	PostinfoService postinfoService;
 	@Autowired
-	PostinfosubDao postinfosubDao;
+	TypedbService typedbService;
 	@Autowired
-	TypedbDao typedbDao;
+	CustomService customService;
 	@Autowired
-	CustomDao customDao;
-	@Autowired
-	PostinfoRepository postRepos;
-	@Autowired
-	PostinfosubRepository postsubRepos;
-	@Autowired
-	CodeinfoRepository codeRepos;
-	@Autowired
-	CodeinfosubRepository codesubRepos;
-	@Autowired
-	OperationService operationService;
+	DeleteOpe deleteOpe;
+	
 	@Autowired
 	Errors errors;
 
@@ -73,7 +59,7 @@ public class AdminController {
 	 */
 	@ModelAttribute("typedbList")
 	List<TypedbEntity> addAttributeTypedb() throws Exception {
-		List<TypedbEntity> typedbList = typedbDao.selectTypedbAll();
+		List<TypedbEntity> typedbList = typedbService.selectTypedbAll();
 		return typedbList;
 	}
 
@@ -86,16 +72,19 @@ public class AdminController {
 	@ModelAttribute("initMap")
 	Map<Integer, Map<Object, List<Object>>> addAttributeinitMap() throws Exception {
 
-		List<Object[]> sqlResultList = customDao.findMisyoninMap();
-		List<TypedbEntity> typedbEntityList = typedbDao.selectTypedbAll();
-
 		Map<Integer, Map<Object, List<Object>>> initMap = new HashMap<>();
 		Map<Object,List<Object>> postMap = new HashMap<>();
 		
+		List<TypedbEntity> typedbEntityList = typedbService.selectTypedbAll();
+		List<Object[]> sqlResultList = customService.findMisyoninMap();
+		// パーツ種別の数ループ
 		for (TypedbEntity typedbEntity : typedbEntityList) {
+			// 公開する投稿情報の数ループ
 			for (Object[] sqlResultObj : sqlResultList) {
 				List<Object> initList = Arrays.asList(sqlResultObj);
 
+				// 投稿情報一覧とパーツ種別が一致した場合にマップに格納
+				// sql結果　0：パーツ種別 1：投稿ID 2：htmlソース 3：cssソース
 				if ((Integer) initList.get(0) == typedbEntity.getTypeid()) {
 					List<Object> outList = new ArrayList<>();
 					outList.add(initList.get(2));
@@ -104,6 +93,7 @@ public class AdminController {
 					outList.add(initList.get(1));
 					postMap.put(initList.get(1), outList);
 				} else if ((Integer) initList.get(0) > typedbEntity.getTypeid()) {
+				// sqlでパーツ種別ソートしているため、この条件を採用
 					break;
 				}
 			}
@@ -155,15 +145,15 @@ public class AdminController {
 			// URL例外
 			throw errors.errorUrl();
 		}
-
-		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
+		
 		// DBに該当の投稿が存在しない場合
+		PostinfoEntity postinfoEntity = postinfoService.findPostByPostid(postid);
 		if (postinfoEntity == null) {
 			throw errors.errorDbIllegal();
 		}
-		model.addAttribute("typename", typedbDao.findTypeByTypeid(postinfoEntity.getTypeid()).getTypename());
-		model.addAttribute("htmlsrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_HTML));
-		model.addAttribute("csssrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_CSS));
+		model.addAttribute("typename", typedbService.findTypeByTypeid(postinfoEntity.getTypeid()).getTypename());
+		model.addAttribute("htmlsrc", codeinfoService.findCodeByPostid(postid, Constants.CODE_TYPE_HTML));
+		model.addAttribute("csssrc", codeinfoService.findCodeByPostid(postid, Constants.CODE_TYPE_CSS));
 		model.addAttribute("postid", postid);
 
 		return "postDetail";
@@ -180,7 +170,7 @@ public class AdminController {
 	@PostMapping("/admin/postDelete")
 	public String manageDelete(@RequestParam(value = "postidForDelete") int postid, Model model) throws Exception {
 		// 投稿IDに紐づく情報をすべて削除
-		operationService.deleteOpe(postid);
+		deleteOpe.deleteOpe(postid);
 
 		return "redirect:/admin/postList";
 	}
@@ -196,7 +186,7 @@ public class AdminController {
 	public String unapprovedList(Model model) throws Exception {
 
 		// 未承認の投稿一覧を取得 [postdate,typename,postid,typeid]
-		List<Object[]> postDataList = customDao.findPostByStatus();
+		List<Object[]> postDataList = customService.findPostByStatus();
 
 		model.addAttribute("postDataList", postDataList);
 
@@ -220,16 +210,16 @@ public class AdminController {
 			throw errors.errorUrl();
 		}
 
-		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
+		PostinfoEntity postinfoEntity = postinfoService.findPostByPostid(postid);
 		// DBに該当の投稿が存在しない場合
 		if (postinfoEntity == null) {
 			throw errors.errorDbIllegal();
 		}
-		mav.addObject("typename", typedbDao.findTypeByTypeid(postinfoEntity.getTypeid()).getTypename());
-		mav.addObject("htmlsrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_HTML));
-		mav.addObject("csssrc", codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_CSS));
-		mav.addObject("iframeData",StringUtil.createIframe(codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_HTML), 
-				codeinfoDao.findCodeByPostid(postid, Constants.CODE_TYPE_CSS)));
+		mav.addObject("typename", typedbService.findTypeByTypeid(postinfoEntity.getTypeid()).getTypename());
+		mav.addObject("htmlsrc", codeinfoService.findCodeByPostid(postid, Constants.CODE_TYPE_HTML));
+		mav.addObject("csssrc", codeinfoService.findCodeByPostid(postid, Constants.CODE_TYPE_CSS));
+		mav.addObject("iframeData",StringUtil.createIframe(codeinfoService.findCodeByPostid(postid, Constants.CODE_TYPE_HTML), 
+				codeinfoService.findCodeByPostid(postid, Constants.CODE_TYPE_CSS)));
 		mav.addObject("postid", postid);
 		mav.setViewName("unapprovedDetail");
 		return mav;
@@ -245,9 +235,8 @@ public class AdminController {
 	 */
 	@PostMapping("/admin/regist")
 	public String postRegist(@RequestParam(value = "postidForRegist") Integer postid, Model model) throws Exception {
-		PostinfoEntity postinfoEntity = postinfoDao.findPostByPostid(postid);
-		postinfoEntity.setStatus(Constants.POSTIFNO_STATUS_SHONIN);
-		postRepos.saveAndFlush(postinfoEntity);
+		PostinfoEntity postinfoEntity = postinfoService.findPostByPostid(postid);
+		postinfoService.chageStatus(postinfoEntity);
 
 		return "redirect:/admin/unapprovedList";
 
@@ -268,10 +257,10 @@ public class AdminController {
 		// すべてが選択されている場合
 		if (typeid == 0) {
 			// 未承認の投稿一覧を取得 [postdate,typename,postid,typeid]
-			postDataList = customDao.findPostByStatus();
+			postDataList = customService.findPostByStatus();
 		} else {
 			// 指定したパーツ種別の未承認の投稿一覧を取得 [postdate,typename,postid,typeid]
-			postDataList = customDao.findPostByStatusFilter(typeid);
+			postDataList = customService.findPostByStatusFilter(typeid);
 		}
 
 		model.addAttribute("postDataList", postDataList);
@@ -292,7 +281,7 @@ public class AdminController {
 	public String reject(@RequestParam(value = "postidForDelete") int postid, Model model) throws Exception {
 
 		// 投稿IDに紐づく情報をすべて削除
-		operationService.deleteOpe(postid);
+		deleteOpe.deleteOpe(postid);
 
 		return "redirect:/admin/unapprovedList";
 	}

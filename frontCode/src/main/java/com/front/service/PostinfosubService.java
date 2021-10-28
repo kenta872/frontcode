@@ -8,22 +8,25 @@ import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.front.controller.entity.PostinfoEntity;
 import com.front.controller.entity.PostinfosubEntity;
+import com.front.controller.repository.PostinfosubRepository;
 
 
 /**
  * 投稿管理テーブルDAO
  */
 @Service
-public class PostinfosubDao {
+public class PostinfosubService {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	@Autowired
+	PostinfosubRepository postinfoSubRepos;
 
 
 	/**
@@ -48,6 +51,20 @@ public class PostinfosubDao {
 		
 		Query postinfoQuery = entityManager.createQuery("from PostinfosubEntity where postid = " + postid);
 		return (PostinfosubEntity)postinfoQuery.getSingleResult();
+	}
+	
+	public PostinfosubEntity insertPostinfo(Integer typeid) {
+		
+		PostinfosubEntity postinfosubEntity = new PostinfosubEntity();
+		postinfosubEntity.setTypeid(typeid);
+		// 投稿情報をDB登録
+		postinfosubEntity = postinfoSubRepos.saveAndFlush(postinfosubEntity);
+		
+		return postinfosubEntity;
+	}
+	
+	public void rejectPostinfosub(PostinfosubEntity postinfosubEntity) {
+		postinfoSubRepos.delete(postinfosubEntity);
 	}
 
 }

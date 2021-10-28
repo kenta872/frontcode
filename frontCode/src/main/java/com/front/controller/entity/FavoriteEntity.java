@@ -13,21 +13,16 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name="codeinfosub", schema="v1")
-public class CodeinfosubEntity {
-	
+@Table(name="favoriteinfo", schema="v1")
+public class FavoriteEntity {
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer codeid;
+	private Integer favoriteid;
+	
+	@Column
+	private Integer accountid;
 	
 	@Column
 	private Integer postid;
-	
-	@Column
-	private String codegenre;
-	
-	@Column
-	private String src;
-
 }

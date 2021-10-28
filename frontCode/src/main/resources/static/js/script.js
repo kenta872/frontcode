@@ -47,6 +47,7 @@ $(function(){
 
 
 window.onload = function () {
+  getFormValue();
   // UploadFormを取得
   var $formObject = document.getElementById( "addItems_form" );
   // UploadFormの入力オブジェクトの数だけループ

@@ -1,4 +1,4 @@
-package com.front.service;
+package com.front.util;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -14,14 +14,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.front.util.Constants;
-
 
 /**
  * IOに関する機能提供
  */
 @Service
-public class IoService {
+public class FileIo {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	

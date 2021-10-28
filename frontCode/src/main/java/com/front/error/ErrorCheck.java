@@ -11,38 +11,52 @@ import com.front.controller.UploadForm;
 
 @Component
 public class ErrorCheck {
-	
+
 	@Autowired
 	Errors errors;
-	
-    /** エラーチェック用：HTTP */
-    public static final String PROTOCOL_HTTP = "http";
-    
-    /** エラーチェック用：script */
-    public static final String SCRIPT_TAG = "script";
-    
-    // ロギング
+
+	/** エラーチェック用：HTTP */
+	public static final String PROTOCOL_HTTP = "http";
+
+	/** エラーチェック用：script */
+	public static final String SCRIPT_TAG = "script";
+
+	// ロギング
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	
+	
+	/**
+	 * htmlアップロード情報に"http"情報が含まれているかをチェック
+	 * @param uploadForm アップロード情報
+	 * @param errorList エラー一覧
+	 * @return エラー一覧
+	 */
 	public List<String> srcCheckHtml(UploadForm uploadForm, List<String> errorList) {
-		// aタグURLエラー
-		if(uploadForm.getHtmlInputText().contains(PROTOCOL_HTTP)) {
+		if (uploadForm.getHtmlInputText().contains(PROTOCOL_HTTP)) {
 			errorList.add(errors.notHttp());
 		}
 		return errorList;
 	}
+
 	
+	/**
+	 * スクリプトタグチェック
+	 * @param uploadForm アップロード情報
+	 * @param errorList エラー一覧
+	 * @return エラー一覧
+	 */
 	public List<String> srcCheckScript(UploadForm uploadForm, List<String> errorList) {
-		
-		// scriptチェック
-		if(uploadForm.getHtmlInputText().contains(SCRIPT_TAG)) {
+
+		// htmlをチェック
+		if (uploadForm.getHtmlInputText().contains(SCRIPT_TAG)) {
 			errorList.add(errors.notHtmlScript());
 		}
-		if(uploadForm.getCssInputText().contains(SCRIPT_TAG)) {
+		// cssをチェ区
+		if (uploadForm.getCssInputText().contains(SCRIPT_TAG)) {
 			errorList.add(errors.notCssScript());
 		}
 		return errorList;
 	}
-
 
 }

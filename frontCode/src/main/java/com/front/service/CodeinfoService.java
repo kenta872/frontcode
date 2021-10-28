@@ -8,20 +8,24 @@ import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.front.controller.entity.CodeinfoEntity;
+import com.front.controller.repository.CodeinfoRepository;
 
 /**
  * ソースコードテーブル操作DAO
  */
 @Service
-public class CodeinfoDao {
+public class CodeinfoService {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	@Autowired
+	CodeinfoRepository codeinfoRepos;
 
 	/**
 	 * すべてのソースコードを取得する
@@ -74,5 +78,26 @@ public class CodeinfoDao {
 		
 		Query Query = entityManager.createQuery("from CodeinfoEntity where delFlg = 'true'");
 		return Query.getResultList();
+	}
+	
+	public CodeinfoEntity insertCodeinfo(String codeType, Integer postid, String src) {
+		CodeinfoEntity codeinfoEntity = new CodeinfoEntity();
+		// HTMLソースコードを設定
+		codeinfoEntity.setCodegenre(codeType);
+		codeinfoEntity.setPostid(postid);
+		codeinfoEntity.setSrc(src);
+		codeinfoEntity = codeinfoRepos.saveAndFlush(codeinfoEntity);
+		
+		return codeinfoEntity;
+	}
+	
+	public void deleteCodeinfo(CodeinfoEntity codeinfoEntity) {
+		
+		codeinfoEntity.setDelFlg(true);
+		codeinfoRepos.saveAndFlush(codeinfoEntity);
+	}
+	
+	public void rejectCodeinfo(CodeinfoEntity codeinfoEntity) {
+		codeinfoRepos.delete(codeinfoEntity);
 	}
 }

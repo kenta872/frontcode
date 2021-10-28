@@ -18,7 +18,7 @@ import com.front.controller.entity.TypedbEntity;
  * パーツ種別管理テーブルDAO
  */
 @Service
-public class TypedbDao {
+public class TypedbService {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	

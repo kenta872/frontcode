@@ -45,7 +45,49 @@
     </div>
   </header>
   <main>
-
+    <div th:fragment="sidemenu_flagment">
+      <input id="nav_check" type="checkbox">
+      <div class="sidebar">
+        <!------------------------------------->
+        <!-- サイドバー -->
+        <!------------------------------------->
+        <!-- plus -->
+        <label class="side_menu side_active">
+          <div class="add_wrapper">
+            <img th:src="@{/images/plus_icon.png}" alt="">
+          </div>
+        </label>
+        <!-- アプリケーション説明ページ -->
+        <label class="side_menu">
+          <div class="side_menu_text">
+            <p>ABOUT</p>
+            <p>アプリについて</p>
+          </div>
+          <img th:src="@{/images/arrow_right.png}" alt="">
+        </label>
+        <!-- お気に入り -->
+        <label class="side_menu" sec:authorize="hasRole('USER')">
+          <div class="side_menu_text">
+            <p>FAVORITE</p>
+            <p>お気に入り</p>
+          </div>
+          <img th:src="@{/images/arrow_right.png}" alt="">
+        </label>
+        <!-------------------------------->
+        <!-- for文 -->
+        <!-------------------------------->
+        <div class="side_menu_for" th:each="sideobj:${typedbList}">
+          <!-- button -->
+          <label class="side_menu">
+            <div class="side_menu_text">
+              <p th:text="${sideobj.typename}"></p>
+              <p th:text="${sideobj.typenamejp}"></p>
+            </div>
+            <img th:src="@{/images/arrow_right.png}" alt="">
+          </label>
+        </div>
+      </div>
+    </div>
   </main>
 </body>
 </html>
