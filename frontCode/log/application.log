@@ -148,3 +148,14 @@
 2021-10-29 08:50:38.220 [http-nio-8080-exec-4] DEBUG(LoggingFilter.java:32) - RequestURL : /
 2021-10-29 08:50:38.676 [http-nio-8080-exec-5] DEBUG(LoggingFilter.java:32) - RequestURL : /
 2021-10-29 08:50:44.597 [http-nio-8080-exec-9] DEBUG(LoggingFilter.java:32) - RequestURL : /login
+2021-10-29 08:52:08.277 [RMI TCP Connection(4)-127.0.0.1] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-29 21:40:24.285 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 12312 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-29 21:40:24.292 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-29 21:40:24.293 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-29 21:40:28.018 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-29 21:40:32.541 [main] DEBUG(LoggingFilter.java:39) - アプリケーション終了
+2021-10-29 21:40:54.368 [main] INFO (StartupInfoLogger.java:55) - Starting FrontCodeApplication using Java 15.0.2 on DESKTOP-9FLEN63 with PID 13520 (C:\Users\inoke\springproject\nakaiproject\frontCode\target\classes started by inoke in C:\Users\inoke\springproject\nakaiproject\frontCode)
+2021-10-29 21:40:54.373 [main] DEBUG(StartupInfoLogger.java:56) - Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-29 21:40:54.374 [main] INFO (SpringApplication.java:659) - No active profile set, falling back to default profiles: default
+2021-10-29 21:40:57.081 [main] DEBUG(LoggingFilter.java:24) - アプリケーション開始
+2021-10-29 21:40:59.481 [main] DEBUG(LoggingFilter.java:39) - アプリケーション終了

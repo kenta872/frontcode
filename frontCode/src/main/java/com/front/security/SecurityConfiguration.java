@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -22,7 +21,7 @@ import com.front.util.Constants;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
-    private AccountService userService;
+	private AccountService userService;
 		
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
@@ -31,14 +30,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
     @Bean
     public PasswordEncoder passwordEncoder() {
-
-    	BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    	
-    	//これはハッシュ化済みの値をDBに登録する確認用に出力させるコード//
-//    	String password = "admin";
-//        String digest = bCryptPasswordEncoder.encode(password);
-//        System.out.println("ハッシュ値 = " + digest);
-        ///////////////////////////////////////////////////////////////
 
         return new BCryptPasswordEncoder();
     }

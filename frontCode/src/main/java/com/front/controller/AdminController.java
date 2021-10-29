@@ -30,7 +30,7 @@ import com.front.util.DeleteOpe;
 import com.front.util.StringUtil;
 
 /**
- * アドミンコントローラ
+ * Adminコントローラ
  */
 @Controller
 public class AdminController {
@@ -76,7 +76,7 @@ public class AdminController {
 		Map<Object,List<Object>> postMap = new HashMap<>();
 		
 		List<TypedbEntity> typedbEntityList = typedbService.selectTypedbAll();
-		List<Object[]> sqlResultList = customService.findMisyoninMap();
+		List<Object[]> sqlResultList = customService.findInitMap();
 		// パーツ種別の数ループ
 		for (TypedbEntity typedbEntity : typedbEntityList) {
 			// 公開する投稿情報の数ループ

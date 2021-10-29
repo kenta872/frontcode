@@ -32,7 +32,7 @@ public class DeleteOpe {
 	PostinfosubRepository postsubRepos;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	/**
 	 * postidに紐づくすべてのデータを削除する
 	 * 
@@ -40,7 +40,7 @@ public class DeleteOpe {
 	 * @throws Exception
 	 */
 	public void deleteOpe(Integer postid) {
-		
+
 		// ソースコード削除
 		List<CodeinfoEntity> codeinfoList = codeinfoService.findSrcByPostid(postid);
 		for (CodeinfoEntity codeinfo : codeinfoList) {

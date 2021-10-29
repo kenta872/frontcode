@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.front.controller.entity.TypedbEntity;
 
@@ -18,6 +19,7 @@ import com.front.controller.entity.TypedbEntity;
  * パーツ種別管理テーブルDAO
  */
 @Service
+@Transactional
 public class TypedbService {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -33,7 +35,7 @@ public class TypedbService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<TypedbEntity> selectTypedbAll() throws Exception {
+	public List<TypedbEntity> selectTypedbAll() {
 		Query query = entityManager.createQuery("from TypedbEntity");
 		return query.getResultList();
 	}

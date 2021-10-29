@@ -1,6 +1,8 @@
 package com.front.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -109,7 +111,30 @@ public class HomeController {
 	@ModelAttribute("initMap")
 	Map<Integer, Map<Object, List<Object>>> addAttributeinitMap() throws Exception {
 
-		return customService.getInitMap();
+		List<Object[]> sqlResultList = customService.findInitMap();
+		List<TypedbEntity> typedbEntityList = typedbService.selectTypedbAll();
+
+		Map<Integer, Map<Object, List<Object>>> initMap = new HashMap<>();
+		Map<Object, List<Object>> postMap = new HashMap<>();
+
+		for (TypedbEntity typedbEntity : typedbEntityList) {
+			for (Object[] sqlResultObj : sqlResultList) {
+				List<Object> initList = Arrays.asList(sqlResultObj);
+
+				if ((Integer) initList.get(0) == typedbEntity.getTypeid()) {
+					List<Object> outList = new ArrayList<>();
+					outList.add(initList.get(2));
+					outList.add(initList.get(3));
+					outList.add(StringUtil.createIframe((String) initList.get(2), (String) initList.get(3)));
+					postMap.put(initList.get(1), outList);
+				} else if ((Integer) initList.get(0) > typedbEntity.getTypeid()) {
+					break;
+				}
+			}
+			initMap.put(typedbEntity.getTypeid(), postMap);
+			postMap = new HashMap<>();
+		}
+		return initMap;
 	}
 
 	/**
@@ -123,8 +148,21 @@ public class HomeController {
 	@GetMapping("/")
 	public String index(UploadForm uploadForm, @AuthenticationPrincipal Account account, Model model) {
 		if (account != null) {
-			// お気に入り投稿情報をマップに格納
-			Map<Integer, Map<Object, List<Object>>> favoriteMap = favoriteinfoService.getFavoriteMap(account);
+			
+			Map<Integer, Map<Object, List<Object>>> favoriteMap = new HashMap<>();
+			Map<Object, List<Object>> postMap = new HashMap<>();
+			List<Object[]> favofiteObjArray = customService.findFavoriteMap(account.getUserid());
+			for (Object[] favoriteObj : favofiteObjArray) {
+				List<Object> initList = Arrays.asList(favoriteObj);
+				List<Object> outList = new ArrayList<>();
+				outList.add(initList.get(2));
+				outList.add(initList.get(3));
+				outList.add(StringUtil.createIframe((String) initList.get(2), (String) initList.get(3)));
+				postMap.put(initList.get(1), outList);
+				favoriteMap.put((Integer) initList.get(0), postMap);
+				postMap = new HashMap<>();
+			}
+		
 			model.addAttribute("favoriteMap", favoriteMap);
 			model.addAttribute("accountid", account.getUserid());
 		}
