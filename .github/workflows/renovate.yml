@@ -11,8 +11,8 @@ jobs:
         with:
           configurationFile: .github/renovate.json
           token: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
-          
-    
+        env:
+          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
       # - name: Setup renovate
       #   run: npm install -g renovate@32.89.0
 
