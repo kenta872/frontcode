@@ -17,10 +17,10 @@ jobs:
           repositories: 'frontcode'
 
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v4.1.1
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v34.84.2
+        uses: renovatebot/github-action@v40.1.7
         with:
           configurationFile: .github/renovate.json
           token: '${{ steps.get_token.outputs.token }}'
