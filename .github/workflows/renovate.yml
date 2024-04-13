@@ -4,27 +4,23 @@ jobs:
   renovate:
     runs-on: self-hosted
     steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v3.3.0
-      # - name: Self-hosted Renovate
-      #   uses: renovatebot/github-action@v34.84.2
-      #   with:
-      #     configurationFile: .github/renovate.json
-      #     # token: 'x-access-token:${{ steps.get_token.outputs.token }}'
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v40.1.7
+        with:
+          docker-cmd-file: .github/renovate-entrypoint.sh
+          docker-user: root
+          token: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
+          
+    
+      # - name: Setup renovate
+      #   run: npm install -g renovate@32.89.0
+
+      # - name: Run renovate
       #   env:
       #     RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
       #     RENOVATE_TOKEN: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
       #     RENOVATE_ALLOW_POST_UPGRADE_COMMAND_TEMPLATING: true
       #     RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
-          
-    
-      - name: Setup renovate
-        run: npm install -g renovate@32.89.0
-
-      - name: Run renovate
-        env:
-          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
-          RENOVATE_TOKEN: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
-          RENOVATE_ALLOW_POST_UPGRADE_COMMAND_TEMPLATING: true
-          RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
-        run: renovate
+      #   run: renovate
