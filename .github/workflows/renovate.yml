@@ -13,7 +13,7 @@ jobs:
       - name: Set up Git configuration
         run: |
           git config --global user.email "875925kenta-test-app@users.noreply.github.enterprise.com"
-          git config --global user.name "kenta-test-app
+          git config --global user.name "kenta-test-app"
 
       - name: Checkout
         uses: actions/checkout@v4.1.1
