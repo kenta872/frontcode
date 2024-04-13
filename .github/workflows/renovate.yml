@@ -4,8 +4,6 @@ jobs:
   renovate:
     runs-on: self-hosted
     steps:
-      - name: print env
-        run: printenv
       - name: Setup renovate
         run: npm install -g renovate@32.89.0
 
