@@ -22,7 +22,8 @@ jobs:
         env:
           RENOVATE_USERNAME: ${{ vars.RENOVATE_USERNAME }}
           RENOVATE_GIT_AUTHOR: ${{ vars.RENOVATE_GIT_AUTHOR }}
-          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
+          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES 
+          RENOVATE_GIT_EMAIL: ${{ vars.RENOVATE_GIT_EMAIL }}
   # renovate:
   #   runs-on: ubuntu-latest
   #   steps:
