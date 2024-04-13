@@ -5,15 +5,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get token
+        id: get_token
+        uses: tibdex/github-app-token@v1
+        with:
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          app_id: ${{ secrets.APP_ID }}
+          
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v40.0.3
         with:
-          token: ${{ secrets.RENOVATE_TOKEN }}
+          token: '${{ steps.get_token.outputs.token }}'
+          # token: ${{ secrets.RENOVATE_TOKEN }}
         env:
-          LOG_LEVEL: 'debug'
-          RENOVATE_REPOSITORIES: 'kenta872/frontcode'
-          RENOVATE_USERNAME: 'renovate[bot]'
+          RENOVATE_USERNAME: ${{ vars.RENOVATE_USERNAME }}
           RENOVATE_PLATFORM: 'github'
+          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
