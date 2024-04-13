@@ -22,5 +22,6 @@ jobs:
           # token: ${{ secrets.RENOVATE_TOKEN }}
         env:
           RENOVATE_USERNAME: ${{ vars.RENOVATE_USERNAME }}
+          RENOVATE_GIT_AUTHOR: ${{ vars.RENOVATE_GIT_AUTHOR }}
           RENOVATE_PLATFORM: 'github'
           RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
