@@ -10,6 +10,8 @@ jobs:
         with:
           private_key: ${{ secrets.PRIVATE_KEY }}
           app_id: ${{ secrets.APP_ID }}
+      - name: display token
+        run: echo ${{ steps.get_token.outputs.token  }}
 
       - name: Checkout
         uses: actions/checkout@v3.3.0
