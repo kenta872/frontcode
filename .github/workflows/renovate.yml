@@ -1,0 +1,18 @@
+name: Renovate
+on: workflow_dispatch
+jobs:
+  renovate:
+    runs-on: self-hosted
+    steps:
+      - name: print env
+        run: printenv
+      - name: Setup renovate
+        run: npm install -g renovate@32.89.0
+
+      - name: Run renovate
+        env:
+          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
+          RENOVATE_TOKEN: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
+          RENOVATE_ALLOW_POST_UPGRADE_COMMAND_TEMPLATING: true
+          RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
+        run: renovate
