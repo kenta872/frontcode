@@ -2,7 +2,7 @@ name: Renovate
 on: workflow_dispatch
 jobs:
   renovate:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Get token
         id: get_token
