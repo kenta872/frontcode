@@ -2,7 +2,7 @@ name: Renovate
 on: workflow_dispatch
 jobs:
   renovate:
-    runs-on: self-hosted
+    runs-on: ubuntu:latest
     steps:
       - name: Get token
         id: get_token
@@ -23,7 +23,6 @@ jobs:
           RENOVATE_USERNAME: ${{ vars.RENOVATE_USERNAME }}
           RENOVATE_GIT_AUTHOR: ${{ vars.RENOVATE_GIT_AUTHOR }}
           RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
-          RENOVATE_CONFIG_FILE: .github/renovate.json
     # runs-on: ubuntu-latest
 
     # steps:
