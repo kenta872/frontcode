@@ -29,7 +29,7 @@ jobs:
 
       - name: Run renovate
         env:
-          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}]
+          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
           RENOVATE_TOKEN: 'x-access-token:${{ steps.get_token.outputs.token }}'
           RENOVATE_ALLOW_POST_UPGRADE_COMMAND_TEMPLATING: true
           RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
