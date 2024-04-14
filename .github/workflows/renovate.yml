@@ -29,12 +29,12 @@ jobs:
           node-version: "16"
 
       - name: Setup renovate
-        run: npm install -g renovate@32.89.0
+        run: npm install -g renovate@37.293.0
 
       - name: Run renovate
         env:
           RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}]
-          RENOVATE_TOKEN: ${{ steps.get_token.outputs.token }}
+          RENOVATE_TOKEN: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
           RENOVATE_ALLOW_POST_UPGRADE_COMMAND_TEMPLATING: true
           RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
         run: renovate
