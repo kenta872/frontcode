@@ -3,7 +3,7 @@
     "extends": [
         "config:best-practices"
     ],
-    "gitAuthor": "kenta-test",
+    "branchPrefix": "renovate/",
     "labels": [
         "renovate"
     ]
