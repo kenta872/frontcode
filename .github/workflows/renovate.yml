@@ -25,7 +25,7 @@ jobs:
 
 
       - name: Setup renovate
-        run: npm install renovate
+        run: npm install -g renovate@latest
 
       - name: Run renovate
         env:
