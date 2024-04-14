@@ -3,8 +3,7 @@
     "extends": [
         "config:best-practices"
     ],
-    "branchPrefix": "renovate/",
-    "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
+    "gitAuthor": "kenta-test",
     "labels": [
         "renovate"
     ]
