@@ -23,6 +23,7 @@ jobs:
           RENOVATE_USERNAME: ${{ vars.RENOVATE_USERNAME }}
           RENOVATE_GIT_AUTHOR: ${{ vars.RENOVATE_GIT_AUTHOR }}
           RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
+          RENOVATE_CONFIG_FILE: .github/renovate.json
     # runs-on: ubuntu-latest
 
     # steps:
