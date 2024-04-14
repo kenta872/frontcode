@@ -24,10 +24,6 @@ jobs:
       #     RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}]
 
 
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "16"
-
       - name: Setup renovate
         run: npm install -g renovate@37.293.0
 
