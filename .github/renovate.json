@@ -7,15 +7,15 @@
     "packageRules": [
         {
           "matchUpdateTypes": ["patch"],
-          "addLabels": ["patch"]
+          "labels": ["patch"]
         },
         {
           "matchUpdateTypes": "major",
-          "addLabels": ["major"]
+          "labels": ["major"]
         },
         {
           "matchUpdateTypes": "minor",
-          "addLabels": ["minor"]
+          "labels": ["minor"]
         }
     ]
 }
