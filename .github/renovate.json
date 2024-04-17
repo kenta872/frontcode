@@ -3,5 +3,19 @@
     "extends": ["config:best-practices"],
     "branchPrefix": "renovate/",
     "labels": ["renovate"],
-    "baseBranches": ["beta"]
+    "baseBranches": ["beta"],
+    "packageRules": [
+        {
+          "matchUpdateTypes": ["patch"],
+          "addLabels": ["patch"]
+        },
+        {
+          "matchUpdateTypes": "major",
+          "addLabels": ["major"]
+        },
+        {
+          "matchUpdateTypes": "minor",
+          "addLabels": ["minor"]
+        }
+    ]
 }
