@@ -15,24 +15,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
       # renovatebot で動かす場合はこちら
-      # - name: Self-hosted Renovate
-      #   uses: renovatebot/github-action@v40.1.9
-      #   with:
-      #     configurationFile: .github/renovate.json
-      #     token: 'x-access-token:${{ steps.get_token.outputs.token }}'
-      #   env:
-      #     RENOVATE_USERNAME: ${{ vars.RENOVATE_USERNAME }}
-      #     RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}]
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v40.1.9
+        with:
+          configurationFile: .github/renovate.json
+          token: ${{ steps.get_token.outputs.token }}
+        env:
+          RENOVATE_USERNAME: ${{ vars.RENOVATE_USERNAME }}
+          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
 
 
       # renovate をインストールした動かす場合はこちら
-      - name: Setup renovate
-        run: npm install -g renovate@latest
+      # - name: Setup renovate
+      #   run: npm install -g renovate@latest
 
-      - name: Run renovate
-        env:
-          RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
-          RENOVATE_TOKEN: ${{ steps.get_token.outputs.token }}
-          # RENOVATE_ALLOW_POST_UPGRADE_COMMAND_TEMPLATING: true
-          # RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
-        run: renovate
+      # - name: Run renovate
+      #   env:
+      #     RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
+      #     RENOVATE_TOKEN: ${{ steps.get_token.outputs.token }}
+      #     # RENOVATE_ALLOW_POST_UPGRADE_COMMAND_TEMPLATING: true
+      #     # RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
+      #   run: renovate
