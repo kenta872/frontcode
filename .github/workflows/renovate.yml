@@ -7,16 +7,16 @@ jobs:
     steps:
       - name: Get token
         id: get_token
-        uses: tibdex/github-app-token@v2
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
         with:
           private_key: ${{ secrets.PRIVATE_KEY }}
           app_id: ${{ secrets.APP_ID }}
 
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       # renovatebot で動かす場合はこちら
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v40.1.9
+        uses: renovatebot/github-action@74811c93da74bf38cb37f41489065619930fba44 # v40.1.9
         with:
           configurationFile: .github/renovate.json
           token: ${{ steps.get_token.outputs.token }}
