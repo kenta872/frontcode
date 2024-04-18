@@ -28,8 +28,6 @@ jobs:
         env:
           # RENOVATE_USERNAME: ${{ vars.RENOVATE_USERNAME }}
           RENOVATE_REPOSITORIES: ${{ vars.RENOVATE_REPOSITORIES }}
-          RENOVATE_ALLOW_POST_UPGRADE_COMMAND_TEMPLATING: true
-          RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: ".*"
 
 
       # renovate をインストールした動かす場合はこちら
